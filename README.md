@@ -49,8 +49,8 @@ You may work as an individual or as a pair on your capstone project. To meet the
 
 ### Integration Choices
 + At least two complex integrations:
-    + Background Jobs
-    + NoSql
+    + Background Jobs **
+    + NoSql **
     + CDN
     + Payment Processing
     + Front-end Framework (Ember, Angular, Backbone, etc.)
@@ -59,11 +59,11 @@ You may work as an individual or as a pair on your capstone project. To meet the
 + Two advanced features:
     + SSL
     + CMS
-    + Internationalization
+    + Internationalization **
     + Live Events
     + SOA
     + S3 storage/delivery
-    + Secure Public API (documented)
+    + Secure Public API (documented) **
 
 ## To Get Started
 + [IDEO Deep Dive](https://www.youtube.com/watch?v=taJOV-YCieI)
