@@ -18,7 +18,7 @@ The Capstone Project is due by 5pm on Thursday, April 24th. It consists of the f
 A clear, concise statement describing the problem your app will solve.
 
 2. **Market Research**
-Outline the key insights from your research. Key insight should cover: your applicationâ€™s competition - what alternatives are already out there (competing apps and/or non-app solutions) and research from users on why these alternatives do not effectively address the problem.
+Outline the key insights from your research. Key insight should cover: your application's competition - what alternatives are already out there (competing apps and/or non-app solutions) and research from users on why these alternatives do not effectively address the problem.
 
 3. **User Personas**
 A detailed summary of your main target user group(s). What are their key characteristics?
