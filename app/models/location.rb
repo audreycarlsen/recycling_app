@@ -1,7 +1,5 @@
 class Location
   include Mongoid::Document
-  embeds_one :contact_info
-  embeds_one :misc_info
 
   field :name,          type: String
   field :latitude,      type: String
@@ -13,4 +11,14 @@ class Location
   field :drop_off,      type: Boolean
   field :mail_in,       type: Boolean
   field :location_type, type: String
+  field :street,        type: String
+  field :city,          type: String
+  field :zipcode,       type: String
+  field :phone,         type: String
+  field :website,       type: String
+  field :hours,         type: String
+  field :cost,          type: String
+  field :min_volume,    type: String
+  field :max_volume,    type: String
+  field :description,   type: String
 end
