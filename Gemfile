@@ -30,7 +30,19 @@ group :doc do
 end
 
 gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
+
 gem 'httparty'
+
+group :development do
+  gem 'rspec-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
+
+group :test do
+  gem 'simplecov', require: false
+  gem 'factory_girl_rails'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
