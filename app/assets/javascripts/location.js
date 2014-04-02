@@ -31,12 +31,14 @@ $(document).ready(function() {
       L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
     }
 
-    // $.ajax({
-    //   type: "GET",
-    //   url: "locations#index"
-    //   success: function(response) {
-    //     $("#victims_list").html(response);
-    //   }
-    // });
+    $.ajax({
+      type: "GET",
+      url: "/locations.json",
+      success: function(data) {
+        console.log(data);
+        var dataLayer = L.geoJson(data);
+        map.addLayer(dataLayer);
+      }
+    });
   });
 });

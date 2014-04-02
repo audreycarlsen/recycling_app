@@ -1,0 +1,16 @@
+<h1>Welcome to Audrey's Mappy App</h1>
+
+<div class='location'>
+  <button type="button" class="btn btn-info">Use Current Location</button>
+</div>
+<br>
+<div class='error'></div>
+<div class='long'> </div>
+<div class='lat'> </div>
+
+<p><div id="map" style="width:600px; height:400px;"></div></p>
+
+<br><br>
+<% @bad_locations.each do |location| %>
+  <%= location.name %>, <%= location.street %>, <%= location.drop_off %>, <%= location.pick_up %>, <%= location.mail_in %><br>
+<% end %>

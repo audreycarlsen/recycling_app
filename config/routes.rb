@@ -1,4 +1,5 @@
 RecyclingApp::Application.routes.draw do
-  root "location#index"
-  get "location/index"
+  root "locations#index"
+  
+  get  "locations", to: "locations#index"
 end
