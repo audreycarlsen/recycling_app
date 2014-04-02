@@ -1,4 +1,15 @@
 $(document).ready(function() {
+
+  var map = L.map('map', { scrollWheelZoom: false }).setView([47.608, -122.333], 11);
+
+  var mapquestLayer = new L.TileLayer('http://{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: 'Data, imagery and map information provided by <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>,<a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.',
+    subdomains: ['otile1','otile2','otile3','otile4']
+  });
+
+  map.addLayer(mapquestLayer);
+
   $('.location').click(function() {
 
     var lon = document.querySelector('.long');
@@ -15,18 +26,17 @@ $(document).ready(function() {
       lat.innerHTML = "Latitude: " + position.coords.latitude;
       lon.innerHTML = 'Longitude: ' + position.coords.longitude;
       
-      var map = L.map('map', { scrollWheelZoom: false }).setView([position.coords.latitude, position.coords.longitude], 13);
+      map.setView([position.coords.latitude, position.coords.longitude], 14);
 
-      var mapquestLayer = new L.TileLayer('http://{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: 'Data, imagery and map information provided by <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>,<a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.',
-        subdomains: ['otile1','otile2','otile3','otile4']
-      });
-
-      map.addLayer(mapquestLayer);
-
-      var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+      L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
     }
-    
+
+    // $.ajax({
+    //   type: "GET",
+    //   url: "locations#index"
+    //   success: function(response) {
+    //     $("#victims_list").html(response);
+    //   }
+    // });
   });
 });
