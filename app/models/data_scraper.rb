@@ -13,7 +13,7 @@ class DataScraper
       cost:          location_json['fee'],        
       min_volume:    location_json['minimum_volume'],
       max_volume:    location_json['maximum_volume'],  
-      description:   location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s.strip
+      description:   (location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip
     )
 
     new_location.pick_up   = location_json['pickup_allowed']   == 'TRUE'
