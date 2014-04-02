@@ -26,7 +26,9 @@ class DataScraper
 
     new_location.materials = new_location.materials + location_json['material_handled'].split(', ')
 
-    new_location.save
+    unless new_location.save
+      Rails.logger.warning("#{new_location.name} failed")
+    end
 
     new_location
   end
@@ -44,10 +46,18 @@ class DataScraper
   end
 
   def self.get_all
-    response = HTTParty.get('http://data.kingcounty.gov/resource/zqwi-c5q3.json')
+    offset = 0
+    while true
+      response = HTTParty.get("http://data.kingcounty.gov/resource/zqwi-c5q3.json?$limit=1000&$offset=#{offset}")
+      count = response.count
+      offset += count
 
-    response.each do |location_json|
-      self.update_or_create_location(location_json)
+      response.each do |location_json|
+        result = self.update_or_create_location(location_json)
+        puts result.name
+      end
+
+      break if count < 1000
     end
   end
 end
