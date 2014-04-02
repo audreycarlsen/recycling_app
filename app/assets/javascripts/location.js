@@ -10,6 +10,19 @@ $(document).ready(function() {
 
   map.addLayer(mapquestLayer);
 
+  $.ajax({
+    type: "GET",
+    url: "/locations.json",
+    success: function(data) {
+      var dataLayer = L.geoJson(data, {
+        onEachFeature: function(feature, layer) {
+          layer.bindPopup(feature.properties.name);
+        }
+      });
+      map.addLayer(dataLayer);
+    }
+  });
+
   $('.location').click(function() {
 
     var lon = document.querySelector('.long');
@@ -30,15 +43,5 @@ $(document).ready(function() {
 
       L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
     }
-
-    $.ajax({
-      type: "GET",
-      url: "/locations.json",
-      success: function(data) {
-        console.log(data);
-        var dataLayer = L.geoJson(data);
-        map.addLayer(dataLayer);
-      }
-    });
   });
 });

@@ -10,6 +10,8 @@
 
 <p><div id="map" style="width:600px; height:400px;"></div></p>
 
+<p>Total locations: <%= @locations.count %>
+
 <br><br>
 <% @bad_locations.each do |location| %>
   <%= location.name %>, <%= location.street %>, <%= location.drop_off %>, <%= location.pick_up %>, <%= location.mail_in %><br>
