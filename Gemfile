@@ -8,6 +8,8 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 1.2'
 gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
 gem 'httparty'
+gem 'geocoder'
+gem 'figaro'
 
 group :doc do
   gem 'sdoc', require: false

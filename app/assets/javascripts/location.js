@@ -1,14 +1,13 @@
 $(document).ready(function() {
 
-  var map = L.map('map', { scrollWheelZoom: false }).setView([47.608, -122.333], 11);
-
-  var mapquestLayer = new L.TileLayer('http://{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
-    maxZoom: 18,
-    attribution: 'Data, imagery and map information provided by <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>,<a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.',
-    subdomains: ['otile1','otile2','otile3','otile4']
-  });
-
-  map.addLayer(mapquestLayer);
+// GOOGLE MAPS MAIN VIEW
+  function initialize() {
+    var mapOptions = {
+      center: new google.maps.LatLng(47.608, -122.333),
+      zoom: 9
+    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  }
 
   $.ajax({
     type: "GET",
@@ -23,7 +22,10 @@ $(document).ready(function() {
     }
   });
 
-  $('.location').click(function() {
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+// CURRENT LOCATION VIEW
+  $('.current_location').click(function() {
 
     var lon = document.querySelector('.long');
     var lat = document.querySelector('.lat');
@@ -39,9 +41,55 @@ $(document).ready(function() {
       lat.innerHTML = "Latitude: " + position.coords.latitude;
       lon.innerHTML = 'Longitude: ' + position.coords.longitude;
       
-      map.setView([position.coords.latitude, position.coords.longitude], 14);
+      var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      mapOptions = {
+        zoom: 13,
+        center: myLatlng
+      }
+      var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-      L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title:"Current Location"
+      });
+
+      // map.setView([position.coords.latitude, position.coords.longitude], 14);
+
+      // L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
     }
   });
+
+  // LEAFLET
+  // var map = L.map('map', { scrollWheelZoom: false }).setView([47.608, -122.333], 11);
+
+  // var mapquestLayer = new L.TileLayer('http://{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
+  //   maxZoom: 18,
+  //   attribution: 'Data, imagery and map information provided by <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>,<a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.',
+  //   subdomains: ['otile1','otile2','otile3','otile4']
+  // });
+
+  // map.addLayer(mapquestLayer);
+
+
+
+
+
+  // $('.submit_address').click(function() {
+  //   $.ajax({
+  //   type: "GET",
+  //   url: google api url,
+  //   success: function(data) {
+  //     var dataLayer = L.geoJson(data, {
+  //       onEachFeature: function(feature, layer) {
+  //         layer.bindPopup(feature.properties.name);
+  //       }
+  //     });
+  //     map.addLayer(dataLayer);
+  //   }
+  // });
+
+  //   map.setView([position.coords.latitude, position.coords.longitude], 14);
+  // //   L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+  // });
 });

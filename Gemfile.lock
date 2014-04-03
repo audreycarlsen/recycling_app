@@ -63,6 +63,10 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
+    geocoder (1.1.9)
     hike (1.2.3)
     httparty (0.12.0)
       json (~> 1.8)
@@ -163,6 +167,8 @@ DEPENDENCIES
   binding_of_caller
   coffee-rails (~> 4.0.0)
   factory_girl_rails
+  figaro
+  geocoder
   httparty
   jbuilder (~> 1.2)
   jquery-rails
