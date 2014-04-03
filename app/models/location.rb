@@ -12,7 +12,6 @@ class Location
   field :mail_in,       type: Boolean
   field :location_type, type: String
   field :street,        type: String
-  field :city,          type: String
   field :zipcode,       type: String
   field :phone,         type: String
   field :website,       type: String

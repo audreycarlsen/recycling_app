@@ -1,0 +1,17 @@
+<div class="container">
+  <h1><strong>What Do I Do With...?</strong></h1>
+
+  <p>Not sure what to do with items that aren’t collected curbside? You've come to the right place!</p>
+
+  <p>Every day, King County residents and businesses run across unwanted items that make them wonder: "What do I do with this?" This site was designed to answer that question! To begin, search by key word below or use the drop-down menu to select a general category. The following pages will ask for more information and allow you to narrow your selection.</p>
+
+  <p>Have you ever bought a new appliance and wondered how to get rid of your old one? Found stacks of old business periodicals you want to recycle? Upgraded your organization's computers and ended up with a mountain of old electronic equipment? The "What Do I Do With...?" directory contains listings of hundreds of businesses and organizations that accept unwanted items from residents and businesses in King County, WA, for reuse, recycling, or proper disposal.</p>
+
+  <%= form_tag("/locations", method: "get") do %>
+    <div class="col-xs-2">
+      <%= select_tag "Materials", options_from_collection_for_select(@materials, "id", "name"), class: "form-control input-sm" %>
+    </div>
+    <%= submit_tag("GO", class: "btn btn-sm btn-success") %>
+  <% end %>
+
+</div>

@@ -1,42 +1,7 @@
-<nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">King County blah blah blah</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Add a Pin</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Profile <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">My Pins</a></li>
-            <li><a href="#">My History</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Log out</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
 <div class="container">
-  <h1><strong>What Do I Do With...?</strong></h1>
-
-  <p>Not sure what to do with items that aren’t collected curbside? You've come to the right place!</p>
-
-  <p>Every day, King County residents and businesses run across unwanted items that make them wonder: "What do I do with this?" This site was designed to answer that question! To begin, search by key word below or use the drop-down menu to select a general category. The following pages will ask for more information and allow you to narrow your selection.</p>
-
-  <p>Have you ever bought a new appliance and wondered how to get rid of your old one? Found stacks of old business periodicals you want to recycle? Upgraded your organization's computers and ended up with a mountain of old electronic equipment? The "What Do I Do With...?" directory contains listings of hundreds of businesses and organizations that accept unwanted items from residents and businesses in King County, WA, for reuse, recycling, or proper disposal.</p>
+  <% @locations.each do |location| %>
+    <%= location.name %>, <%= location.materials %><br><br>
+  <% end %>
 
   <p><%= form_tag locations_path, :method => 'get', :class => 'form-inline' do %>
     <div class="form-group">
@@ -55,9 +20,4 @@
 <!--   <p><div id="map" style="width:600px; height:400px;"></div></p> -->
 
   <p><div id="map-canvas" style="width:600px; height:400px;"></div></p>
-
-  <br><br><strong>BAD LOCATIONS</strong><br>
-  <% @bad_locations.each do |location| %>
-    <%= location.name %>, <%= location.street %>, <%= location.drop_off %>, <%= location.pick_up %>, <%= location.mail_in %><br>
-  <% end %>
 </div>

@@ -24,7 +24,7 @@ class DataScraper
 
     new_location.materials = []
 
-    new_location.materials = new_location.materials + location_json['material_handled'].split(', ')
+    new_location.materials << location_json['material_handled']
 
     unless new_location.save
       Rails.logger.warning("#{new_location.name} failed")
@@ -37,7 +37,7 @@ class DataScraper
     existing_location = Location.where(name: location_json['provider_name']).first
 
     if existing_location
-      existing_location.materials = existing_location.materials + location_json['material_handled'].split(', ')
+      existing_location.materials << location_json['material_handled']
       existing_location.save
       existing_location
     else

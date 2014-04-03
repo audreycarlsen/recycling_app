@@ -9,19 +9,6 @@ $(document).ready(function() {
     var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
   }
 
-  $.ajax({
-    type: "GET",
-    url: "/locations.json",
-    success: function(data) {
-      var dataLayer = L.geoJson(data, {
-        onEachFeature: function(feature, layer) {
-          layer.bindPopup(feature.properties.name);
-        }
-      });
-      map.addLayer(dataLayer);
-    }
-  });
-
   google.maps.event.addDomListener(window, 'load', initialize);
 
 // CURRENT LOCATION VIEW
@@ -53,10 +40,6 @@ $(document).ready(function() {
         map: map,
         title:"Current Location"
       });
-
-      // map.setView([position.coords.latitude, position.coords.longitude], 14);
-
-      // L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
     }
   });
 
@@ -73,7 +56,18 @@ $(document).ready(function() {
 
 
 
-
+  // $.ajax({
+  //   type: "GET",
+  //   url: "/locations.json",
+  //   success: function(data) {
+  //     var dataLayer = L.geoJson(data, {
+  //       onEachFeature: function(feature, layer) {
+  //         layer.bindPopup(feature.properties.name);
+  //       }
+  //     });
+  //     map.addLayer(dataLayer);
+  //   }
+  // });
 
   // $('.submit_address').click(function() {
   //   $.ajax({
