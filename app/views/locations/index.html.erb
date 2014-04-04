@@ -1,15 +1,8 @@
 <div class="container">
-  <% @locations.each do |location| %>
-    <%= location.name %>, <%= location.materials %><br><br>
-  <% end %>
 
-  <p><%= form_tag locations_path, :method => 'get', :class => 'form-inline' do %>
-    <div class="form-group">
-      <%= text_field_tag :address, nil, class: "form-control" %><%= submit_tag "Go!", class: "submit_address btn btn-sm btn-success" %>
-    </div>
-  <% end %><p>
+    <p><div id="map-canvas" style="width:600px; height:400px;"></div></p>
 
-  <div class='current_location'>
+     <div class='current_location'>
     <button type="button" class="btn btn-info">Use Current Location</button>
   </div>
   <br>
@@ -17,7 +10,18 @@
   <div class='long'> </div>
   <div class='lat'> </div>
 
+    <p><%= form_tag locations_path, :method => 'get', :class => 'form-inline' do %>
+    <div class="form-group">
+      <%= text_field_tag :address, nil, class: "form-control" %><%= submit_tag "Go!", class: "submit_address btn btn-sm btn-success" %>
+    </div>
+  <% end %><p>
+
+  <% @locations.each do |location| %>
+    <%= location.name %>, <%= location.materials %><br><br>
+  <% end %>
+
+
 <!--   <p><div id="map" style="width:600px; height:400px;"></div></p> -->
 
-  <p><div id="map-canvas" style="width:600px; height:400px;"></div></p>
+
 </div>
