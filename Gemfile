@@ -10,6 +10,7 @@ gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
 gem 'httparty'
 gem 'geocoder'
 gem 'figaro'
+gem 'therubyracer', platforms: :ruby
 
 group :doc do
   gem 'sdoc', require: false
@@ -19,6 +20,10 @@ group :development do
   gem 'rspec-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'capistrano'
+  gem 'capistrano-rvm'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
 end
 
 group :test do
