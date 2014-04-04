@@ -2,8 +2,10 @@ $(document).ready(function() {
   var source = $("#material-result-template").html();
   var template = Handlebars.compile(source);
 
-  $('.search_button').click(function() {
+  var update = function() {
     var id = $("#material option:selected").val();
+
+    $('.search_button').innerHTML = "Loading...";
 
     $.ajax({
       type: "GET",
@@ -14,5 +16,13 @@ $(document).ready(function() {
       }
     });
     return false;
-  });
+  }
+
+  $('.search_button').click(
+    update
+  );
+
+  $('.select_box').change(
+    update
+  );
 });

@@ -11,9 +11,9 @@
 
   <%= form_tag do %>
     <div class="col-xs-3">
-      <%= select_tag "material", options_from_collection_for_select(@materials, "id", "name"), prompt: "Select a category", class: "form-control input-sm" %>
+      <%= select_tag "material", options_from_collection_for_select(@materials, "id", "name"), prompt: "Select a category", class: "form-control input-sm select_box" %>
     </div>
-    <%= submit_tag("GO", class: "btn btn-sm btn-success search_button") %>
+    <button type="submit" class="btn btn-sm btn-success search_button">GO</button>
   <% end %>
 
   <div id="material_result">
@@ -23,7 +23,10 @@
   <div id="material_result">
     <h1>{{name}}</h1>
     <div class="body">
-      {{subcategories}}
+      {{#each subcategories}}
+      <p>{{name}}</p>
+      <p>{{description}}</p>
+      {{/each}}
     </div>
   </div>
 </script>
