@@ -4,6 +4,12 @@
     <% @subcategories.each do |subcategory| %>
       <% if @subcategories.count == 1 %>
         <%= subcategory %>
+      <% elsif @subcategories.count == 2 %>
+        <% unless subcategory == @subcategories.last %>
+          <%= subcategory %>
+        <% else %>
+          and <%= subcategory %>
+        <% end %>
       <% else %>
         <% unless subcategory == @subcategories.last %>
           <%= subcategory %>,
@@ -38,7 +44,15 @@
     <tbody>
       <% @locations.each do |location| %>
         <tr>
-          <td><%= link_to location.name, location.website, :target => "_blank" %><br><%= location.phone %></td>
+          <td>
+            <strong>
+              <% if location.website %>
+                <%= link_to location.name, location.website, :target => "_blank" %>
+              <% else %>
+                <%= location.name %>
+              <% end %>
+            </strong>
+          <br><%= location.phone %></td>
           <td><%= location.street %></td>
           <td><%= location.hours %></td>
           <td><%= location.pick_up %></td>
