@@ -23,16 +23,14 @@
   <div id="material_result">
     <h1>{{name}}</h1>
     <div class="body">
-      <%= form_tag("/locations/match", method: "get") do %>
+      <%= form_tag(locations_path, method: "get") do %>
         {{#each subcategories}}
           <div class="col-md-1">
            <input name="subcategories[]" type="checkbox" value="{{name}}">
-
-
           </div><div class="col-xs-2"> 
           <strong>{{name}}</strong><br>{{description}}</div>
         {{/each}}
-        <%= submit_tag("GO!") %>
+        <button type="submit" class="btn btn-sm btn-warning">GO</button>
       <% end %>
     </div>
   </div>

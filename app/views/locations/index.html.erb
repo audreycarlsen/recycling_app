@@ -1,8 +1,21 @@
 <div class="container">
+  <h4><em>What do I do with... </em></h4>
+  <h3><strong>
+    <% @subcategories.each do |subcategory| %>
+      <% if @subcategories.count == 1 %>
+        <%= subcategory %>
+      <% else %>
+        <% unless subcategory == @subcategories.last %>
+          <%= subcategory %>,
+        <% else %>
+          and <%= subcategory %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </strong></h3>
 
-    <p><div id="map-canvas" style="width:600px; height:400px;"></div></p>
-
-     <div class='current_location'>
+<br>
+  <div class='current_location'>
     <button type="button" class="btn btn-info">Use Current Location</button>
   </div>
   <br>
@@ -10,18 +23,28 @@
   <div class='long'> </div>
   <div class='lat'> </div>
 
-    <p><%= form_tag locations_path, :method => 'get', :class => 'form-inline' do %>
-    <div class="form-group">
-      <%= text_field_tag :address, nil, class: "form-control" %><%= submit_tag "Go!", class: "submit_address btn btn-sm btn-success" %>
-    </div>
-  <% end %><p>
+  <p><div id="map-canvas" style="width:600px; height:400px;"></div></p>
+  <!--   <p><div id="map" style="width:600px; height:400px;"></div></p> -->
 
-  <% @locations.each do |location| %>
-    <%= location.name %>, <%= location.materials %><br><br>
-  <% end %>
-
-
-<!--   <p><div id="map" style="width:600px; height:400px;"></div></p> -->
-
-
+  <table class="table table-condensed location-table">
+    <thead>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Hours</th>
+      <th>Pickup</th>
+      <th>Dropoff</th>
+      <th>Mail In</th>
+    </thead>
+    <tbody>
+      <% @locations.each do |location| %>
+        <tr>
+          <td><%= link_to location.name, location.website, :target => "_blank" %><br><%= location.phone %></td>
+          <td><%= location.street %></td>
+          <td><%= location.hours %></td>
+          <td><%= location.pick_up %></td>
+          <td><%= location.drop_off %></td>
+          <td><%= location.mail_in %></td>
+        </tr>
+      <% end %>
+  </table>
 </div>

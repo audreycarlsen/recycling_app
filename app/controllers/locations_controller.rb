@@ -1,13 +1,10 @@
 class LocationsController < ApplicationController
   def index
-    @locations = Location.where(:materials.in => ["Ribbon Cartridges"])
+    @subcategories = params["subcategories"]
+    @locations = Location.where(:materials.in => params["subcategories"])
 
-    # TO DO: Look up these addresses by hand :(
+    # TO DO: Look up these addresses by hand?! :(
     @bad_locations = Location.all.where(latitude: nil)
-  end
-
-  def match
-    raise
   end
 
   def get_coordinates

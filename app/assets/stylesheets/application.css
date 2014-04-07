@@ -12,7 +12,12 @@
  *= require_tree .
  */
 
- body {
+body {
   padding-bottom: 50px;
   font-family: 'Open Sans', sans-serif;
- }
+}
+
+.location-table {
+  font-size: 12px;
+/*  font-family: 'Helvetica', sans-serif;*/
+}
