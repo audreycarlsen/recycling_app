@@ -6,6 +6,7 @@ class DataScraper
       longitude:     location_json['geolocation']['longitude'],
       location_type: "Business",
       street:        location_json['provider_address'],
+      city:          location_json['city'],
       zipcode:       location_json['zip'],
       phone:         location_json['phone']['phone_number'], 
       website:       location_json['provider_url'].try(:[],'url'),

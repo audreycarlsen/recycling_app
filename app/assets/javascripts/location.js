@@ -7,6 +7,21 @@ $(document).ready(function() {
       zoom: 9
     };
     var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+    // $.ajax({
+    //   type: "GET",
+    //   url: "/locations.json",
+    //   success: function(data) {
+    //     $.each(data, function (i, location) {
+    //       var position = new google.maps.LatLng(data[i].latitude, data[i].longitude);
+    //       var marker = new google.maps.Marker({
+    //         position: position,
+    //         map: map,
+    //         title: "Hello world!"
+    //       });
+    //     }
+    //   }
+    // });
   }
 
   google.maps.event.addDomListener(window, 'load', initialize);
@@ -28,15 +43,15 @@ $(document).ready(function() {
       lat.innerHTML = "Latitude: " + position.coords.latitude;
       lon.innerHTML = 'Longitude: ' + position.coords.longitude;
       
-      var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      var myCoords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       mapOptions = {
         zoom: 13,
-        center: myLatlng
+        center: myCoords
       }
       var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
       var marker = new google.maps.Marker({
-        position: myLatlng,
+        position: myCoords,
         map: map,
         title:"Current Location"
       });

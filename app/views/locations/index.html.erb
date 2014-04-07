@@ -53,7 +53,12 @@
               <% end %>
             </strong>
           <br><%= location.phone %></td>
-          <td><%= location.street %></td>
+          <td>
+            <%= location.street %><br>
+            <% if location.city || location.zipcode %>
+              <%= location.city %>, WA <%= location.zipcode%>
+            <% end %>
+          </td>
           <td><%= location.hours %></td>
           <td><%= location.pick_up %></td>
           <td><%= location.drop_off %></td>
