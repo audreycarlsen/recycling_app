@@ -1,105 +1,70 @@
 $(document).ready(function() {
-  var mapOptions = {
-    center: new google.maps.LatLng(47.608, -122.333),
-    zoom: 9
-  };
-  var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  if ($("#map-canvas").length) {
+    var mapOptions = {
+      center: new google.maps.LatLng(47.608, -122.333),
+      zoom: 9
+    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-  var infoWindow = new google.maps.InfoWindow();
+    var infoWindow = new google.maps.InfoWindow();
 
-  $.ajax({
-    type: "GET",
-    url: "/locations.json" + location.search,
-    success: function(data) {
-      $.each(data, function (i, location) {
-        var position = new google.maps.LatLng(data[i].latitude, data[i].longitude);
+    $.ajax({
+      type: "GET",
+      url: "/locations.json" + location.search,
+      success: function(data) {
+        $.each(data, function (i, location) {
+          var position = new google.maps.LatLng(data[i].latitude, data[i].longitude);
+
+          var marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+          });
+
+          var windowContent = '<strong>' + data[i].name + '</strong><br>' + data[i].street + '<br>' + data[i].city + ', WA ' + data[i].zipcode
+
+          google.maps.event.addListener(marker, 'click', function() {
+            infoWindow.setContent(windowContent);
+            infoWindow.open(map, this);
+          });
+        });
+      }
+    });
+
+    $('.current_location').click(function() {
+
+      var lon = document.querySelector('.long');
+      var lat = document.querySelector('.lat');
+      var error = document.querySelector('.error');
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        error.innerHTML = "Geolocation is not supported by this browser.";
+      }
+
+      function showPosition(position) {
+        lat.innerHTML = "Latitude: " + position.coords.latitude;
+        lon.innerHTML = 'Longitude: ' + position.coords.longitude;
+        
+        var myCoords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        mapOptions = {
+          zoom: 13,
+          center: myCoords
+        }
 
         var marker = new google.maps.Marker({
-          position: position,
+          position: myCoords,
           map: map,
-          icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+          title: "Current Location",
+          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
         });
 
         google.maps.event.addListener(marker, 'click', function() {
-          infoWindow.setContent('Hello World');
+          infoWindow.setContent('Current Location');
           infoWindow.open(map, this);
         });
-      });
-    }
-  });
-
-  $('.current_location').click(function() {
-
-    var lon = document.querySelector('.long');
-    var lat = document.querySelector('.lat');
-    var error = document.querySelector('.error');
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-      error.innerHTML = "Geolocation is not supported by this browser.";
-    }
-
-    function showPosition(position) {
-      lat.innerHTML = "Latitude: " + position.coords.latitude;
-      lon.innerHTML = 'Longitude: ' + position.coords.longitude;
-      
-      var myCoords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      mapOptions = {
-        zoom: 13,
-        center: myCoords
       }
-
-      var marker = new google.maps.Marker({
-        position: myCoords,
-        map: map,
-        title: "Current Location",
-        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-      });
-    }
-  });
-
-  // LEAFLET
-  // var map = L.map('map', { scrollWheelZoom: false }).setView([47.608, -122.333], 11);
-
-  // var mapquestLayer = new L.TileLayer('http://{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
-  //   maxZoom: 18,
-  //   attribution: 'Data, imagery and map information provided by <a href="http://open.mapquest.co.uk" target="_blank">MapQuest</a>,<a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> and contributors.',
-  //   subdomains: ['otile1','otile2','otile3','otile4']
-  // });
-
-  // map.addLayer(mapquestLayer);
-
-
-
-  // $.ajax({
-  //   type: "GET",
-  //   url: "/locations.json",
-  //   success: function(data) {
-  //     var dataLayer = L.geoJson(data, {
-  //       onEachFeature: function(feature, layer) {
-  //         layer.bindPopup(feature.properties.name);
-  //       }
-  //     });
-  //     map.addLayer(dataLayer);
-  //   }
-  // });
-
-  // $('.submit_address').click(function() {
-  //   $.ajax({
-  //   type: "GET",
-  //   url: google api url,
-  //   success: function(data) {
-  //     var dataLayer = L.geoJson(data, {
-  //       onEachFeature: function(feature, layer) {
-  //         layer.bindPopup(feature.properties.name);
-  //       }
-  //     });
-  //     map.addLayer(dataLayer);
-  //   }
-  // });
-
-  //   map.setView([position.coords.latitude, position.coords.longitude], 14);
-  // //   L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
-  // });
+    });
+  }
 });
