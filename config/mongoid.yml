@@ -3,7 +3,7 @@ production:
     default:
       database: recycling_app_production
       hosts:
-        - ec2-54-187-26-197.us-west-2.compute.amazonaws.com:27017
+        - localhost:27017
 
 development:
   # Configure available database sessions. (required)
