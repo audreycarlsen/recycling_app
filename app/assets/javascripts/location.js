@@ -1,32 +1,33 @@
 $(document).ready(function() {
+  var mapOptions = {
+    center: new google.maps.LatLng(47.608, -122.333),
+    zoom: 9
+  };
+  var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-// GOOGLE MAPS MAIN VIEW
-  function initialize() {
-    var mapOptions = {
-      center: new google.maps.LatLng(47.608, -122.333),
-      zoom: 9
-    };
-    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  var infoWindow = new google.maps.InfoWindow();
 
-    $.ajax({
-      type: "GET",
-      url: "/locations.json" + location.search,
-      success: function(data) {
-        $.each(data, function (i, location) {
-          var position = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-          var marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            title: "Hello world!"
-          });
-        })
-      }
-    });
-  }
+  $.ajax({
+    type: "GET",
+    url: "/locations.json" + location.search,
+    success: function(data) {
+      $.each(data, function (i, location) {
+        var position = new google.maps.LatLng(data[i].latitude, data[i].longitude);
 
-  google.maps.event.addDomListener(window, 'load', initialize);
+        var marker = new google.maps.Marker({
+          position: position,
+          map: map,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+        });
 
-// CURRENT LOCATION VIEW
+        google.maps.event.addListener(marker, 'click', function() {
+          infoWindow.setContent('Hello World');
+          infoWindow.open(map, this);
+        });
+      });
+    }
+  });
+
   $('.current_location').click(function() {
 
     var lon = document.querySelector('.long');
@@ -48,12 +49,12 @@ $(document).ready(function() {
         zoom: 13,
         center: myCoords
       }
-      var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
       var marker = new google.maps.Marker({
         position: myCoords,
         map: map,
-        title:"Current Location"
+        title: "Current Location",
+        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
       });
     }
   });
