@@ -2,6 +2,7 @@ class LocationsController < ApplicationController
   def index
     @subcategories = params["subcategories"]
     @locations = Location.where(:materials.in => params["subcategories"])
+    @mappable_locations = @locations.reject{ |l| l.latitude.nil? }
 
     # TO DO: Look up these addresses by hand?! :(
     @bad_locations = Location.all.where(latitude: nil)

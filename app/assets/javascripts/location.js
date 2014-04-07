@@ -8,20 +8,20 @@ $(document).ready(function() {
     };
     var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-    // $.ajax({
-    //   type: "GET",
-    //   url: "/locations.json",
-    //   success: function(data) {
-    //     $.each(data, function (i, location) {
-    //       var position = new google.maps.LatLng(data[i].latitude, data[i].longitude);
-    //       var marker = new google.maps.Marker({
-    //         position: position,
-    //         map: map,
-    //         title: "Hello world!"
-    //       });
-    //     }
-    //   }
-    // });
+    $.ajax({
+      type: "GET",
+      url: "/locations.json" + location.search,
+      success: function(data) {
+        $.each(data, function (i, location) {
+          var position = new google.maps.LatLng(data[i].latitude, data[i].longitude);
+          var marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: "Hello world!"
+          });
+        })
+      }
+    });
   }
 
   google.maps.event.addDomListener(window, 'load', initialize);
