@@ -19,8 +19,10 @@ $(document).ready(function() {
       return false;
     };
 
-    $('.search_button').click(
+    $('.search_button').click(function() {
+      console.log('go')
       update
+    }
     );
 
     $('.select_box').change(

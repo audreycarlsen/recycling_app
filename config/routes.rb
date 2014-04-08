@@ -5,4 +5,6 @@ RecyclingApp::Application.routes.draw do
 
   resources :materials
   resources :locations
+
+  get "locations/distances", to: "locations#calculate_distances"
 end

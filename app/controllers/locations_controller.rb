@@ -23,11 +23,17 @@ class LocationsController < ApplicationController
 
     @mappable_locations = @locations_by_service_and_type.reject{ |l| l.latitude.nil? }
 
-    # TO DO: Look up these addresses by hand?! :(
-    @bad_locations = Location.all.where(latitude: nil)
   end
 
   # def get_coordinates
   #   response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?address=1301+5th+Ave,+Seattle,+WA&sensor=true")
   # end
+
+  def calculate_distances
+    response = HTTParty.get("https://maps.googleapis.com/maps/api/distancematrix/output?origins=" + current_location + "&destinations=" + locations + "&sensor=false")
+
+    respond_to do |format|
+      format.json { render json: response }
+    end
+  end
 end

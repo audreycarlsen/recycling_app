@@ -16,8 +16,10 @@
   <% end %>
   <button type="submit" class="btn btn-sm btn-success search_button">GO</button>
 
+<div id="wtf">
   <div id="material_result">
   </div>
+</div>
 
   <script id="material-result-template" type="text/x-handlebars-template">
     <div id="material_result">
@@ -45,6 +47,17 @@
         <input name="service" type="radio" value="pick_up" /> Pick-Up
         <input name="service" type="radio" value="drop_off" /> Drop-Off
         <input name="service" type="radio" value="mail_in" /> Mail-In
+
+        <br><br><p><strong>Step 4: Input your address</strong></p>
+        <em>ex: 1301 5th Ave, Seattle, WA 98101</em><br>
+        <%= text_field_tag :address %><br>
+        <div class='current_location'>
+          <button type="button" class="btn btn-info">Use Current Location</button>
+        </div>
+        <br>
+        <div class='error'></div>
+        <div class='long'> </div>
+        <div class='lat'> </div>
 
         <br><br><p><button type="submit" class="btn btn-lg btn-warning">Onward, to glory!</button></p>
       <% end %>
