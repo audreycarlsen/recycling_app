@@ -16,10 +16,8 @@
   <% end %>
   <button type="submit" class="btn btn-sm btn-success search_button">GO</button>
 
-<div id="wtf">
   <div id="material_result">
   </div>
-</div>
 
   <script id="material-result-template" type="text/x-handlebars-template">
     <div id="material_result">
@@ -50,7 +48,7 @@
 
         <br><br><p><strong>Step 4: Input your address</strong></p>
         <em>ex: 1301 5th Ave, Seattle, WA 98101</em><br>
-        <%= text_field_tag :address %><br>
+        <input name="address" type="text" id="address_field"/><br>
         <div class='current_location'>
           <button type="button" class="btn btn-info">Use Current Location</button>
         </div>

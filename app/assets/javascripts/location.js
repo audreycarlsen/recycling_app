@@ -36,43 +36,5 @@ $(document).ready(function() {
         map.fitBounds(bounds);
       }
     });
-
-    $('#wtf').on('click', '.current_location', function() {
-      console.log("hello")
-      var lon = document.querySelector('.long');
-      var lat = document.querySelector('.lat');
-      var error = document.querySelector('.error');
-
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-        error.innerHTML = "Geolocation is not supported by this browser.";
-      }
-
-      // AJAX GOES HERE
-
-      function showPosition(position) {
-        lat.innerHTML = "Latitude: " + position.coords.latitude;
-        lon.innerHTML = 'Longitude: ' + position.coords.longitude;
-        
-        // var myCoords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        // mapOptions = {
-        //   zoom: 13,
-        //   center: myCoords
-        // }
-
-        // var marker = new google.maps.Marker({
-        //   position: myCoords,
-        //   map: map,
-        //   title: "Current Location",
-        //   icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-        // });
-
-        // google.maps.event.addListener(marker, 'click', function() {
-        //   infoWindow.setContent('Current Location');
-        //   infoWindow.open(map, this);
-        // });
-      }
-    });
   }
 });

@@ -23,17 +23,28 @@ class LocationsController < ApplicationController
 
     @mappable_locations = @locations_by_service_and_type.reject{ |l| l.latitude.nil? }
 
+    destination_coords = ""
+
+    @mappable_locations.each do |location|
+      unless location == @mappable_locations.last
+        destination_coords << (location.latitude + "," + location.longitude + "|")
+      else
+        destination_coords << (location.latitude + "," + location.longitude)
+      end
+    end
+    
+    calculate_distances(params[:address], destination_coords)
   end
 
   # def get_coordinates
   #   response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?address=1301+5th+Ave,+Seattle,+WA&sensor=true")
   # end
 
-  def calculate_distances
-    response = HTTParty.get("https://maps.googleapis.com/maps/api/distancematrix/output?origins=" + current_location + "&destinations=" + locations + "&sensor=false")
+  private
 
-    respond_to do |format|
-      format.json { render json: response }
-    end
+  def calculate_distances(current_location, destination_coords)
+    url = ("https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + current_location + "&destinations=" + destination_coords + "&sensor=false&units=imperial").strip
+    HTTParty.get(URI.encode(url))
   end
+
 end

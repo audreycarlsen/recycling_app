@@ -18,7 +18,7 @@ class DataScraper
     )
 
     new_location.pick_up   = location_json['pickup_allowed']   == 'TRUE'
-    new_location.drop_off  = location_json['drop_off_allowed'] == 'TRUE'
+    new_location.drop_off  = location_json['dropoff_allowed'] == 'TRUE'
     new_location.mail_in   = location_json['mail_in_allowed']  == 'TRUE'
     new_location.business  = location_json['property_type'].include?('Business')
     new_location.residents = location_json['property_type'].include?('Residents')
