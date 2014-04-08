@@ -24,7 +24,7 @@ $(document).ready(function() {
     );
 
     $('.select_box').change(
-      update 
+      update
     );
   }
 });
