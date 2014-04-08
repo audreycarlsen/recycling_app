@@ -20,27 +20,34 @@
   </div>
 
   <script id="material-result-template" type="text/x-handlebars-template">
-    <br><br><div id="material_result">
+    <div id="material_result">
       <h4><em>What do I do with... </em></h4>
-      <h3><strong>{{name}}</h3>
+      <strong><h3>{{name}}</h3>
       <p>Step 1: Select specific materials</p></strong>
-      <div class="body">
-        <%= form_tag(locations_path, method: "get") do %>
-          {{#each subcategories}}
-            <div class="col-md-1">
-              <input name="subcategories[]" type="checkbox" value="{{name}}">
-            </div><div class="col-xs-2"> 
-            <strong>{{name}}</strong><br>{{description}}</div>
-          {{/each}}
 
-          // <div class="col-md-1">
-          //   <input checked="checked" name="subcategories[]" type="checkbox" value="put_something_here">
-          // </div><div class="col-xs-2"> 
-          // <strong>All</strong></div>
+      <%= form_tag(locations_path, method: "get") do %>
+        {{#each subcategories}}
+          <p>
+            <input name="subcategories[]" type="checkbox" value="{{name}}" />
+            <strong>{{name}}</strong><br>{{description}}
+          </p>
+        {{/each}}
 
-          <button type="submit" class="btn btn-sm btn-warning">GO</button>
-        <% end %>
-      </div>
+        <input checked="checked" name="subcategories[]" type="checkbox" value="EVERYTHING!" />
+        <strong>All</strong>
+      
+        <br><br><p><strong>Step 2: Is this material generated from your business or residence?</strong></p>
+
+        <input name="type" type="radio" value="Business" /> Business
+        <input name="type" type="radio" value="Residence" /> Residence
+
+        <br><br><p><strong>Step 3: What type of service are you looking for?</strong></p>
+        <input name="service" type="radio" value="pick_up" /> Pick-Up
+        <input name="service" type="radio" value="drop_off" /> Drop-Off
+        <input name="service" type="radio" value="mail_in" /> Mail-In
+
+        <br><br><p><button type="submit" class="btn btn-lg btn-warning">Onward, to glory!</button></p>
+      <% end %>
     </div>
   </script>
 </div>

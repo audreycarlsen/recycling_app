@@ -12,6 +12,8 @@ $(document).ready(function() {
       type: "GET",
       url: "/locations.json" + location.search,
       success: function(data) {
+        var bounds = new google.maps.LatLngBounds ();
+        
         $.each(data, function (i, location) {
           var position = new google.maps.LatLng(data[i].latitude, data[i].longitude);
 
@@ -27,7 +29,11 @@ $(document).ready(function() {
             infoWindow.setContent(windowContent);
             infoWindow.open(map, this);
           });
+
+          bounds.extend(position);
         });
+
+        map.fitBounds(bounds);
       }
     });
 

@@ -40,9 +40,11 @@
       <th>Pickup</th>
       <th>Dropoff</th>
       <th>Mail In</th>
+      <th>Business</th>
+      <th>Residents</th>
     </thead>
     <tbody>
-      <% @locations.each do |location| %>
+      <% @locations_by_service_and_type.each do |location| %>
         <tr>
           <td>
             <strong>
@@ -63,6 +65,8 @@
           <td><%= location.pick_up %></td>
           <td><%= location.drop_off %></td>
           <td><%= location.mail_in %></td>
+          <td><%= location.business %></td>
+          <td><%= location.residents %></td>
         </tr>
       <% end %>
   </table>
