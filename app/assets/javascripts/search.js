@@ -1,8 +1,18 @@
 function showPosition(position) {
-  $.getJSON("http://maps.googleapis.com/maps/api/geocode/json?latlng=47.608933099999994,-122.3333873&sensor=false")
-  debugger;
-  address_string = response.
-  $('#address_field').attr('value', position.coords.latitude + "," + position.coords.longitude);
+  $.ajax({
+    type: "GET",
+    url: "http://maps.googleapis.com/maps/api/geocode/json?latlng=47.608933099999994,-122.3333873&sensor=false",
+    success: function(data) {
+      $('#address_field').attr('value', data.results[0].address_components[0].short_name + " " + data.results[0].address_components[1].short_name + ", " + data.results[0].address_components[3].short_name + ", " + data.results[0].address_components[5].short_name + " " + data.results[0].address_components[7].short_name);
+    }
+  });
+
+  // var response = $.getJSON("http://maps.googleapis.com/maps/api/geocode/json?latlng=47.608933099999994,-122.3333873&sensor=false", function() {
+  //   console.log(response)
+  // });
+  // debugger;
+  // address_string = response.
+  // $('#address_field').attr('value', position.coords.latitude + "," + position.coords.longitude);
   // var myCoords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
   // mapOptions = {
   //   zoom: 13,
