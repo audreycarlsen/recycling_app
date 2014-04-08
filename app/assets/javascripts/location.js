@@ -13,7 +13,7 @@ $(document).ready(function() {
       url: "/locations.json" + location.search,
       success: function(data) {
         var bounds = new google.maps.LatLngBounds ();
-        
+
         $.each(data, function (i, location) {
           var position = new google.maps.LatLng(data[i].latitude, data[i].longitude);
 
@@ -32,7 +32,7 @@ $(document).ready(function() {
 
           bounds.extend(position);
         });
-
+        
         map.fitBounds(bounds);
       }
     });

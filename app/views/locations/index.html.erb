@@ -20,7 +20,12 @@
     <% end %>
   </strong></h3>
 
-<br>
+  <p>
+    <% unless @locations_by_service_and_type.last %>
+      Nope. Got nothing for you. :(
+    <% end %>
+  </p>
+
   <div class='current_location'>
     <button type="button" class="btn btn-info">Use Current Location</button>
   </div>
