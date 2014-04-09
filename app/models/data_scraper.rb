@@ -44,9 +44,9 @@ class DataScraper
       end
     end
 
-    new_location.pick_up   = location_json['pickup_allowed']   == 'TRUE'
+    new_location.pick_up   = location_json['pickup_allowed'] == 'TRUE'
     new_location.drop_off  = location_json['dropoff_allowed'] == 'TRUE'
-    new_location.mail_in   = location_json['mail_in_allowed']  == 'TRUE'
+    new_location.mail_in   = location_json['mail_in_allowed'] == 'TRUE'
     new_location.business  = location_json['property_type'].include?('Business')
     new_location.residents = location_json['property_type'].include?('Residents')
 
@@ -62,7 +62,7 @@ class DataScraper
   end
 
   def self.update_or_create_location(location_json)
-    existing_location = Location.where(name: location_json['provider_name']).first
+    existing_location = Location.where(name: DataScraper.titleize(location_json['provider_name'])).first
 
     if existing_location
       existing_location.materials << location_json['material_handled']

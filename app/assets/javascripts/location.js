@@ -1,10 +1,6 @@
 $(document).ready(function() {
   if ($("#map-canvas").length) {
-    var mapOptions = {
-      center: new google.maps.LatLng(47.608, -122.333),
-      zoom: 9
-    };
-    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    var map = new google.maps.Map(document.getElementById("map-canvas"));
 
     var infoWindow = new google.maps.InfoWindow();
 

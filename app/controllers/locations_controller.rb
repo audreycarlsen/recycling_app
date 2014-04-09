@@ -16,13 +16,13 @@ class LocationsController < ApplicationController
     @mail_in_locations  = []
 
     @locations_by_type.each do |location|
-      if location.pick_up = true
+      if location.pick_up == true
         @pick_up_locations << location
       end
-      if location.drop_off = true
+      if location.drop_off == true
         @drop_off_locations << location
       end
-      if location.mail_in = true
+      if location.mail_in == true
         @mail_in_locations << location
       end
     end

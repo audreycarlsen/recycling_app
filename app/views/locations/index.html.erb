@@ -36,6 +36,7 @@
 
   <p><div id="map-canvas" style="width:600px; height:400px;"></div></p>
 
+  Drop-Off
   <table class="table table-condensed location-table">
     <thead>
       <th>Name</th>
@@ -49,7 +50,93 @@
       <th>Distance</th>
     </thead>
     <tbody>
-      <% @locations_by_type.each do |location| %>
+      <% @drop_off_locations.each do |location| %>
+        <tr>
+          <td>
+            <strong>
+              <% if location.website %>
+                <%= link_to location.name, location.website, :target => "_blank" %>
+              <% else %>
+                <%= location.name %>
+              <% end %>
+            </strong>
+          <br><%= location.phone %></td>
+          <td>
+            <%= location.street %><br>
+            <% if location.city || location.zipcode %>
+              <%= location.city %>, <%= location.state %> <%= location.zipcode%>
+            <% end %>
+          </td>
+          <td><%= location.hours %></td>
+          <td><%= location.pick_up %></td>
+          <td><%= location.drop_off %></td>
+          <td><%= location.mail_in %></td>
+          <td><%= location.business %></td>
+          <td><%= location.residents %></td>
+          <td><%= location.distance %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  Pick-Up
+  <table class="table table-condensed location-table">
+    <thead>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Hours</th>
+      <th>Pickup</th>
+      <th>Dropoff</th>
+      <th>Mail In</th>
+      <th>Business</th>
+      <th>Residents</th>
+      <th>Distance</th>
+    </thead>
+    <tbody>
+      <% @pick_up_locations.each do |location| %>
+        <tr>
+          <td>
+            <strong>
+              <% if location.website %>
+                <%= link_to location.name, location.website, :target => "_blank" %>
+              <% else %>
+                <%= location.name %>
+              <% end %>
+            </strong>
+          <br><%= location.phone %></td>
+          <td>
+            <%= location.street %><br>
+            <% if location.city || location.zipcode %>
+              <%= location.city %>, <%= location.state %> <%= location.zipcode%>
+            <% end %>
+          </td>
+          <td><%= location.hours %></td>
+          <td><%= location.pick_up %></td>
+          <td><%= location.drop_off %></td>
+          <td><%= location.mail_in %></td>
+          <td><%= location.business %></td>
+          <td><%= location.residents %></td>
+          <td><%= location.distance %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  Mail-In
+  <table class="table table-condensed location-table">
+    <thead>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Hours</th>
+      <th>Pickup</th>
+      <th>Dropoff</th>
+      <th>Mail In</th>
+      <th>Business</th>
+      <th>Residents</th>
+      <th>Distance</th>
+    </thead>
+    <tbody>
+      <% @mail_in_locations.each do |location| %>
         <tr>
           <td>
             <strong>
