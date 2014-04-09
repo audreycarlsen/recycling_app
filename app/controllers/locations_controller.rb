@@ -33,7 +33,8 @@ class LocationsController < ApplicationController
       end
     end
     
-    calculate_distances(params[:address], destination_coords)
+    tk = calculate_distances(params[:address], destination_coords)
+    raise
   end
 
   # def get_coordinates

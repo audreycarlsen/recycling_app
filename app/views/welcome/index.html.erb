@@ -26,33 +26,49 @@
       <p>Step 1: Select specific materials</p></strong>
 
       <%= form_tag(locations_path, method: "get") do %>
-        {{#each subcategories}}
-          <p>
-            <input name="subcategories[]" type="checkbox" value="{{name}}" />
-            <strong>{{name}}</strong><br>{{description}}
-          </p>
-        {{/each}}
+        <div class="checkbox">
+          {{#each subcategories}}
+            <p>
+              <input name="subcategories[]" type="checkbox" value="{{name}}" />
+              <strong>{{name}}</strong><br>{{description}}
+            </p>
+          {{/each}}
+        </div>
 
         <input checked="checked" name="subcategories[]" type="checkbox" value="EVERYTHING!" />
         <strong>All</strong>
       
         <br><br><p><strong>Step 2: Is this material generated from your business or residence?</strong></p>
 
-        <input name="type" type="radio" value="Business" /> Business
-        <input name="type" type="radio" value="Residence" /> Residence
+        <label class="radio-inline">
+          <input name="type" type="radio" value="Business" /> Business
+        </label>
+        <label class="radio-inline">
+          <input name="type" type="radio" value="Residence" /> Residence
+        </label>
 
         <br><br><p><strong>Step 3: What type of service are you looking for?</strong></p>
-        <input name="service" type="radio" value="pick_up" /> Pick-Up
-        <input name="service" type="radio" value="drop_off" /> Drop-Off
-        <input name="service" type="radio" value="mail_in" /> Mail-In
+        <label class="radio-inline">
+          <input name="service" type="radio" value="pick_up" /> Pick-Up
+        </label>
+        <label class="radio-inline">
+          <input name="service" type="radio" value="drop_off" /> Drop-Off
+        </label>
+        <label class="radio-inline">
+          <input name="service" type="radio" value="mail_in" /> Mail-In
+        </label>
 
-        <br><br><p><strong>Step 4: Input your address</strong></p>
+        <br><br>
+
+        <p><strong>Step 4: Input your address</strong></p>
         <em>ex: 1301 5th Ave, Seattle, WA 98101</em><br>
+
         <div class="form-group">
-          <input name="address" type="text" id="address_field" class="form-control" style="width:33%"/>
+          <input name="address" type="text" id="address_field" class="form-control" style="width:40%"/>
         </div>
         <div class='current_location'>
           <button type="button" class="btn btn-info">Use Current Location</button>
+          <div class='location_display'></div>
         </div>
 
         <p><div class='error'></div></p>
