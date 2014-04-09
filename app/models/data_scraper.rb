@@ -1,7 +1,7 @@
 class DataScraper
   def self.create_location(location_json)
     new_location = Location.new(
-      name:          location_json['provider_name'],
+      name:          DataScraper.titleize(location_json['provider_name']),
       latitude:      location_json['geolocation']['latitude'],
       longitude:     location_json['geolocation']['longitude'],
       location_type: "Business",
@@ -87,5 +87,10 @@ class DataScraper
 
       break if count < 1000
     end
+  end
+
+  def self.titleize(name)
+    lowercase_words = %w{a an the and but or for nor of}
+    name.split.each_with_index.map{|x, index| lowercase_words.include?(x) && index > 0 ? x : x.capitalize }.join(" ")
   end
 end
