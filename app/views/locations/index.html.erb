@@ -21,7 +21,7 @@
   </strong></h3>
 
   <p>
-    <% unless @locations_by_service_and_type.last %>
+    <% unless @locations_by_type.last %>
       Nope. Got nothing for you. :(
     <% end %>
   </p>
@@ -35,7 +35,6 @@
   <div class='lat'> </div>
 
   <p><div id="map-canvas" style="width:600px; height:400px;"></div></p>
-  <!--   <p><div id="map" style="width:600px; height:400px;"></div></p> -->
 
   <table class="table table-condensed location-table">
     <thead>
@@ -47,9 +46,10 @@
       <th>Mail In</th>
       <th>Business</th>
       <th>Residents</th>
+      <th>Distance</th>
     </thead>
     <tbody>
-      <% @locations_by_service_and_type.each do |location| %>
+      <% @locations_by_type.each do |location| %>
         <tr>
           <td>
             <strong>
@@ -63,7 +63,7 @@
           <td>
             <%= location.street %><br>
             <% if location.city || location.zipcode %>
-              <%= location.city %>, WA <%= location.zipcode%>
+              <%= location.city %>, <%= location.state %> <%= location.zipcode%>
             <% end %>
           </td>
           <td><%= location.hours %></td>
@@ -72,7 +72,9 @@
           <td><%= location.mail_in %></td>
           <td><%= location.business %></td>
           <td><%= location.residents %></td>
+          <td><%= location.distance %></td>
         </tr>
       <% end %>
+    </tbody>
   </table>
 </div>

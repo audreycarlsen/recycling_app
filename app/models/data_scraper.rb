@@ -22,7 +22,25 @@ class DataScraper
         new_location.state = "WA"
       else
         city_response = HTTParty.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + location_json['zip'].to_s + '&sensor=false')
-        new_location.state = city_response["results"][0]["address_components"][3]["short_name"]
+        city_response["results"][0]["address_components"].each do |hash|
+          if hash["types"].include?("administrative_area_level_1")
+            new_location.state = hash["short_name"]
+          end
+        end
+      end
+    elsif location_json["city"] && location_json["provider_address"]
+      address = location_json['provider_address'].gsub(" ", "+") + "+" + location_json['city']
+      url = 'http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=false'
+      city_response = HTTParty.get(URI.encode(url))
+      if city_response["results"][0]
+        city_response["results"][0]["address_components"].each do |hash|
+          if hash["types"].include?("administrative_area_level_1")
+            new_location.state = hash["short_name"]
+          end
+          if hash["types"].include?("postal_code")
+            new_location.zipcode = hash["short_name"]
+          end
+        end
       end
     end
 

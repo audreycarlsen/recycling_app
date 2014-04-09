@@ -1,4 +1,6 @@
 class Location
+  attr_accessor :distance
+
   include Mongoid::Document
 
   field :name,          type: String
@@ -13,6 +15,7 @@ class Location
   field :location_type, type: String
   field :street,        type: String
   field :city,          type: String
+  field :state,         type: String
   field :zipcode,       type: String
   field :phone,         type: String
   field :website,       type: String
@@ -21,4 +24,5 @@ class Location
   field :min_volume,    type: String
   field :max_volume,    type: String
   field :description,   type: String
+
 end

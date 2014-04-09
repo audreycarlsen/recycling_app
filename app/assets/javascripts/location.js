@@ -23,7 +23,7 @@ $(document).ready(function() {
             icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
           });
 
-          var windowContent = '<strong>' + data[i].name + '</strong><br>' + data[i].street + '<br>' + data[i].city + ', WA ' + data[i].zipcode
+          var windowContent = '<strong>' + data[i].name + '</strong><br>' + data[i].street + '<br>' + data[i].city + ', WA ' + data[i].zipcode + '<br>' + data[i].distance
 
           google.maps.event.addListener(marker, 'click', function() {
             infoWindow.setContent(windowContent);

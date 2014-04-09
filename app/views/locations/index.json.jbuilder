@@ -9,5 +9,6 @@ json.array! @mappable_locations do |location|
     json.hours     location.hours
     json.latitude  location.latitude
     json.longitude location.longitude
+    json.distance  location.distance
   end
 end
