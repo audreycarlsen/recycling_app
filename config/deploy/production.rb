@@ -45,3 +45,20 @@ server 'ec2-54-187-31-255.us-west-2.compute.amazonaws.com/',
 #     # password: 'please use keys'
 #   }
 # setting per server overrides global ssh_options
+namespace :figaro do
+  desc "SCP transfer figaro configuration to the shared folder"
+  task :setup do
+    on roles(:app) do
+      upload! "config/application.yml", "#{shared_path}/application.yml", via: :scp
+    end
+  end
+ 
+  desc "Symlink application.yml to the release path"
+  task :symlink do
+    on roles(:app) do
+      execute "ln -sf #{shared_path}/application.yml #{current_path}/config/application.yml"
+    end
+  end
+end
+after "deploy:started", "figaro:setup"
+after "deploy:symlink:release", "figaro:symlink"
