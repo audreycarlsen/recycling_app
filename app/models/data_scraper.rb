@@ -17,6 +17,15 @@ class DataScraper
       description:   (location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip
     )
 
+    if location_json['zip']
+      if location_json['zip'].to_i.between?(98001, 99403)
+        new_location.state = "WA"
+      else
+        city_response = HTTParty.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + location_json['zip'].to_s + '&sensor=false')
+        new_location.state = city_response["results"][0]["address_components"][3]["short_name"]
+      end
+    end
+
     new_location.pick_up   = location_json['pickup_allowed']   == 'TRUE'
     new_location.drop_off  = location_json['dropoff_allowed'] == 'TRUE'
     new_location.mail_in   = location_json['mail_in_allowed']  == 'TRUE'
