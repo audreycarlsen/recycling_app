@@ -20,187 +20,183 @@
     <% end %>
   </strong></h3>
 
-  <p>
-    <% unless @locations_by_type.last %>
-      Nope. Got nothing for you. :(
+  <% if @locations_by_type.last %>
+    <p><div id="map-canvas" style="width:600px; height:400px;"></div></p>
+
+    <% if @drop_off_locations.first %>
+      Drop-Off
+      <table class="table table-condensed location-table">
+        <thead>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Hours</th>
+          <% if @subcategories.count > 1 %>
+            <th>Accepts</th>
+          <% end %>
+          <th>Pickup</th>
+          <th>Dropoff</th>
+          <th>Mail In</th>
+          <th>Business</th>
+          <th>Residents</th>
+          <th>Distance</th>
+        </thead>
+        <tbody>
+          <% @drop_off_locations.each do |location| %>
+            <tr>
+              <td>
+                <strong>
+                  <% if location.website %>
+                    <%= link_to location.name, location.website, :target => "_blank" %>
+                  <% else %>
+                    <%= location.name %>
+                  <% end %>
+                </strong>
+              <br><%= location.phone %></td>
+              <td>
+                <%= location.street %><br>
+                <% if location.city || location.zipcode %>
+                  <%= location.city %>, <%= location.state %> <%= location.zipcode%>
+                <% end %>
+              </td>
+              <td><%= location.hours %></td>
+              <% if @subcategories.count > 1 %>
+                <td>
+                  <% location.materials.each do |material| %>
+                  <!-- Make this a class method please!!!! -->
+                    <% if @subcategories.include?(material) %>
+                      <%= material %>
+                    <% end %>
+                  <% end %>
+                </td>
+              <% end %>
+              <td><%= location.pick_up %></td>
+              <td><%= location.drop_off %></td>
+              <td><%= location.mail_in %></td>
+              <td><%= location.business %></td>
+              <td><%= location.residents %></td>
+              <td><%= location.distance %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     <% end %>
-  </p>
 
-  <div class='current_location'>
-    <button type="button" class="btn btn-info">Use Current Location</button>
-  </div>
-  <br>
-  <div class='error'></div>
-  <div class='long'> </div>
-  <div class='lat'> </div>
-
-  <p><div id="map-canvas" style="width:600px; height:400px;"></div></p>
-
-  Drop-Off
-  <table class="table table-condensed location-table">
-    <thead>
-      <th>Name</th>
-      <th>Location</th>
-      <th>Hours</th>
-      <% if @subcategories.count > 1 %>
-        <th>Accepts</th>
-      <% end %>
-      <th>Pickup</th>
-      <th>Dropoff</th>
-      <th>Mail In</th>
-      <th>Business</th>
-      <th>Residents</th>
-      <th>Distance</th>
-    </thead>
-    <tbody>
-      <% @drop_off_locations.each do |location| %>
-        <tr>
-          <td>
-            <strong>
-              <% if location.website %>
-                <%= link_to location.name, location.website, :target => "_blank" %>
-              <% else %>
-                <%= location.name %>
-              <% end %>
-            </strong>
-          <br><%= location.phone %></td>
-          <td>
-            <%= location.street %><br>
-            <% if location.city || location.zipcode %>
-              <%= location.city %>, <%= location.state %> <%= location.zipcode%>
-            <% end %>
-          </td>
-          <td><%= location.hours %></td>
+    <% if @pick_up_locations.first %>
+      Pick-Up
+      <table class="table table-condensed location-table">
+        <thead>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Hours</th>
           <% if @subcategories.count > 1 %>
-            <td>
-              <% location.materials.each do |material| %>
-              <!-- Make this a class method please!!!! -->
-                <% if @subcategories.include?(material) %>
-                  <%= material %>
-                <% end %>
-              <% end %>
-            </td>
+            <th>Accepts</th>
           <% end %>
-          <td><%= location.pick_up %></td>
-          <td><%= location.drop_off %></td>
-          <td><%= location.mail_in %></td>
-          <td><%= location.business %></td>
-          <td><%= location.residents %></td>
-          <td><%= location.distance %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+          <th>Cost</th>
+          <th>Pickup</th>
+          <th>Dropoff</th>
+          <th>Mail In</th>
+          <th>Business</th>
+          <th>Residents</th>
+        </thead>
+        <tbody>
+          <% @pick_up_locations.each do |location| %>
+            <tr>
+              <td>
+                <strong>
+                  <% if location.website %>
+                    <%= link_to location.name, location.website, :target => "_blank" %>
+                  <% else %>
+                    <%= location.name %>
+                  <% end %>
+                </strong>
+              <br><%= location.phone %></td>
+              <td>
+                <%= location.street %><br>
+                <% if location.city || location.zipcode %>
+                  <%= location.city %>, <%= location.state %> <%= location.zipcode%>
+                <% end %>
+              </td>
+              <td><%= location.hours %></td>
+              <% if @subcategories.count > 1 %>
+                <td>
+                  <% location.materials.each do |material| %>
+                  <!-- Make this a class method please!!!! -->
+                    <% if @subcategories.include?(material) %>
+                      <%= material %>
+                    <% end %>
+                  <% end %>
+                </td>
+              <% end %>
+              <% if location.cost %>
+              <td><%= location.cost.html_safe %></td>
+              <% end %>
+              <td><%= location.pick_up %></td>
+              <td><%= location.drop_off %></td>
+              <td><%= location.mail_in %></td>
+              <td><%= location.business %></td>
+              <td><%= location.residents %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
 
-  Pick-Up
-  <table class="table table-condensed location-table">
-    <thead>
-      <th>Name</th>
-      <th>Location</th>
-      <th>Hours</th>
-      <% if @subcategories.count > 1 %>
-        <th>Accepts</th>
-      <% end %>
-      <th>Pickup</th>
-      <th>Dropoff</th>
-      <th>Mail In</th>
-      <th>Business</th>
-      <th>Residents</th>
-      <th>Distance</th>
-    </thead>
-    <tbody>
-      <% @pick_up_locations.each do |location| %>
-        <tr>
-          <td>
-            <strong>
-              <% if location.website %>
-                <%= link_to location.name, location.website, :target => "_blank" %>
-              <% else %>
-                <%= location.name %>
-              <% end %>
-            </strong>
-          <br><%= location.phone %></td>
-          <td>
-            <%= location.street %><br>
-            <% if location.city || location.zipcode %>
-              <%= location.city %>, <%= location.state %> <%= location.zipcode%>
-            <% end %>
-          </td>
-          <td><%= location.hours %></td>
+    <% if @mail_in_locations.first %>
+      Mail-In
+      <table class="table table-condensed location-table">
+        <thead>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Hours</th>
           <% if @subcategories.count > 1 %>
-            <td>
-              <% location.materials.each do |material| %>
-              <!-- Make this a class method please!!!! -->
-                <% if @subcategories.include?(material) %>
-                  <%= material %>
-                <% end %>
-              <% end %>
-            </td>
+            <th>Accepts</th>
           <% end %>
-          <td><%= location.pick_up %></td>
-          <td><%= location.drop_off %></td>
-          <td><%= location.mail_in %></td>
-          <td><%= location.business %></td>
-          <td><%= location.residents %></td>
-          <td><%= location.distance %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  Mail-In
-  <table class="table table-condensed location-table">
-    <thead>
-      <th>Name</th>
-      <th>Location</th>
-      <th>Hours</th>
-      <% if @subcategories.count > 1 %>
-        <th>Accepts</th>
-      <% end %>
-      <th>Pickup</th>
-      <th>Dropoff</th>
-      <th>Mail In</th>
-      <th>Business</th>
-      <th>Residents</th>
-      <th>Distance</th>
-    </thead>
-    <tbody>
-      <% @mail_in_locations.each do |location| %>
-        <tr>
-          <td>
-            <strong>
-              <% if location.website %>
-                <%= link_to location.name, location.website, :target => "_blank" %>
-              <% else %>
-                <%= location.name %>
-              <% end %>
-            </strong>
-          <br><%= location.phone %></td>
-          <td>
-            <%= location.street %><br>
-            <% if location.city || location.zipcode %>
-              <%= location.city %>, <%= location.state %> <%= location.zipcode%>
-            <% end %>
-          </td>
-          <td><%= location.hours %></td>
-          <% if @subcategories.count > 1 %>
-            <td>
-              <% location.materials.each do |material| %>
-              <!-- Make this a class method please!!!! -->
-                <% if @subcategories.include?(material) %>
-                  <%= material %>
+          <th>Pickup</th>
+          <th>Dropoff</th>
+          <th>Mail In</th>
+          <th>Business</th>
+          <th>Residents</th>
+        </thead>
+        <tbody>
+          <% @mail_in_locations.each do |location| %>
+            <tr>
+              <td>
+                <strong>
+                  <% if location.website %>
+                    <%= link_to location.name, location.website, :target => "_blank" %>
+                  <% else %>
+                    <%= location.name %>
+                  <% end %>
+                </strong>
+              <br><%= location.phone %></td>
+              <td>
+                <%= location.street %><br>
+                <% if location.city || location.zipcode %>
+                  <%= location.city %>, <%= location.state %> <%= location.zipcode%>
                 <% end %>
+              </td>
+              <td><%= location.hours %></td>
+              <% if @subcategories.count > 1 %>
+                <td>
+                  <% location.materials.each do |material| %>
+                  <!-- Make this a class method please!!!! -->
+                    <% if @subcategories.include?(material) %>
+                      <%= material %>
+                    <% end %>
+                  <% end %>
+                </td>
               <% end %>
-            </td>
+              <td><%= location.pick_up %></td>
+              <td><%= location.drop_off %></td>
+              <td><%= location.mail_in %></td>
+              <td><%= location.business %></td>
+              <td><%= location.residents %></td>
+            </tr>
           <% end %>
-          <td><%= location.pick_up %></td>
-          <td><%= location.drop_off %></td>
-          <td><%= location.mail_in %></td>
-          <td><%= location.business %></td>
-          <td><%= location.residents %></td>
-          <td><%= location.distance %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        </tbody>
+      </table>
+    <% end %>
+  <% else %>
+    Nope. Got nothing for you. :(
+  <% end %>
 </div>

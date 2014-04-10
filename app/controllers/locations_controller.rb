@@ -1,14 +1,14 @@
 class LocationsController < ApplicationController
   def index
     @subcategories = params["subcategories"]
-    locations = Location.where(:materials.in => params["subcategories"])
+    locations_by_material = Location.where(:materials.in => @subcategories)
 
     if params["type"] == "Business"
-      @locations_by_type = locations.where(business: true)
+      @locations_by_type = locations_by_material.where(business: true)
     elsif params["type"] == "Residence"
-      @locations_by_type = locations.where(residents: true)
+      @locations_by_type = locations_by_material.where(residents: true)
     else
-      @locations_by_type = locations
+      @locations_by_type = locations_by_material
     end
 
     @pick_up_locations  = []
@@ -29,9 +29,6 @@ class LocationsController < ApplicationController
 
     @drop_off_locations = @drop_off_locations.reject{ |l| l.latitude.nil?}
 
-    # # Only want map to display locations that have an address and accept drop-offs:
-    # @mappable_locations = @locations_by_type.reject{ |l| l.latitude.nil? || l.drop_off == false }
-
     destination_coords = ""
 
     @drop_off_locations.each do |location|
@@ -48,24 +45,15 @@ class LocationsController < ApplicationController
       location.distance = @distances.parsed_response["rows"].first["elements"][index]["distance"]["text"]
     end
 
+    @drop_off_locations.sort_by! { |location| location.distance.split(" mi")[0].to_f }
+
     @current_location = params["address"].split(",")
-
-    # @locations_by_service_and_type.each_with_index do |location, index|
-    #   next if location.latitude
-    #   location.distance = @distances.parsed_response["rows"].first["elements"][index]["distance"]["text"]
-    # end
-
-
   end
-
-  # def get_coordinates
-  #   response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?address=1301+5th+Ave,+Seattle,+WA&sensor=true")
-  # end
 
   private
 
   def calculate_distances(current_location, destination_coords)
-    url = ("https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + current_location + "&destinations=" + destination_coords + "&sensor=false&units=imperial").strip
+    url = ("https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + current_location + "&destinations=" + destination_coords + "&sensor=false&units=imperial&key=" + ENV['GOOGLE_SERVER_API_KEY']).strip
     HTTParty.get(URI.encode(url))
   end
 end
