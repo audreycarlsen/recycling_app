@@ -1,6 +1,17 @@
 class LocationsController < ApplicationController
   def index
-    @subcategories = params["subcategories"]
+    parsed_subcategories_param = params["subcategories"].first.split(" ", 2)
+
+    @subcategories = []
+
+    if parsed_subcategories_param.first == "All"
+      Material.where(name: parsed_subcategories_param.last).first.subcategories.each do |subcategory|
+        @subcategories << subcategory["name"]
+      end
+    else
+      @subcategories = params["subcategories"]
+    end
+
     locations_by_material = Location.where(:materials.in => @subcategories)
 
     if params["type"] == "Business"
