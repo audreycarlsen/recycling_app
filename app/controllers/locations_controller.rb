@@ -45,7 +45,9 @@ class LocationsController < ApplicationController
       location.distance = @distances.parsed_response["rows"].first["elements"][index]["distance"]["text"]
     end
 
-    @drop_off_locations.sort_by! { |location| location.distance.split(" mi")[0].to_f }
+    @drop_off_locations.sort_by! { |location| location.distance.split(" mi")[0].delete(",").to_f }
+    @pick_up_locations.sort_by! { |location| location.name }
+    @mail_in_locations.sort_by! { |location| location.name }
 
     @current_location = params["address"].split(",")
   end

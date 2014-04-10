@@ -7,30 +7,6 @@ function showPosition(position) {
       $('.location_display').text("(near: " + data.results[0].address_components[0].short_name + " " + data.results[0].address_components[1].short_name + ", " + data.results[0].address_components[3].short_name + ", " + data.results[0].address_components[5].short_name + " " + data.results[0].address_components[7].short_name + ")");
     }
   });
-
-  // var response = $.getJSON("http://maps.googleapis.com/maps/api/geocode/json?latlng=47.608933099999994,-122.3333873&sensor=false", function() {
-  //   console.log(response)
-  // });
-  // debugger;
-  // address_string = response.
-  // $('#address_field').attr('value', position.coords.latitude + "," + position.coords.longitude);
-  // var myCoords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-  // mapOptions = {
-  //   zoom: 13,
-  //   center: myCoords
-  // }
-
-  // var marker = new google.maps.Marker({
-  //   position: myCoords,
-  //   map: map,
-  //   title: "Current Location",
-  //   icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-  // });
-
-  // google.maps.event.addListener(marker, 'click', function() {
-  //   infoWindow.setContent('Current Location');
-  //   infoWindow.open(map, this);
-  // });
 }
 
 function watchCurrentLocation() {
@@ -42,9 +18,16 @@ function watchCurrentLocation() {
     } else {
       error.innerHTML = "Geolocation is not supported by this browser.";
     }
+  });
+}
 
-    // AJAX GOES HURRRR
+function watchCheckboxes() {
+  $('.watched-checkbox').click(function() {
+    $('.checkbox-all').children('input').attr('checked', false)
+  });
 
+  $('.checkbox-all').click(function() {
+    $('.watched-checkbox').children('input').attr('checked', false)
   });
 }
 
@@ -65,6 +48,7 @@ $(document).ready(function() {
           var html = template(data);
           $("#material_result").replaceWith(html);
           watchCurrentLocation();
+          watchCheckboxes();
         }
       });
       return false;

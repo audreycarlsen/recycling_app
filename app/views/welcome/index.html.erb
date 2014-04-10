@@ -29,16 +29,22 @@
         <div class="checkbox">
           {{#each subcategories}}
             <p>
-              <input name="subcategories[]" type="checkbox" value="{{name}}" />
+              <div class="watched-checkbox">
+                <input name="subcategories[]" type="checkbox" value="{{name}}" />
+              </div>
               <strong>{{name}}</strong><br>{{description}}
             </p>
           {{/each}}
         </div>
 
-        <input checked="checked" name="subcategories[]" type="checkbox" value="EVERYTHING!" />
-        <strong>All</strong>
+        <div class="checkbox">
+          <div class="checkbox-all">
+            <input checked=true name="subcategories[]" type="checkbox" value="EVERYTHING!" />
+          </div>
+          <strong>All</strong>
+        </div>
       
-        <br><br><p><strong>Step 2: Is this material generated from your business or residence?</strong></p>
+        <p><strong>Step 2: Is this material generated from your business or residence?</strong></p>
 
         <label class="radio-inline">
           <input name="type" type="radio" value="Business" /> Business
