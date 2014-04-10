@@ -66,6 +66,7 @@ class DataScraper
 
     if existing_location
       existing_location.materials << location_json['material_handled']
+      existing_location.description << (' ' + location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip
       existing_location.save
       existing_location
     else

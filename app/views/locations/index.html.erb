@@ -42,6 +42,9 @@
       <th>Name</th>
       <th>Location</th>
       <th>Hours</th>
+      <% if @subcategories.count > 1 %>
+        <th>Accepts</th>
+      <% end %>
       <th>Pickup</th>
       <th>Dropoff</th>
       <th>Mail In</th>
@@ -68,6 +71,16 @@
             <% end %>
           </td>
           <td><%= location.hours %></td>
+          <% if @subcategories.count > 1 %>
+            <td>
+              <% location.materials.each do |material| %>
+              <!-- Make this a class method please!!!! -->
+                <% if @subcategories.include?(material) %>
+                  <%= material %>
+                <% end %>
+              <% end %>
+            </td>
+          <% end %>
           <td><%= location.pick_up %></td>
           <td><%= location.drop_off %></td>
           <td><%= location.mail_in %></td>
@@ -85,6 +98,9 @@
       <th>Name</th>
       <th>Location</th>
       <th>Hours</th>
+      <% if @subcategories.count > 1 %>
+        <th>Accepts</th>
+      <% end %>
       <th>Pickup</th>
       <th>Dropoff</th>
       <th>Mail In</th>
@@ -111,6 +127,16 @@
             <% end %>
           </td>
           <td><%= location.hours %></td>
+          <% if @subcategories.count > 1 %>
+            <td>
+              <% location.materials.each do |material| %>
+              <!-- Make this a class method please!!!! -->
+                <% if @subcategories.include?(material) %>
+                  <%= material %>
+                <% end %>
+              <% end %>
+            </td>
+          <% end %>
           <td><%= location.pick_up %></td>
           <td><%= location.drop_off %></td>
           <td><%= location.mail_in %></td>
@@ -128,6 +154,9 @@
       <th>Name</th>
       <th>Location</th>
       <th>Hours</th>
+      <% if @subcategories.count > 1 %>
+        <th>Accepts</th>
+      <% end %>
       <th>Pickup</th>
       <th>Dropoff</th>
       <th>Mail In</th>
@@ -154,6 +183,16 @@
             <% end %>
           </td>
           <td><%= location.hours %></td>
+          <% if @subcategories.count > 1 %>
+            <td>
+              <% location.materials.each do |material| %>
+              <!-- Make this a class method please!!!! -->
+                <% if @subcategories.include?(material) %>
+                  <%= material %>
+                <% end %>
+              <% end %>
+            </td>
+          <% end %>
           <td><%= location.pick_up %></td>
           <td><%= location.drop_off %></td>
           <td><%= location.mail_in %></td>

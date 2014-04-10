@@ -1,5 +1,5 @@
-json.array! @mappable_locations do |location|
-  if location.longitude
+json.drop_off_locations do
+  json.array! @drop_off_locations do |location|
     json.name      location.name
     json.website   location.website
     json.street    location.street
@@ -11,4 +11,8 @@ json.array! @mappable_locations do |location|
     json.longitude location.longitude
     json.distance  location.distance
   end
+end
+json.current_location do
+  json.latitude  @current_location[0]
+  json.longitude @current_location[1]
 end
