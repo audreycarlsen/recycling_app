@@ -19,5 +19,12 @@ body {
 
 .location-table {
   font-size: 12px;
-/*  font-family: 'Helvetica', sans-serif;*/
+}
+
+.css-class-here {
+    text-transform: lowercase;
+}
+
+.label-all {
+  text-transform: lowercase;
 }

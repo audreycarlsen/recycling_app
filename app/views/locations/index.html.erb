@@ -1,17 +1,17 @@
 <div class="container">
   <h4><em>What do I do with... </em></h4>
   <h3><strong>
-    <% @subcategories.each do |subcategory| %>
-      <% if @subcategories.count == 1 %>
+    <% @untouched_subcategories.each do |subcategory| %>
+      <% if @untouched_subcategories.count == 1 %>
         <%= subcategory %>
-      <% elsif @subcategories.count == 2 %>
-        <% unless subcategory == @subcategories.last %>
+      <% elsif @untouched_subcategories.count == 2 %>
+        <% unless subcategory == @untouched_subcategories.last %>
           <%= subcategory %>
         <% else %>
           and <%= subcategory %>
         <% end %>
       <% else %>
-        <% unless subcategory == @subcategories.last %>
+        <% unless subcategory == @untouched_subcategories.last %>
           <%= subcategory %>,
         <% else %>
           and <%= subcategory %>

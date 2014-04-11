@@ -41,7 +41,7 @@
           <div class="checkbox-all">
             <input checked=true name="subcategories[]" type="checkbox" value="All {{name}}" />
           </div>
-          <strong>All</strong>
+          <strong>All <span class="label-all">{{name}}</span></strong>
         </div>
       
         <p><strong>Step 2: Is this material generated from your business or residence?</strong></p>
@@ -55,16 +55,18 @@
 
         <br><br>
 
-        <p><strong>Step 3: Find drop-off locations nearest to you</strong></p>
+        <p><strong>Step 3: Enter your address to find the nearest drop-off locations</strong></p>
         <em>ex: 1301 5th Ave, Seattle, WA 98101</em><br>
 
         <div class="form-group">
-          <input name="address" type="text" id="address_field" class="form-control" style="width:40%"/>
+          <input type="text" id="displayed_address_field" class="form-control" style="width:40%"/>
         </div>
-        <div class='current_location'>
-          <button type="button" class="btn btn-info">Use Current Location</button>
-          <div class='location_display'></div>
-        </div>
+        <div class="invalid_address"></div>
+        <input name="address" type="text" id="address_field" class="form-control" style="width:40%"/>
+
+        <br>
+
+        or <button type="button" class="btn btn-sm btn-info current_location">Use Current Location</button>
 
         <p><div class='error'></div></p>
 

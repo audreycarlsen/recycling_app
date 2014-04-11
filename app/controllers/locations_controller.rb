@@ -1,11 +1,12 @@
 class LocationsController < ApplicationController
   def index
-    parsed_subcategories_param = params["subcategories"].first.split(" ", 2)
+    @untouched_subcategories = params["subcategories"]
+    parsed_subcategories = params["subcategories"].first.split(" ", 2)
 
     @subcategories = []
 
-    if parsed_subcategories_param.first == "All"
-      Material.where(name: parsed_subcategories_param.last).first.subcategories.each do |subcategory|
+    if parsed_subcategories.first == "All"
+      Material.where(name: parsed_subcategories.last).first.subcategories.each do |subcategory|
         @subcategories << subcategory["name"]
       end
     else
@@ -49,7 +50,7 @@ class LocationsController < ApplicationController
         destination_coords << (location.latitude + "," + location.longitude)
       end
     end
-    
+  
     @distances = calculate_distances(params["address"], destination_coords)
 
     @drop_off_locations.each_with_index do |location, index|
