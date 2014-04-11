@@ -5,6 +5,7 @@ function showPosition(position) {
     success: function(data) {
       $('#address_field').val(position.coords.latitude + "," + position.coords.longitude);
       $('#displayed_address_field').val("near: " + data.results[0].address_components[0].short_name + " " + data.results[0].address_components[1].short_name + ", " + data.results[0].address_components[3].short_name + ", " + data.results[0].address_components[5].short_name + " " + data.results[0].address_components[7].short_name);
+      $(".invalid_address").html('');
     }
   });
 }
@@ -33,20 +34,35 @@ function watchCheckboxes() {
 
 function watchDisplayedAddress() {
   $('#displayed_address_field').blur(function() {
-      var address = $('#displayed_address_field').val().replace(/\s/g, '+');
+    var address = $('#displayed_address_field').val().replace(/\s/g, '+');
 
-    $.ajax({
-      type: "GET",
-      url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false",
-      success: function(data) {
-        if (data["status"] == "ZERO_RESULTS") {
-          $('<p>Invalid address</p>').appendTo(".invalid_address");
-        } else {
-          $('#address_field').val(data.results[0].geometry.location.lat + "," + data.results[0].geometry.location.lng);
-          $('#displayed_address_field').val(data.results[0].formatted_address);
+    if ($('#displayed_address_field').val() != '') { 
+      $.ajax({
+        type: "GET",
+        url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false",
+        success: function(data) {
+          if (data["status"] == "ZERO_RESULTS") {
+            $(".invalid_address").html("Invalid address :(");
+          } else {
+            $('#address_field').val(data.results[0].geometry.location.lat + "," + data.results[0].geometry.location.lng);
+            $('#displayed_address_field').val(data.results[0].formatted_address);
+            $(".invalid_address").html('');
+            $(".invalid_address").html("");
+          }
         }
-      }
-    });
+      });
+    }
+
+    // $('.onward-button').prop('disabled', false);
+  });
+}
+
+function watchOnwardButton() {
+  $('.onward-button').click(function() {
+    if ($('#displayed_address_field').val() == '') {
+      $(".invalid_address").html("Please provide an address!");
+      return false;
+    }
   });
 }
 
@@ -69,6 +85,7 @@ $(document).ready(function() {
           watchCurrentLocation();
           watchCheckboxes();
           watchDisplayedAddress();
+          watchOnwardButton();
         }
       });
       return false;

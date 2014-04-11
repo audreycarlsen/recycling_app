@@ -22,6 +22,7 @@
 
   <% if @locations_by_type.last %>
     <p><div id="map-canvas" style="width:600px; height:400px;"></div></p>
+    <p>Near <%= @displayed_address %></p>
 
     <% if @drop_off_locations.first %>
       Drop-Off

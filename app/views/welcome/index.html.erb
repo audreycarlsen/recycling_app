@@ -55,11 +55,11 @@
 
         <br><br>
 
-        <p><strong>Step 3: Enter your address to find the nearest drop-off locations</strong></p>
+        <p><strong>Step 3: Enter your address to find drop-off locations nearest to you</strong></p>
         <em>ex: 1301 5th Ave, Seattle, WA 98101</em><br>
 
         <div class="form-group">
-          <input type="text" id="displayed_address_field" class="form-control" style="width:40%"/>
+          <input name="displayed_address" type="text" id="displayed_address_field" class="form-control" style="width:40%"/>
         </div>
         <div class="invalid_address"></div>
         <input name="address" type="text" id="address_field" class="form-control" style="width:40%"/>
@@ -70,7 +70,7 @@
 
         <p><div class='error'></div></p>
 
-        <p><button type="submit" class="btn btn-lg btn-warning">Onward, to glory!</button></p>
+        <p><button type="submit" class="btn btn-lg btn-warning onward-button">Onward, to glory!</button></p>
       <% end %>
     </div>
   </script>

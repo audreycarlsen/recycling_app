@@ -1,5 +1,7 @@
 class LocationsController < ApplicationController
   def index
+
+    @displayed_address = params["displayed_address"].split("near: ")[1]
     @untouched_subcategories = params["subcategories"]
     parsed_subcategories = params["subcategories"].first.split(" ", 2)
 
