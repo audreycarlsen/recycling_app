@@ -1,7 +1,6 @@
 class LocationsController < ApplicationController
   def index
-
-    @displayed_address = params["displayed_address"].split("near: ")[1]
+    @displayed_address = params["displayed_address"].split("near: ").last
     @untouched_subcategories = params["subcategories"]
     parsed_subcategories = params["subcategories"].first.split(" ", 2)
 
@@ -54,6 +53,7 @@ class LocationsController < ApplicationController
     end
   
     @distances = calculate_distances(params["address"], destination_coords)
+    # @distances.parsed_response["rows"].first["elements"][index]["status"]
 
     @drop_off_locations.each_with_index do |location, index|
       location.distance = @distances.parsed_response["rows"].first["elements"][index]["distance"]["text"]
@@ -63,7 +63,8 @@ class LocationsController < ApplicationController
     @pick_up_locations.sort_by! { |location| location.name }
     @mail_in_locations.sort_by! { |location| location.name }
 
-    @current_location = params["address"].split(",")
+    # For jQuery map rendering
+    @current_location = params["address"].split(",").map {|coord| coord.to_f}
   end
 
   private

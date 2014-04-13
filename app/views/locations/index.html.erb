@@ -26,7 +26,7 @@
 
     <% if @drop_off_locations.first %>
       Drop-Off
-      <table class="table table-condensed location-table">
+      <table class="table table-condensed location-table" id="drop_off_table" data-current-location="<%= @current_location %>">
         <thead>
           <th>Name</th>
           <th>Location</th>
@@ -43,7 +43,7 @@
         </thead>
         <tbody>
           <% @drop_off_locations.each do |location| %>
-            <tr>
+            <tr data-name="<%= location.name %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>" data-distance="<%= location.distance %>" data-latitude="<%= location.latitude %>" data-longitude="<%= location.longitude %>">
               <td>
                 <strong>
                   <% if location.website %>

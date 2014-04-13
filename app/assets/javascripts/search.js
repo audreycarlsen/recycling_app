@@ -37,6 +37,8 @@ function watchDisplayedAddress() {
     var address = $('#displayed_address_field').val().replace(/\s/g, '+');
 
     if ($('#displayed_address_field').val() != '') { 
+      // disable button
+      // display loading gif
       $.ajax({
         type: "GET",
         url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false",
@@ -47,7 +49,7 @@ function watchDisplayedAddress() {
             $('#address_field').val(data.results[0].geometry.location.lat + "," + data.results[0].geometry.location.lng);
             $('#displayed_address_field').val(data.results[0].formatted_address);
             $(".invalid_address").html('');
-            $(".invalid_address").html("");
+            // enable the button
           }
         }
       });

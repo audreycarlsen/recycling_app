@@ -1,4 +1,8 @@
 class DataScraper
+  include Mongoid::Document
+
+  field :date_modified, type: String
+
   def self.create_location(location_json)
     new_location = Location.new(
       name:          DataScraper.titleize(location_json['provider_name']),
@@ -74,20 +78,38 @@ class DataScraper
     end
   end
 
-  def self.get_all
-    offset = 0
-    while true
-      response = HTTParty.get("http://data.kingcounty.gov/resource/zqwi-c5q3.json?$limit=1000&$offset=#{offset}")
-      count = response.count
-      offset += count
+  def self.update_or_leave_locations_alone(last_date_modified)
+    if last_date_modified != DataScraper.last.date_modified
+      DataScraper.last.date_modified = last_date_modified
 
-      response.each do |location_json|
-        result = self.update_or_create_location(location_json)
-        puts result.name
+      offset = 0
+
+      while true
+        response = HTTParty.get("http://data.kingcounty.gov/resource/zqwi-c5q3.json?$limit=1000&$offset=#{offset}")
+        count = response.count
+        offset += count
+
+        response.each do |location_json|
+          result = self.update_or_create_location(location_json)
+          puts result.name
+        end
+
+        break if count < 1000
       end
-
-      break if count < 1000
+    else
+      DataScraper.last.date_modified = test_response.headers["last-modified"]
+      DataScraper.save
     end
+  end
+
+  def self.get_all
+    if DataScraper.last.nil?
+      DataScraper.create
+    end
+
+    test_response = HTTParty.get("http://data.kingcounty.gov/resource/zqwi-c5q3.json?$limit=1")
+    last_date_modified = test_response.headers["last-modified"]
+    self.update_or_leave_locations_alone(last_date_modified)
   end
 
   def self.titleize(name)
