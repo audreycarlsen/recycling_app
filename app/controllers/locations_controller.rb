@@ -53,7 +53,6 @@ class LocationsController < ApplicationController
     end
   
     @distances = calculate_distances(params["address"], destination_coords)
-    # @distances.parsed_response["rows"].first["elements"][index]["status"]
 
     @drop_off_locations.each_with_index do |location, index|
       location.distance = @distances.parsed_response["rows"].first["elements"][index]["distance"]["text"]
