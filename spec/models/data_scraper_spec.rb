@@ -42,7 +42,31 @@ describe DataScraper do
     end
   end
 
-  describe "get_all" do
+  describe "update_or_leave_locations_alone" do
+    let(:data_scraper){DataScraper.new(date_modified: "2013-04-14 10:17:59 -0700")}
+
+    context "database has been modified" do
+      it "makes API call and increments offset by 1000 until record count is <1000" do
+        data_scraper.save
+
+        response = double("response", :each => [])
+        allow(response).to receive(:count).and_return(1000, 600)
+
+        expect(HTTParty).to receive(:get).with("http://data.kingcounty.gov/resource/zqwi-c5q3.json?$limit=1000&$offset=0").and_return(response)
+        expect(HTTParty).to receive(:get).with("http://data.kingcounty.gov/resource/zqwi-c5q3.json?$limit=1000&$offset=1000").and_return(response)
+
+        DataScraper.update_or_leave_locations_alone("2014-04-14 10:17:59 -0700")
+      end
+    end
+
+    context "database has not been modified" do
+      it "doesn't make an API call" do
+        data_scraper.save
+        
+        expect(HTTParty).to_not receive(:get)
+        DataScraper.update_or_leave_locations_alone("2013-04-14 10:17:59 -0700")
+      end
+    end     
     xit "increments offset by 1000 until record count is <1000" do
       response = double("response", :each => [])
       allow(response).to receive(:count).and_return(1000, 600)
@@ -50,7 +74,7 @@ describe DataScraper do
       expect(HTTParty).to receive(:get).with("http://data.kingcounty.gov/resource/zqwi-c5q3.json?$limit=1000&$offset=0").and_return(response)
       expect(HTTParty).to receive(:get).with("http://data.kingcounty.gov/resource/zqwi-c5q3.json?$limit=1000&$offset=1000").and_return(response)
 
-      DataScraper.get_all
+      DataScraper.update_or_leave_locations_alone
     end
   end
 end

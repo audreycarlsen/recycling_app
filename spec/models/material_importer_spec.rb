@@ -43,6 +43,9 @@ describe MaterialImporter do
       end
     end
   end
+
+  describe "get_all" do
+  end
 end
 
 def csv_row

@@ -24,5 +24,4 @@ class Location
   field :min_volume,    type: String
   field :max_volume,    type: String
   field :description,   type: String
-
 end

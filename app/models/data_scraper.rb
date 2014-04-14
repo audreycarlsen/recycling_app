@@ -96,9 +96,6 @@ class DataScraper
 
         break if count < 1000
       end
-    else
-      DataScraper.last.date_modified = test_response.headers["last-modified"]
-      DataScraper.save
     end
   end
 
