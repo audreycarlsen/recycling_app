@@ -22,10 +22,6 @@ describe DataScraper do
       expect(DataScraper.create_location(location_json).business).to eq(true)
     end
 
-    xit "splits and saves materials in an array" do
-      expect(DataScraper.create_location(location_json).materials).to eq(['Air Conditioners', 'Heat Pumps'])
-    end
-
     it "handles nil service_description gracefully" do
       expect(DataScraper.create_location(location_json3).description).to eq('Anything with a cord on or anything with metal in it. Working or not or parts.')
     end
@@ -36,9 +32,9 @@ describe DataScraper do
   end
 
   describe "update_or_create_location" do
-    xit "creates location and then adds materials" do
-      expect(DataScraper.update_or_create_location(location_json).materials).to eq(['Air Conditioners', 'Heat Pumps'])
-      expect(DataScraper.update_or_create_location(location_json2).materials).to eq(['Air Conditioners', 'Heat Pumps', 'Refrigerators'])
+    it "creates location and then adds materials" do
+      expect(DataScraper.update_or_create_location(location_json).materials).to eq(['Air Conditioners, Heat Pumps'])
+      expect(DataScraper.update_or_create_location(location_json2).materials).to eq(['Air Conditioners, Heat Pumps', 'Refrigerators'])
     end
   end
 

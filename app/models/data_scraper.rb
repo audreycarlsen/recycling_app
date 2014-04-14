@@ -3,56 +3,6 @@ class DataScraper
 
   field :date_modified, type: String
 
-  def self.create_location(location_json)
-    new_location = Location.new(
-      name:          DataScraper.titleize(location_json['provider_name']),
-      latitude:      location_json['geolocation']['latitude'],
-      longitude:     location_json['geolocation']['longitude'],
-      location_type: "Business",
-      street:        location_json['provider_address'],
-      city:          location_json['city'],
-      zipcode:       location_json['zip'],
-      phone:         location_json['phone']['phone_number'], 
-      website:       location_json['provider_url'].try(:[],'url'),
-      hours:         location_json['hours'],       
-      cost:          location_json['fee'],        
-      min_volume:    location_json['minimum_volume'],
-      max_volume:    location_json['maximum_volume'],  
-      description:   (location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip
-    )
-
-    set_state_and_zip(location_json, new_location)
-    set_services(location_json, new_location)
-    set_materials(location_json['material_handled'], new_location)
-
-    unless new_location.save
-      Rails.logger.warning("#{new_location.name} failed")
-    end
-
-    new_location
-  end
-
-  def self.set_materials(material_handled, new_location)
-    new_location.materials = []
-    new_location.materials << location_json['material_handled']
-  end
-
-  def self.set_services(location_json, new_location)
-    new_location.pick_up   = location_json['pickup_allowed'] == 'TRUE'
-    new_location.drop_off  = location_json['dropoff_allowed'] == 'TRUE'
-    new_location.mail_in   = location_json['mail_in_allowed'] == 'TRUE'
-    new_location.business  = location_json['property_type'].include?('Business')
-    new_location.residents = location_json['property_type'].include?('Residents')
-  end
-
-  def self.set_state_and_zip(location_json, new_location)
-    if location_json['zip']
-      set_state(location_json['zip'], new_location)
-    elsif location_json["city"] && location_json["provider_address"]
-      set_zip(location_json, new_location)
-    end
-  end
-
   def self.set_zip(location_json, new_location)
     address = location_json['provider_address'].gsub(" ", "+") + "+" + location_json['city']
     url = 'http://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&sensor=false'
@@ -82,6 +32,71 @@ class DataScraper
     end
   end
 
+  def self.set_materials(material_handled, new_location)
+    new_location.materials = []
+    new_location.materials << location_json['material_handled']
+  end
+
+  def self.set_services(location_json, new_location)
+    new_location.pick_up   = location_json['pickup_allowed'] == 'TRUE'
+    new_location.drop_off  = location_json['dropoff_allowed'] == 'TRUE'
+    new_location.mail_in   = location_json['mail_in_allowed'] == 'TRUE'
+    new_location.business  = location_json['property_type'].include?('Business')
+    new_location.residents = location_json['property_type'].include?('Residents')
+  end
+
+  def self.set_state_and_zip(location_json, new_location)
+    if location_json['zip']
+      set_state(location_json['zip'], new_location)
+    elsif location_json["city"] && location_json["provider_address"]
+      set_zip(location_json, new_location)
+    end
+  end
+
+  def self.add_new_material_and_description(existing_location, location_json)
+    existing_location.materials << location_json['material_handled']
+    existing_location.description << (' ' + location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip
+    existing_location.save
+    existing_location
+  end
+
+  def self.create_location(location_json)
+    new_location = Location.new(
+      name:          DataScraper.titleize(location_json['provider_name']),
+      latitude:      location_json['geolocation']['latitude'],
+      longitude:     location_json['geolocation']['longitude'],
+      location_type: "Business",
+      street:        location_json['provider_address'],
+      city:          location_json['city'],
+      zipcode:       location_json['zip'],
+      phone:         location_json['phone']['phone_number'], 
+      website:       location_json['provider_url'].try(:[],'url'),
+      hours:         location_json['hours'],       
+      cost:          location_json['fee'],        
+      min_volume:    location_json['minimum_volume'],
+      max_volume:    location_json['maximum_volume'],  
+      description:   (location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip
+    )
+
+    set_state_and_zip(location_json, new_location)
+    set_services(location_json, new_location)
+    set_materials(location_json['material_handled'], new_location)
+
+    unless new_location.save
+      Rails.logger.warning("#{new_location.name} failed")
+    end
+
+    new_location
+  end
+
+  def self.needs_updating?(api_date_modified)
+    api_date_modified != DataScraper.last.date_modified
+  end
+
+  def self.socrata_api_call(offset = 0)
+    HTTParty.get("http://data.kingcounty.gov/resource/zqwi-c5q3.json?$limit=1000&$offset=#{offset}")
+  end
+
   def self.update_or_create_location(location_json)
     existing_location = Location.where(name: DataScraper.titleize(location_json['provider_name'])).first
 
@@ -92,11 +107,10 @@ class DataScraper
     end
   end
 
-  def self.add_new_material_and_description(location, location_json)
-    existing_location.materials << location_json['material_handled']
-    existing_location.description << (' ' + location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip
-    existing_location.save
-    existing_location
+  def self.update_date_modified(api_date_modified)
+    ds = DataScraper.last
+    ds.date_modified = api_date_modified
+    ds.save
   end
 
   def self.update_or_leave_locations_alone(api_date_modified)
@@ -121,20 +135,6 @@ class DataScraper
 
       update_date_modified(api_date_modified)
     end
-  end
-
-  def self.needs_updating?(api_date_modified)
-    api_date_modified != DataScraper.last.date_modified
-  end
-
-  def self.update_date_modified(api_date_modified)
-    ds = DataScraper.last
-    ds.date_modified = api_date_modified
-    ds.save
-  end
-
-  def self.socrata_api_call(offset = 0)
-    HTTParty.get("http://data.kingcounty.gov/resource/zqwi-c5q3.json?$limit=1000&$offset=#{offset}")
   end
 
   def self.get_all
