@@ -23,7 +23,7 @@ class DataScraper
     if zipcode.to_i.between?(98001, 99403)
         new_location.state = "WA"
     else
-      city_response = HTTParty.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + location_json['zip'].to_s + '&sensor=false')
+      city_response = HTTParty.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + zipcode.to_s + '&sensor=false')
       city_response["results"][0]["address_components"].each do |hash|
         if hash["types"].include?("administrative_area_level_1")
           new_location.state = hash["short_name"]
@@ -34,7 +34,7 @@ class DataScraper
 
   def self.set_materials(material_handled, new_location)
     new_location.materials = []
-    new_location.materials << location_json['material_handled']
+    new_location.materials << material_handled
   end
 
   def self.set_services(location_json, new_location)

@@ -11,6 +11,7 @@ gem 'httparty'
 gem 'geocoder'
 gem 'figaro'
 gem 'therubyracer', platforms: :ruby
+gem 'whenever', :require => false
 
 group :doc do
   gem 'sdoc', require: false

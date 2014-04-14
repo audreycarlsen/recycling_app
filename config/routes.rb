@@ -3,5 +3,5 @@ RecyclingApp::Application.routes.draw do
 
   resources :materials
 
-  post "locations", to: "locations#index"
+  post "results", to: "locations#index"
 end
