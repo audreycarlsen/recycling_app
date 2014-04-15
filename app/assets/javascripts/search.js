@@ -6,6 +6,7 @@ function showPosition(position) {
       $('#address_field').val(position.coords.latitude + "," + position.coords.longitude);
       $('#displayed_address_field').val("near: " + data.results[0].address_components[0].short_name + " " + data.results[0].address_components[1].short_name + ", " + data.results[0].address_components[3].short_name + ", " + data.results[0].address_components[5].short_name + " " + data.results[0].address_components[7].short_name);
       $(".invalid_address").html('');
+      $('.loading-gif1').toggle();
     }
   });
 }
@@ -13,6 +14,7 @@ function showPosition(position) {
 function watchCurrentLocation() {
   $('.current_location').click(function() {
     var error = document.querySelector('.error');
+    $('.loading-gif1').toggle();
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
@@ -39,7 +41,7 @@ function watchOnwardButton() {
       return false;
     }
     else {
-      $('.loading-gif').toggle();
+      $('.loading-gif2').toggle();
 
       var address = $('#displayed_address_field').val().replace(/\s/g, '+');
 

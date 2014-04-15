@@ -42,28 +42,35 @@ class LocationsController < ApplicationController
 
     @drop_off_locations = @drop_off_locations.reject{ |l| l.latitude.nil?}
 
-    destination_coords = ""
+    if @drop_off_locations != []
 
-    @drop_off_locations.each do |location|
-      unless location == @drop_off_locations.last
-        destination_coords << (location.latitude + "," + location.longitude + "|")
+      destination_coords = ""
+
+      @drop_off_locations.each do |location|
+        unless location == @drop_off_locations.last
+          destination_coords << (location.latitude + "," + location.longitude + "|")
+        else
+          destination_coords << (location.latitude + "," + location.longitude)
+        end
+      end
+    
+      @distances = calculate_distances(params["address"], destination_coords)
+
+      if @distances.parsed_response["rows"].first["elements"][0]["distance"] == nil
+        redirect_to root_path
       else
-        destination_coords << (location.latitude + "," + location.longitude)
+        @drop_off_locations.each_with_index do |location, index|
+          location.distance = @distances.parsed_response["rows"].first["elements"][index]["distance"]["text"]
+        end
+
+        @drop_off_locations.sort_by! { |location| location.distance.split(" mi")[0].delete(",").to_f }
+        @pick_up_locations.sort_by! { |location| location.name }
+        @mail_in_locations.sort_by! { |location| location.name }
+
+        # For jQuery map rendering
+        @current_location = params["address"].split(",").map {|coord| coord.to_f}
       end
     end
-  
-    @distances = calculate_distances(params["address"], destination_coords)
-
-    @drop_off_locations.each_with_index do |location, index|
-      location.distance = @distances.parsed_response["rows"].first["elements"][index]["distance"]["text"]
-    end
-
-    @drop_off_locations.sort_by! { |location| location.distance.split(" mi")[0].delete(",").to_f }
-    @pick_up_locations.sort_by! { |location| location.name }
-    @mail_in_locations.sort_by! { |location| location.name }
-
-    # For jQuery map rendering
-    @current_location = params["address"].split(",").map {|coord| coord.to_f}
   end
 
   private

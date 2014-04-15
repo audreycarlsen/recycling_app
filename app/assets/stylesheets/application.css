@@ -28,3 +28,7 @@ body {
 .label-all {
   text-transform: lowercase;
 }
+
+li {
+  margin-left: -23px;
+}
