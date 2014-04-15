@@ -6,7 +6,7 @@ function showPosition(position) {
       $('#address_field').val(position.coords.latitude + "," + position.coords.longitude);
       $('#displayed_address_field').val("near: " + data.results[0].address_components[0].short_name + " " + data.results[0].address_components[1].short_name + ", " + data.results[0].address_components[3].short_name + ", " + data.results[0].address_components[5].short_name + " " + data.results[0].address_components[7].short_name);
       $(".invalid_address").html('');
-      $('.loading-gif1').toggle();
+      $('.loading-gif1').hide();
     }
   });
 }
@@ -14,7 +14,7 @@ function showPosition(position) {
 function watchCurrentLocation() {
   $('.current_location').click(function() {
     var error = document.querySelector('.error');
-    $('.loading-gif1').toggle();
+    $('.loading-gif1').show();
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
@@ -41,7 +41,7 @@ function watchOnwardButton() {
       return false;
     }
     else {
-      $('.loading-gif2').toggle();
+      $('.loading-gif2').show();
 
       var address = $('#displayed_address_field').val().replace(/\s/g, '+');
 
@@ -51,14 +51,23 @@ function watchOnwardButton() {
         success: function(data) {
           if (data["status"] == "ZERO_RESULTS") {
             $(".invalid_address").html("Invalid address :(");
-            $('.loading-gif').toggle();
+            $('.loading-gif2').hide();
             return false;
           }
           else {
             $('#address_field').val(data.results[0].geometry.location.lat + "," + data.results[0].geometry.location.lng);
             $('#displayed_address_field').val(data.results[0].formatted_address);
-            $(".invalid_address").html('');
-            $('.onward-button').click();
+
+            var v = $('#displayed_address_field').val();
+
+            if (v.indexOf('USA')!=-1) {
+              $(".invalid_address").html('');
+              $('.onward-button').click();
+            } else {
+              $(".invalid_address").html("Please enter a location in the U.S. or Canada");
+              $('.loading-gif2').hide();
+              return false;
+            }
           }
         }
       });

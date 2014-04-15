@@ -22,8 +22,9 @@
 
   <% if @locations_by_type.last %>
     <% if @drop_off_locations.first %>
-      <p><div id="map-canvas" style="width:600px; height:400px;"></div></p>
       <p>Near <%= @displayed_address %></p>
+
+      <p><div id="map-canvas" style="width:600px; height:400px;"></div></p>
 
       Drop-Off
       <table class="table table-condensed location-table" id="drop_off_table" data-current-location="<%= @current_location %>">

@@ -1,3 +1,3 @@
 task :hello_world => :environment do
-  puts "Hello world"
+  puts "Hello world #{Time.now}"
 end
