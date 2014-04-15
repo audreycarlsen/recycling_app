@@ -24,46 +24,42 @@ function watchCurrentLocation() {
 
 function watchCheckboxes() {
   $('.watched-checkbox').click(function() {
-    $('.checkbox-all').children('input').attr('checked', false)
+    $('.checkbox-all').children('input').attr('checked', false);
   });
 
   $('.checkbox-all').click(function() {
-    $('.watched-checkbox').children('input').attr('checked', false)
+    $('.watched-checkbox').children('input').attr('checked', false);
   });
 }
 
-function watchDisplayedAddress() {
-  $('#displayed_address_field').blur(function() {
-    var address = $('#displayed_address_field').val().replace(/\s/g, '+');
+function watchOnwardButton() {
+  $('.dummy-onward-button').click(function() {
+    if ($('#displayed_address_field').val() === '') {
+      $(".invalid_address").html("Please provide an address!");
+      return false;
+    }
+    else {
+      $('.loading-gif').toggle();
 
-    if ($('#displayed_address_field').val() != '') { 
-      // disable button
-      // display loading gif
+      var address = $('#displayed_address_field').val().replace(/\s/g, '+');
+
       $.ajax({
         type: "GET",
         url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false",
         success: function(data) {
           if (data["status"] == "ZERO_RESULTS") {
             $(".invalid_address").html("Invalid address :(");
-          } else {
+            $('.loading-gif').toggle();
+            return false;
+          }
+          else {
             $('#address_field').val(data.results[0].geometry.location.lat + "," + data.results[0].geometry.location.lng);
             $('#displayed_address_field').val(data.results[0].formatted_address);
             $(".invalid_address").html('');
-            // enable the button
+            $('.onward-button').click();
           }
         }
       });
-    }
-
-    // $('.onward-button').prop('disabled', false);
-  });
-}
-
-function watchOnwardButton() {
-  $('.onward-button').click(function() {
-    if ($('#displayed_address_field').val() == '') {
-      $(".invalid_address").html("Please provide an address!");
-      return false;
     }
   });
 }
@@ -76,8 +72,6 @@ $(document).ready(function() {
     var update = function() {
       var id = $("#material option:selected").val();
 
-      $('.search_button').innerHTML = "Loading...";
-
       $.ajax({
         type: "GET",
         url: "/materials/" + id,
@@ -86,7 +80,6 @@ $(document).ready(function() {
           $("#material_result").replaceWith(html);
           watchCurrentLocation();
           watchCheckboxes();
-          watchDisplayedAddress();
           watchOnwardButton();
         }
       });

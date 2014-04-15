@@ -19,9 +19,13 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :environment, "development"
+set :environment, "production"
 set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
 
-every :monday, :at => '4:38pm' do
+every :sunday, :at => '12am' do
   rake "data_scraper"
+end
+
+every 1.minute do
+  rake "hello_world"
 end
