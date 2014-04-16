@@ -1,8 +1,8 @@
-## What Do I Do With . . . this Location API?
+## What Do I Do With . . . this API?
 
 ###Requests
 
-A Location API request takes the following form:
+A WDIDW Location API request takes the following form:
 
     http://www.wdidw.com/api/locations?parameters
 
@@ -10,7 +10,7 @@ Output is in JavaScript Object Notation (JSON).
 
 ###Parameters
 
-All parameters are optional and should be separated using the ampersand (&) character. If no parameters are provided, the response will return all locations.
+All parameters are optional and should be separated using the ampersand (&) character. If no parameters are provided, the response will include all locations.
 
 One or more material categories can be included in the query string, separated by commas. Response will only include locations that match all specified materials.
 
