@@ -1,6 +1,4 @@
-# What Do I Do With . . . this API?
-
-##Location API
+## What Do I Do With . . . this Location API?
 
 ###Requests
 
@@ -36,30 +34,31 @@ Or by service type:
 
 A sample HTTP request is shown below:
 
-    http://localhost:3000/api/locations?materials=TVs,Monitors&zipcode=98006&residents=true
+    http://www.wdidw.com/api/locations?materials=TVs,Monitors&zipcode=98006&residents=true
     
 The JSON result is shown below:
 
-    [ { "_id": { "$oid":"534c73c76c61739a298e0000" },
-        "business":false,
-        "city":"Bellevue",
-        "cost":"FREE for E-Cycle Washington eligible groups including residents, small businesses (\u003C 50 employees corporate-wide), school districts (no colleges or universities), charities and non-profit groups.",
+    [ { "_id":
+            { "$oid": "534c73c76c61739a298e0000" },
+        "business": false,
+        "city": "Bellevue",
+        "cost": "FREE for E-Cycle Washington eligible groups including residents, small businesses (\u003C 50 employees corporate-wide), school districts (no colleges or universities), charities and non-profit groups.",
         "description":"Authorized E-Cycle Washington Collector. Accepts computer monitors for recycling. Non-store donation centers that collect electronics for E-cycle Washington will only take 3 products per donor, per day.",
-        "drop_off":true,
-        "hours":"Mon-Sun: 7:30am - 6pm",
-        "latitude":"47.56053000035939",
-        "location_type":"Business",
-        "longitude":"-122.1525500001822",
-        "mail_in":false,
+        "drop_off": true,
+        "hours": "Mon-Sun: 7:30am - 6pm",
+        "latitude": "47.56053000035939",
+        "location_type": "Business",
+        "longitude": "-122.1525500001822",
+        "mail_in": false,
         "materials": 
-          [ "Monitors","Computers, Laptops, Tablets","TVs" ],
-        "max_volume":"3 products per donor, per day.",
-        "min_volume":null,
-        "name":"Goodwill Newport Hills Donation Center",
-        "phone":"()",
-        "pick_up":false,
-        "residents":true,
-        "state":"WA",
-        "street":"5115 112th PL SE",
-        "website":"http://www.seattlegoodwill.org/",
-        "zipcode":"98006" } ]
+            [ "Monitors", "Computers, Laptops, Tablets", "TVs" ],
+        "max_volume": "3 products per donor, per day.",
+        "min_volume": null,
+        "name": "Goodwill Newport Hills Donation Center",
+        "phone": "()",
+        "pick_up": false,
+        "residents": true,
+        "state": "WA",
+        "street": "5115 112th PL SE",
+        "website": "http://www.seattlegoodwill.org/",
+        "zipcode": "98006" } ]
