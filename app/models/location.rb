@@ -24,4 +24,10 @@ class Location
   field :min_volume,    type: String
   field :max_volume,    type: String
   field :description,   type: String
+
+  def self.search(location_params)
+    location_params.inject(Location.all) do |result, (attribute, value)|
+      result.where(attribute => value)
+    end
+  end
 end

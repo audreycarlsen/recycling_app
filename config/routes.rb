@@ -4,4 +4,8 @@ RecyclingApp::Application.routes.draw do
   resources :materials
 
   post "results", to: "locations#index"
+
+  namespace :api, :defaults => { :format => 'json' } do
+    resources :locations
+  end
 end
