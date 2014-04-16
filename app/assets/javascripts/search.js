@@ -36,6 +36,11 @@ function watchCheckboxes() {
 
 function watchOnwardButton() {
   $('.dummy-onward-button').click(function() {
+    if($("input:checked").length == 0) {
+      $(".invalid_address").html("Please select at least one material");
+      return false;
+    }
+
     if ($('#displayed_address_field').val() === '') {
       $(".invalid_address").html("Please provide an address!");
       return false;
