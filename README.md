@@ -4,7 +4,7 @@
 
 A Location API request takes the following form:
 
-    http://www.wdidw.com/api/locations/api?parameters
+    http://www.wdidw.com/api/locations?parameters
 
 Output is in JavaScript Object Notation (JSON).
 
@@ -12,7 +12,7 @@ Output is in JavaScript Object Notation (JSON).
 
 All parameters are optional and should be separated using the ampersand (&) character. If no parameters are provided, the response will return all locations.
 
-One or more material subcategories can be included in the query string, separated by commas. Response will only include locations that match all specified materials.
+One or more material categories can be included in the query string, separated by commas. Response will only include locations that match all specified materials.
 
     materials="Gaming+Devices,Air+Conditioners"
 
@@ -62,3 +62,9 @@ The JSON result is shown below:
         "street": "5115 112th PL SE",
         "website": "http://www.seattlegoodwill.org/",
         "zipcode": "98006" } ]
+
+###Materials API
+
+The static materials data used to build WDIDW, including subcategories and descriptions, can be accessed through the following API request:
+
+    http://www.wdidw.com/api/materials

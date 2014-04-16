@@ -9,12 +9,4 @@ class Api::LocationsController < ApplicationController
       format.json { render :json => @locations }
     end
   end
-
-  # def show
-  #   @location = Location.where(name: params[:name])
-  #   respond_to do |format|
-  #     format.json { render :json => @location }
-  #   end
-  # end
-
 end
