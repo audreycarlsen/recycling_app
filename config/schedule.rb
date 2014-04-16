@@ -22,10 +22,6 @@
 set :environment, "production"
 set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
 
-every :sunday, :at => '12am' do
+every :wednesday, :at => '11:50am' do
   rake "data_scraper"
-end
-
-every 1.minute do
-  rake "hello_world"
 end

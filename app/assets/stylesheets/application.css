@@ -32,3 +32,7 @@ body {
 li {
   margin-left: -23px;
 }
+
+.invalid_address {
+  color: red;
+}
