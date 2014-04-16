@@ -1,20 +1,10 @@
 class LocationsController < ApplicationController
   def index
     @displayed_address = params["displayed_address"].split("near: ").last
-    @untouched_subcategories = params["subcategories"]
-    parsed_subcategories = params["subcategories"].first.split(" ", 2)
+    @subcategories = params["subcategories"]
+    @displayed_title = display_title(@subcategories)
 
-    @subcategories = []
-
-    if parsed_subcategories.first == "All"
-      Material.where(name: parsed_subcategories.last).first.subcategories.each do |subcategory|
-        @subcategories << subcategory["name"]
-      end
-    else
-      @subcategories = params["subcategories"]
-    end
-
-    locations_by_material = Location.where(:materials.in => @subcategories)
+    locations_by_material = Location.all_in(materials: @subcategories)
 
     if params["type"] == "Business"
       @locations_by_type = locations_by_material.where(business: true)
@@ -78,5 +68,27 @@ class LocationsController < ApplicationController
   def calculate_distances(current_location, destination_coords)
     url = ("https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + current_location + "&destinations=" + destination_coords + "&sensor=false&units=imperial&key=" + ENV['GOOGLE_SERVER_API_KEY']).strip
     HTTParty.get(URI.encode(url))
+  end
+
+  def display_title(subcategories)
+    title = ""
+    subcategories.each do |subcategory|
+      if subcategories.count == 1
+        title = subcategory
+      elsif subcategories.count == 2
+        unless subcategory == subcategories.last
+          title = subcategory
+        else
+          title = title + " and " + subcategory
+        end
+      else
+        unless subcategory == subcategories.last
+           title = subcategory + ","
+        else
+          title = title + " and " + subcategory
+        end
+      end
+    end
+    title
   end
 end

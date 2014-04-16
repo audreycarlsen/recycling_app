@@ -36,13 +36,6 @@
             </p>
           {{/each}}
         </div>
-
-        <div class="checkbox">
-          <div class="checkbox-all">
-            <input checked=true name="subcategories[]" type="checkbox" value="All {{name}}" />
-          </div>
-          <strong>All <span class="label-all">{{name}}</span></strong>
-        </div>
       
         <p><strong>Step 2: Is this material generated from your business or residence?</strong></p>
 
@@ -71,6 +64,14 @@
         <p><button type="submit" class="onward-button", style="display: none;">Onward, to glory!</button> </p>
       <% end %>
       <button type="submit" class="btn btn-lg btn-warning dummy-onward-button">Onward, to glory!</button> <%= image_tag "loading.gif", class: "loading-gif2", height: "30px", style: "display: none; padding-left: 10px" %>
+
+      // <a href="#" id="mydialog-btn">Open Dialog</a>
+
+      // <div class="dialog" id="mydialog">
+      //   <p>This is a dialog</p>
+      //   <a href="#mydialog-btn" class="dialog-close">Close</a>
+      // </div>
+
     </div>
   </script>
 </div>

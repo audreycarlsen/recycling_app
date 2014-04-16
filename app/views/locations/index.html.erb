@@ -1,24 +1,10 @@
 <div class="container">
   <h4><em>What do I do with... </em></h4>
   <h3><strong>
-    <% @untouched_subcategories.each do |subcategory| %>
-      <% if @untouched_subcategories.count == 1 %>
-        <%= subcategory %>
-      <% elsif @untouched_subcategories.count == 2 %>
-        <% unless subcategory == @untouched_subcategories.last %>
-          <%= subcategory %>
-        <% else %>
-          and <%= subcategory %>
-        <% end %>
-      <% else %>
-        <% unless subcategory == @untouched_subcategories.last %>
-          <%= subcategory %>,
-        <% else %>
-          and <%= subcategory %>
-        <% end %>
-      <% end %>
-    <% end %>
+    <%= @displayed_title %>
   </strong></h3>
+
+  <p>Don't see what you're looking for...?</p>
 
   <% if @locations_by_type.last %>
     <% if @drop_off_locations.first %>
@@ -32,7 +18,7 @@
           <th>Name</th>
           <th>Location</th>
           <th>Hours</th>
-          <% if @subcategories.count > 1 || @untouched_subcategories[0].include?("All") %>
+          <% if @subcategories.count > 1 || @subcategories[0].include?("All") %>
             <th>Accepts</th>
           <% end %>
           <th>Distance</th>
