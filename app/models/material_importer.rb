@@ -9,7 +9,7 @@ class MaterialImporter
   def self.add_subcategory(row, material)
     subcategory_hash = {}
 
-    subcategory_hash["id"]          = SecureRandom.uuid.gsub("-", "")
+    # subcategory_hash["id"]          = SecureRandom.uuid.gsub("-", "")
     subcategory_hash["name"]        = row[1]
     subcategory_hash["description"] = row[2]
 
