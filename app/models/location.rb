@@ -28,7 +28,7 @@ class Location
   def self.search(location_params)
     location_params.inject(Location.all) do |result, (attribute, value)|
       if attribute == "materials"
-        materials = value.split("|").map {|subcategory| subcategory.gsub("+", " ")}
+        materials = value.split(",").map {|subcategory| subcategory.gsub("+", " ")}
         result.all_in(attribute => materials)
       else
         result.where(attribute => value)

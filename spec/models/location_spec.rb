@@ -56,9 +56,9 @@ def location_params2
 end
 
 def location_params3
-  {"materials"=>"Gaming+Devices|Printers"}
+  {"materials"=>"Gaming+Devices,Printers"}
 end
 
 def location_params4
-  {"materials"=>"Gaming+Devices|Bunnies"}
+  {"materials"=>"Gaming+Devices,Bunnies"}
 end
