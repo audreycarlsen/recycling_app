@@ -1,73 +1,65 @@
-# Capstone Project
+# What Do I Do With . . . this API?
 
-The Capstone Project is the largest undertaking you'll experience in the Ada classroom.
+##Location API
 
-Not only is it a month long, but you will be your own product owner and project manager. Before building your applications, you will need to create a product plan: you'll need to identify your target audience and their unmet needs. Then, you'll need to write a project specification to explain how you will meet those needs, including the features you intend to implement.
+###Requests
 
-## Delivery
-The Capstone Project is due by 5pm on Thursday, April 24th. It consists of the following components:
+A Location API request takes the following form:
 
-+ Completed application, live on the web
-+ Linked from the application, the following supplemental material:
-    + Product plan: problem statement, user persona(s), market research
-+ Project presentation, including a demo of the application and product plan (to be presented last day of class)
+    http://www.wdidw.com/api/locations/api?parameters
 
-## Product Plan Components
+Output is in JavaScript Object Notation (JSON).
 
-1. **Problem Statement**
-A clear, concise statement describing the problem your app will solve.
+###Parameters
 
-2. **Market Research**
-Outline the key insights from your research. Key insight should cover: your application's competition - what alternatives are already out there (competing apps and/or non-app solutions) and research from users on why these alternatives do not effectively address the problem.
+All parameters are optional and should be separated using the ampersand (&) character. If no parameters are provided, the response will return all locations.
 
-3. **User Personas**
-A detailed summary of your main target user group(s). What are their key characteristics?
+One or more material subcategories can be included in the query string, separated by commas. Response will only include locations that match all specified materials.
 
-## Application
+    materials="Gaming+Devices,Air+Conditioners"
 
-### Overview
-You may work as an individual or as a pair on your capstone project. To meet the technical requirements, you will need to meet all of the goals and guidelines listed below, as well as include at least two advanced features and at least two integrations within your application.
+Locations can also be filtered by address:
 
-### Goals
-+ Use your product plan to lead the functionality development of their application
-+ Use [Pivotal Tracker](http://pivotaltracker.com) as a project management service
-+ Host the application using a VPS such as Linode.com (no Heroku)
-+ Configure DNS with custom domain
-+ Create a stylized, responsive design for all devices (phone, tablet, display)
-+ At least 10 items of dummy-data for each concept
-+ Use background jobs for any long running tasks (email, image processing, 3rd party data manipulation)
-+ Use caching for slow or bulky database
-+ Use performance analytics to asses and optimize site performance (average server response time < 300ms)
-+ Optimize client-side performance (Google PageSpeed Insights minimum score of 80)
-+ Practice TDD to lead the development process
-+ Integrate email (At least user signup)
-+ Meet expectations for code quality
-    + 90% or greater test coverage
-    + B- or greater score on Code Climate
-    + No security issues
+    city=Seattle
+    state=WA
+    zipcode=98105
+    
+Or by service type:
+    
+    business=true
+    residents=true
+    drop_off=true
+    mail_in=true
+    pick_up=true
 
+###Responses
 
-### Integration Choices
-+ At least two complex integrations:
-    + Background Jobs **
-    + NoSql **
-    + CDN
-    + Payment Processing
-    + Front-end Framework (Ember, Angular, Backbone, etc.)
+A sample HTTP request is shown below:
 
-### Advanced Feature Choices
-+ Two advanced features:
-    + SSL
-    + CMS
-    + Internationalization **
-    + Live Events
-    + SOA
-    + S3 storage/delivery
-    + Secure Public API (documented) **
+    http://localhost:3000/api/locations?materials=TVs,Monitors&zipcode=98006&residents=true
+    
+The JSON result is shown below:
 
-## To Get Started
-+ [IDEO Deep Dive](https://www.youtube.com/watch?v=taJOV-YCieI)
-+ [Hello Ruby](https://www.kickstarter.com/projects/lindaliukas/hello-ruby)
-
-## Prep Homework
-+ Watch Ryan Singer's [Designing from Start to Finish](http://vimeo.com/16814487)
+    [ { "_id": { "$oid":"534c73c76c61739a298e0000" },
+        "business":false,
+        "city":"Bellevue",
+        "cost":"FREE for E-Cycle Washington eligible groups including residents, small businesses (\u003C 50 employees corporate-wide), school districts (no colleges or universities), charities and non-profit groups.",
+        "description":"Authorized E-Cycle Washington Collector. Accepts computer monitors for recycling. Non-store donation centers that collect electronics for E-cycle Washington will only take 3 products per donor, per day.",
+        "drop_off":true,
+        "hours":"Mon-Sun: 7:30am - 6pm",
+        "latitude":"47.56053000035939",
+        "location_type":"Business",
+        "longitude":"-122.1525500001822",
+        "mail_in":false,
+        "materials": 
+          [ "Monitors","Computers, Laptops, Tablets","TVs" ],
+        "max_volume":"3 products per donor, per day.",
+        "min_volume":null,
+        "name":"Goodwill Newport Hills Donation Center",
+        "phone":"()",
+        "pick_up":false,
+        "residents":true,
+        "state":"WA",
+        "street":"5115 112th PL SE",
+        "website":"http://www.seattlegoodwill.org/",
+        "zipcode":"98006" } ]
