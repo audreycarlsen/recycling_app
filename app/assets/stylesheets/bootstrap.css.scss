@@ -2681,8 +2681,8 @@ input[type="button"].btn-block {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: asset-url('assets/glyphicons-halflings-regular.eot');
-  src: asset-url('assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), asset-url('assets/glyphicons-halflings-regular.woff') format('woff'), asset-url('assets/glyphicons-halflings-regular.ttf') format('truetype'), asset-url('assets/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+  src: font-url('assets/glyphicons-halflings-regular.eot');
+  src: font-url('assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), font-url('assets/glyphicons-halflings-regular.woff') format('woff'), font-url('assets/glyphicons-halflings-regular.ttf') format('truetype'), font-url('assets/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }
 
 .glyphicon {
@@ -4131,7 +4131,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .nav .nav-divider {
   height: 1px;
-  margin: 9px 0;
+  margin: 1px 0;
   overflow: hidden;
   background-color: #e5e5e5;
 }
@@ -4147,6 +4147,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li {
   float: left;
   margin-bottom: -1px;
+  margin-right: 20px;
 }
 
 .nav-tabs > li > a {
