@@ -17,7 +17,9 @@ function watchCurrentLocation() {
     $('.loading-gif1').show();
 
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
+      navigator.geolocation.getCurrentPosition(showPosition, function(error) {
+        alert("Check your browser and system settings to enable location services.");
+      });
     } else {
       error.innerHTML = "Geolocation is not supported by this browser. Please type in your location by hand.";
     }
@@ -97,6 +99,7 @@ $(document).ready(function() {
           watchCurrentLocation();
           watchCheckboxes();
           watchOnwardButton();
+          $('.learn-more').popover({trigger: 'click, hover'});
         }
       });
       return false;

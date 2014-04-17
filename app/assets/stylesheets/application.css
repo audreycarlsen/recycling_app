@@ -22,7 +22,7 @@ body {
 }
 
 .css-class-here {
-    text-transform: lowercase;
+  text-transform: lowercase;
 }
 
 .label-all {
@@ -35,4 +35,27 @@ li {
 
 .invalid_address {
   color: red;
+}
+
+.material-block {
+  margin:20px;
+  width:172px;
+  float:left;
+}
+
+.clear {
+  clear: both;
+}
+
+.gray {
+  color: #B8B8B8;
+}
+
+.learn-more:hover {
+  color: #888888;
+}
+
+.popover-content {
+  padding: 9px 14px;
+  font-size: 12px;
 }

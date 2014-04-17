@@ -3,9 +3,7 @@
 
   <p>Not sure what to do with items that aren’t collected curbside? You've come to the right place!</p>
 
-  <p>Every day, King County residents and businesses run across unwanted items that make them wonder: "What do I do with this?" This site was designed to answer that question! To begin, search by key word below or use the drop-down menu to select a general category. The following pages will ask for more information and allow you to narrow your selection.</p>
-
-  <p>Have you ever bought a new appliance and wondered how to get rid of your old one? Found stacks of old business periodicals you want to recycle? Upgraded your organization's computers and ended up with a mountain of old electronic equipment? The "What Do I Do With...?" directory contains listings of hundreds of businesses and organizations that accept unwanted items from residents and businesses in King County, WA, for reuse, recycling, or proper disposal.</p>
+  <p>To begin, search by key word below or use the drop-down menu to select a general category. You will then be asked for more information to narrow your selection. tktk</p>
 
   <hr>
 
@@ -21,6 +19,7 @@
 
   <script id="material-result-template" type="text/x-handlebars-template">
     <div id="material_result">
+
       <h4><em>What do I do with... </em></h4>
       <strong><h3>{{name}}</h3>
       <p>Step 1: Select specific materials</p></strong>
@@ -28,44 +27,46 @@
       <%= form_tag("/results", method: "post") do %>
         <div class="checkbox">
           {{#each subcategories}}
-            <p>
+            <div class="material-block">
               <div class="watched-checkbox">
                 <input class='{roles: true}' name="subcategories[]" type="checkbox" value="{{name}}" />
               </div>
-              <strong>{{name}}</strong><br>{{description}} 
-            </p>
+              {{name}} <span class="learn-more glyphicon glyphicon-info-sign gray" href="#" data-toggle="popover" data-placement="bottom" data-content="{{description}}"></span>
+            </div>
           {{/each}}
         </div>
       
-        <p><strong>Step 2: Is this material generated from your business or residence?</strong></p>
+        <div class="clear"></div>
 
-        <label class="radio-inline">
-          <input name="type" type="radio" value="Business" /> Business
-        </label>
-        <label class="radio-inline">
-          <input name="type" type="radio" value="Residence" /> Residence
-        </label>
+          <p><strong>Step 2: Is this material generated from your business or residence?</strong></p>
 
-        <br><br>
+          <label class="radio-inline">
+            <input name="type" type="radio" value="Business" /> Business
+          </label>
+          <label class="radio-inline">
+            <input name="type" type="radio" value="Residence" /> Residence
+          </label>
 
-        <p><strong>Step 3: Enter your address to find drop-off locations nearest to you</strong></p>
-        <em>ex: 1301 5th Ave, Seattle, WA 98101</em><br>
+          <br><br>
 
-        <div class="form-group">
-          <input name="displayed_address" type="text" id="displayed_address_field" class="form-control" style="width:40%"/>
-        </div>
+          <p><strong>Step 3: Enter your address to find drop-off locations nearest to you</strong></p>
+          <em>ex: 1301 5th Ave, Seattle, WA 98101</em><br>
 
-        <div class="invalid_address"></div>
-        
-        <input name="address" type="hidden" id="address_field" class="form-control" style="width:40%"/>
+          <div class="form-group">
+            <input name="displayed_address" type="text" id="displayed_address_field" class="form-control" style="width:40%"/>
+          </div>
 
-        or <button type="button" class="btn btn-sm btn-info current_location">Use Current Location</button><%= image_tag "loading.gif", class: "loading-gif1", height: "20px", style: "display: none; padding-left: 10px" %>
+          <div class="invalid_address"></div>
+          
+          <input name="address" type="hidden" id="address_field" class="form-control" style="width:40%"/>
 
-        <p><div class='error'></div></p>
+          or <button type="button" class="btn btn-sm btn-info current_location">Use Current Location</button><%= image_tag "loading.gif", class: "loading-gif1", height: "20px", style: "display: none; padding-left: 10px" %>
 
-        <p><button type="submit" class="onward-button", style="display: none;">Onward, to glory!</button> </p>
-      <% end %>
-      <button type="submit" class="btn btn-lg btn-warning dummy-onward-button">Onward, to glory!</button> <%= image_tag "loading.gif", class: "loading-gif2", height: "30px", style: "display: none; padding-left: 10px" %>
-    </div>
+          <p><div class='error'></div></p>
+
+          <p><button type="submit" class="onward-button", style="display: none;">Onward, to glory!</button> </p>
+        <% end %>
+        <button type="submit" class="btn btn-lg btn-warning dummy-onward-button">Onward, to glory!</button> <%= image_tag "loading.gif", class: "loading-gif2", height: "30px", style: "display: none; padding-left: 10px" %>
+      </div>
   </script>
 </div>

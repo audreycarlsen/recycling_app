@@ -54,7 +54,7 @@ class DataScraper
   end
 
   def self.add_new_material_and_description(existing_location, location_json)
-    existing_location.materials << location_json['material_handled']
+    existing_location.materials << DataScraper.titleize(location_json['material_handled'])
     existing_location.description << (' ' + location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip
     existing_location.save
     existing_location
