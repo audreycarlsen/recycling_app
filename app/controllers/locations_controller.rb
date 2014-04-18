@@ -1,7 +1,14 @@
 class LocationsController < ApplicationController
   def index
-    LocationFinder.new(params["address"], params["subcategories"], params["type"])
+    results = LocationFinder.new(params["address"], params["subcategories"], params["type"])
+    
+    @drop_off_locations = results.drop_off_locations
+    @pick_up_locations = results.pick_up_locations
+    @mail_in_locations = results.mail_in_locations
+    @locations_by_type = results.locations_by_type
+
     @displayed_address = params["displayed_address"].split("near: ").last
+    @current_location = params["address"].split(",").map {|coord| coord.to_f}
     @displayed_title = display_title(params["subcategories"])
   end
 
@@ -13,11 +20,6 @@ class LocationsController < ApplicationController
   end
 
   private
-
-  def calculate_distances(current_location, destination_coords)
-    url = ("https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + current_location + "&destinations=" + destination_coords + "&sensor=false&units=imperial&key=" + ENV['GOOGLE_SERVER_API_KEY']).strip
-    HTTParty.get(URI.encode(url))
-  end
 
   def display_title(subcategories)
     title = ""

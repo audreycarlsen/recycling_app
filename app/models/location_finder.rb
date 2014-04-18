@@ -42,7 +42,7 @@ class LocationFinder
         end
       end
     
-      @distances = calculate_distances(coordinates, destination_coords)
+      @distances = LocationFinder.calculate_distances(coordinates, destination_coords)
 
       if @distances.parsed_response["rows"].first["elements"][0]["distance"] == nil
         redirect_to root_path
@@ -55,18 +55,28 @@ class LocationFinder
         @pick_up_locations.sort_by! { |location| location.name }
         @mail_in_locations.sort_by! { |location| location.name }
 
-        # For jQuery map rendering
-        @current_location = coordinates.split(",").map {|coord| coord.to_f}
       end
     end
   end
 
-  def get_drop_off
+  def drop_off_locations
+    @drop_off_locations
   end
 
-  def get_drop_off
+  def pick_up_locations
+    @pick_up_locations
   end
 
-  def get_drop_off
+  def mail_in_locations
+    @mail_in_locations
+  end
+
+  def locations_by_type
+    @locations_by_type
+  end
+
+  def self.calculate_distances(current_location, destination_coords)
+    url = ("https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + current_location + "&destinations=" + destination_coords + "&sensor=false&units=imperial&key=" + ENV['GOOGLE_SERVER_API_KEY']).strip
+    HTTParty.get(URI.encode(url))
   end
 end

@@ -3,7 +3,6 @@ $(document).ready(function() {
 
     var current_location = $("#drop_off_table").data("current-location");
 
-    if (current_location) {
       var mapOptions = {
         scrollwheel: false,
         center: new google.maps.LatLng(current_location[0], current_location[1]),
@@ -55,6 +54,6 @@ $(document).ready(function() {
         infoWindow.setContent(windowContent);
         infoWindow.open(map, this);
       });
-    }
+
   }
 });
