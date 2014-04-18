@@ -5,6 +5,7 @@ $(document).ready(function() {
 
     if (current_location) {
       var mapOptions = {
+        scrollwheel: false,
         center: new google.maps.LatLng(current_location[0], current_location[1]),
         zoom: 11
       };
@@ -22,7 +23,7 @@ $(document).ready(function() {
         var street    = data.street;
         var city      = data.city;
         var state     = data.state;
-        var zipcode   = data.zicode;
+        var zipcode   = data.zipcode;
         var distance  = data.distance;
         var latitude  = parseFloat(data.latitude);
         var longitude = parseFloat(data.longitude);

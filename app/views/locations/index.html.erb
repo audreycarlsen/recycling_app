@@ -8,178 +8,161 @@
 
   <% if @locations_by_type.last %>
 
-    <% if @drop_off_locations.first %>
-      <p>Near <%= @displayed_address %></p>
-      <p><div id="map-canvas" style="width:600px; height:400px;"></div></p>
+    <!-- Locations Tables w. Tabs -->
+
+    <div class="col-md-6">
+
+      <!-- Nav Tabs -->
+
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#drop_off" data-toggle="tab">Drop-Off</a></li>
+        <li><a href="#pick_up" data-toggle="tab">Pick-Up</a></li>
+        <li><a href="#mail_in" data-toggle="tab">Mail-In</a></li>
+      </ul>
+
+      <div class="tab-content">
+
+        <!-- Drop-Off Table -->
+
+        <div class="tab-pane active" id="drop_off">
+          <% if @drop_off_locations.first %>
+            <table class="table table-condensed location-table" id="drop_off_table" data-current-location="<%= @current_location %>">
+              <thead>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Hours</th>
+                <th>Distance</th>
+              </thead>
+              <tbody>
+                <% @drop_off_locations.each do |location| %>
+                  <tr data-name="<%= location.name %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>" data-distance="<%= location.distance %>" data-latitude="<%= location.latitude %>" data-longitude="<%= location.longitude %>">
+                    <td>
+                      <strong>
+                        <% if location.website %>
+                          <%= link_to location.name, location.website, :target => "_blank" %>
+                        <% else %>
+                          <%= location.name %>
+                        <% end %>
+                      </strong>
+                    <br><%= location.phone %></td>
+                    <td>
+                      <%= location.street %><br>
+                      <% if location.city || location.zipcode %>
+                        <%= location.city %>, <%= location.state %> <%= location.zipcode%>
+                      <% end %>
+                    </td>
+                    <td><%= location.hours %></td>
+                    <td><%= location.distance %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <br><p>No drop-off locations. Check for pick-up and/or mail-in locations.</p>
+          <% end %>
+        </div>
+
+        <!-- Pick-Up Table -->
+
+        <div class="tab-pane" id="pick_up">
+          <% if @pick_up_locations.first %>
+            <table class="table table-condensed location-table">
+              <thead>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Hours</th>
+                <th>Cost</th>
+              </thead>
+              <tbody>
+                <% @pick_up_locations.each do |location| %>
+                  <tr>
+                    <td>
+                      <strong>
+                        <% if location.website %>
+                          <%= link_to location.name, location.website, :target => "_blank" %>
+                        <% else %>
+                          <%= location.name %>
+                        <% end %>
+                      </strong>
+                    <br><%= location.phone %></td>
+                    <td>
+                      <%= location.street %><br>
+                      <% if location.city || location.zipcode %>
+                        <%= location.city %>, <%= location.state %> <%= location.zipcode%>
+                      <% end %>
+                    </td>
+                    <td><%= location.hours %></td>
+                    <% if location.cost %>
+                      <td><%= location.cost.html_safe %></td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <br><p>No pick-up locations.</p>
+          <% end %>
+        </div>
+
+        <!-- Mail-In Table -->
+
+        <div class="tab-pane" id="mail_in">
+          <% if @mail_in_locations.first %>
+            <table class="table table-condensed location-table">
+              <thead>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Hours</th>
+              </thead>
+              <tbody>
+                <% @mail_in_locations.each do |location| %>
+                  <tr>
+                    <td>
+                      <strong>
+                        <% if location.website %>
+                          <%= link_to location.name, location.website, :target => "_blank" %>
+                        <% else %>
+                          <%= location.name %>
+                        <% end %>
+                      </strong>
+                    <br><%= location.phone %></td>
+                    <td>
+                      <%= location.street %><br>
+                      <% if location.city || location.zipcode %>
+                        <%= location.city %>, <%= location.state %> <%= location.zipcode%>
+                      <% end %>
+                    </td>
+                    <td><%= location.hours %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <br><p>No mail-in locations.</p>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      No results.
+    <% end %>
+  </div>
+
+  <!-- Map -->
+
+  <div class="col-md-6">
+
+    <!-- Email -->
+
+    <span class="small-text">Send me these results:</span>
+    
+    <%= form_tag("/email", method: "post", class: "form-inline") do %>
+      <div class="form-group">
+        <input type="email" class="form-control input-sm email-me-form" placeholder="Enter email">
+      </div>
+      <button type="submit" class="btn btn-info btn-sm email-me-button">Go</button>
     <% end %>
 
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs">
-      <% if @drop_off_locations.first %>
-        <li class="active"><a href="#drop_off" data-toggle="tab">Drop-Off</a></li>
-      <% end %>
-      <% if @pick_up_locations.first %>
-        <li><a href="#pick_up" data-toggle="tab">Pick-Up</a></li>
-      <% end %>
-      <li><a href="#mail_in" data-toggle="tab">Mail-In</a></li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <% if @drop_off_locations.first %>
-        <div class="tab-pane active" id="drop_off">
-          <table class="table table-condensed location-table" id="drop_off_table" data-current-location="<%= @current_location %>">
-            <thead>
-              <th>Name</th>
-              <th>Location</th>
-              <th>Hours</th>
-              <% if @subcategories.count > 1 || @subcategories[0].include?("All") %>
-                <th>Accepts</th>
-              <% end %>
-              <th>Distance</th>
-            </thead>
-            <tbody>
-              <% @drop_off_locations.each do |location| %>
-                <tr data-name="<%= location.name %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>" data-distance="<%= location.distance %>" data-latitude="<%= location.latitude %>" data-longitude="<%= location.longitude %>">
-                  <td>
-                    <strong>
-                      <% if location.website %>
-                        <%= link_to location.name, location.website, :target => "_blank" %>
-                      <% else %>
-                        <%= location.name %>
-                      <% end %>
-                    </strong>
-                  <br><%= location.phone %></td>
-                  <td>
-                    <%= location.street %><br>
-                    <% if location.city || location.zipcode %>
-                      <%= location.city %>, <%= location.state %> <%= location.zipcode%>
-                    <% end %>
-                  </td>
-                  <td><%= location.hours %></td>
-                  <% if @subcategories.count > 1 %>
-                    <td>
-                      <ul>
-                        <% location.materials.each do |material| %>
-                        <!-- Make this a class method please!!!! -->
-                          <% if @subcategories.include?(material) %>
-                            <li><%= material %></li>
-                          <% end %>
-                        <% end %>
-                      </ul>
-                    </td>
-                  <% end %>
-                  <td><%= location.distance %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      <% end %>
-
-      <% if @pick_up_locations.first %>
-        <div class="tab-pane" id="pick_up">
-          <table class="table table-condensed location-table">
-            <thead>
-              <th>Name</th>
-              <th>Location</th>
-              <th>Hours</th>
-              <% if @subcategories.count > 1 %>
-                <th>Accepts</th>
-              <% end %>
-              <th>Cost</th>
-            </thead>
-            <tbody>
-              <% @pick_up_locations.each do |location| %>
-                <tr>
-                  <td>
-                    <strong>
-                      <% if location.website %>
-                        <%= link_to location.name, location.website, :target => "_blank" %>
-                      <% else %>
-                        <%= location.name %>
-                      <% end %>
-                    </strong>
-                  <br><%= location.phone %></td>
-                  <td>
-                    <%= location.street %><br>
-                    <% if location.city || location.zipcode %>
-                      <%= location.city %>, <%= location.state %> <%= location.zipcode%>
-                    <% end %>
-                  </td>
-                  <td><%= location.hours %></td>
-                  <% if @subcategories.count > 1 %>
-                    <td>
-                      <% location.materials.each do |material| %>
-                      <!-- Make this a class method please!!!! -->
-                        <% if @subcategories.include?(material) %>
-                          <%= material %>
-                        <% end %>
-                      <% end %>
-                    </td>
-                  <% end %>
-                  <% if location.cost %>
-                    <td><%= location.cost.html_safe %></td>
-                  <% end %>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      <% end %>
-
-      <div class="tab-pane" id="mail_in">
-        <% if @mail_in_locations.first %>
-          <table class="table table-condensed location-table">
-            <thead>
-              <th>Name</th>
-              <th>Location</th>
-              <th>Hours</th>
-              <% if @subcategories.count > 1 %>
-                <th>Accepts</th>
-              <% end %>
-            </thead>
-            <tbody>
-              <% @mail_in_locations.each do |location| %>
-                <tr>
-                  <td>
-                    <strong>
-                      <% if location.website %>
-                        <%= link_to location.name, location.website, :target => "_blank" %>
-                      <% else %>
-                        <%= location.name %>
-                      <% end %>
-                    </strong>
-                  <br><%= location.phone %></td>
-                  <td>
-                    <%= location.street %><br>
-                    <% if location.city || location.zipcode %>
-                      <%= location.city %>, <%= location.state %> <%= location.zipcode%>
-                    <% end %>
-                  </td>
-                  <td><%= location.hours %></td>
-                  <% if @subcategories.count > 1 %>
-                    <td>
-                      <% location.materials.each do |material| %>
-                      <!-- Make this a class method please!!!! -->
-                        <% if @subcategories.include?(material) %>
-                          <%= material %>
-                        <% end %>
-                      <% end %>
-                    </td>
-                  <% end %>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        <% else %>
-          Nope. Got nothing for you. :(
-        <% end %>
-      </div>
-    </div>
-
-  <% else %>
-    No results.
-
-  <% end %>
+    <p><div id="map-canvas" style="width:100%; height:400px;"></div></p>
+    <p>Near <%= @displayed_address %></p>
+  </div>
 </div>
