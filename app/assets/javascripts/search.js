@@ -67,7 +67,7 @@ function watchOnwardButton() {
 
             var v = $('#displayed_address_field').val();
 
-            if (v.indexOf('USA')!=-1) {
+            if (v.indexOf('USA')!=-1 || v.indexOf('Canada')!=-1) {
               $(".invalid_address").html('');
               $('.onward-button').click();
             } else {
