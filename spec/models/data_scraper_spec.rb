@@ -1,6 +1,41 @@
 require 'spec_helper'
 
-describe DataScraper do
+describe DataScraper do    
+  let(:data_scraper){DataScraper.new(date_modified: "2013-04-14 10:17:59 -0700")}
+  let(:location){Location.new}
+
+  describe "set_materials" do
+    it "adds material to materials array" do
+      location.save
+      DataScraper.set_materials("Bunnies", location)
+      expect(location.materials).to eq(["Bunnies"])
+    end
+  end
+
+  describe "set_state" do
+    context "zipcode is in WA" do
+      it "sets state to WA" do
+        location.save
+        DataScraper.set_state("98105", location)
+        expect(location.state).to eq("WA")
+      end
+    end
+  end
+
+  describe "needs_updating?" do
+    before do
+      data_scraper.save
+    end
+
+    it "returns true if database has been updated" do
+      expect(DataScraper.needs_updating?("2014-04-14 10:17:59 -0700")).to eq(true)
+    end
+
+    it "returns false if database has not been updated" do
+      expect(DataScraper.needs_updating?("2013-04-14 10:17:59 -0700")).to eq(false)
+    end
+  end
+
   describe "create_location" do
     it "returns a Location instance" do
       expect(DataScraper.create_location(location_json).class).to eq(Location)
@@ -32,14 +67,37 @@ describe DataScraper do
   end
 
   describe "update_or_create_location" do
-    it "creates location and then adds materials" do
-      expect(DataScraper.update_or_create_location(location_json).materials).to eq(['Air Conditioners, Heat Pumps'])
-      expect(DataScraper.update_or_create_location(location_json2).materials).to eq(['Air Conditioners, Heat Pumps', 'Refrigerators'])
+    context "location doesn't exist" do
+      it "creates location and adds materials" do
+        expect(DataScraper.update_or_create_location(location_json).materials).to eq(['Air Conditioners, Heat Pumps'])
+      end
+    end
+
+    context "location exists" do
+      before do
+        DataScraper.update_or_create_location(location_json)
+      end
+
+      it "doesn't create a location" do
+        expect{DataScraper.update_or_create_location(location_json2)}.to change{Location.count}.by(0)
+      end
+
+      it "adds new materials" do
+        expect(DataScraper.update_or_create_location(location_json2).materials).to eq(['Air Conditioners, Heat Pumps', 'Refrigerators'])
+      end
+    end
+  end
+
+  describe "update_date_modified" do
+    it "updates the date" do
+      data_scraper.save
+      expect(DataScraper.last.date_modified).to eq("2013-04-14 10:17:59 -0700")
+      DataScraper.update_date_modified("2014-04-14 10:17:59 -0700")
+      expect(DataScraper.last.date_modified).to eq("2014-04-14 10:17:59 -0700")
     end
   end
 
   describe "update_or_leave_locations_alone" do
-    let(:data_scraper){DataScraper.new(date_modified: "2013-04-14 10:17:59 -0700")}
 
     context "database has been modified" do
       it "updates DataScraper's date modified" do

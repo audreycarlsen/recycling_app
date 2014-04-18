@@ -45,6 +45,11 @@ describe MaterialImporter do
   end
 
   describe "get_all" do
+    it "get the materials" do
+      expect(Material.count).to eq(0)
+      MaterialImporter.get_all
+      expect(Material.count).to eq(29)
+    end
   end
 end
 
