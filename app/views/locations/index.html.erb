@@ -25,8 +25,8 @@
         <!-- Drop-Off Table -->
 
         <div class="tab-pane active" id="drop_off">
-          <% if @drop_off_locations.first %>
-            <table class="table table-condensed location-table" id="drop_off_table" data-current-location="<%= @current_location %>">
+          <% unless @drop_off_locations.empty? %>
+            <table class="table table-condensed location-table" id="drop_off_table">
               <thead>
                 <th>Name</th>
                 <th>Location</th>
@@ -58,14 +58,14 @@
               </tbody>
             </table>
           <% else %>
-            <br><p>No drop-off locations. Check for pick-up and/or mail-in locations.</p>
+            <br><p>No drop-off locations found.</p><p>Check for pick-up and/or mail-in locations.</p>
           <% end %>
         </div>
 
         <!-- Pick-Up Table -->
 
         <div class="tab-pane" id="pick_up">
-          <% if @pick_up_locations.first %>
+          <% unless @pick_up_locations.empty? %>
             <table class="table table-condensed location-table">
               <thead>
                 <th>Name</th>
@@ -100,14 +100,14 @@
               </tbody>
             </table>
           <% else %>
-            <br><p>No pick-up locations.</p>
+            <br><p>No pick-up locations found.</p>
           <% end %>
         </div>
 
         <!-- Mail-In Table -->
 
         <div class="tab-pane" id="mail_in">
-          <% if @mail_in_locations.first %>
+          <% unless @mail_in_locations.empty? %>
             <table class="table table-condensed location-table">
               <thead>
                 <th>Name</th>
@@ -138,7 +138,7 @@
               </tbody>
             </table>
           <% else %>
-            <br><p>No mail-in locations.</p>
+            <br><p>No mail-in locations found.</p>
           <% end %>
         </div>
       </div>
@@ -159,10 +159,10 @@
       <div class="form-group">
         <input type="email" class="form-control input-sm email-me-form" placeholder="Enter email">
       </div>
-      <button type="submit" class="btn btn-info btn-sm email-me-button">Go</button>
+      <button type="submit" class="btn btn-info btn-sm email-me-button">Go</button><%= image_tag "loading.gif", id: "loading-gif", height: "20px", style: "display: none; padding-left: 10px" %> <span class="email-notification"></span><span class="email-error"></span>
     <% end %>
 
-    <p><div id="map-canvas" style="width:100%; height:400px;"></div></p>
-    <p>Near <%= @displayed_address %></p>
+    <br><p>Near <%= @displayed_address %></p>
+    <p><div id="map-canvas" style="width:100%; height:400px;"  data-current-location="<%= @current_location %>"></div></p>
   </div>
 </div>

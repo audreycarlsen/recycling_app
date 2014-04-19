@@ -1,7 +1,7 @@
 $(document).ready(function() {
   if ($("#map-canvas").length) {
 
-    var current_location = $("#drop_off_table").data("current-location");
+    var current_location = $("#map-canvas").data("current-location");
 
       var mapOptions = {
         scrollwheel: false,

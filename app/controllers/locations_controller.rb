@@ -13,7 +13,7 @@ class LocationsController < ApplicationController
   end
 
   def email
-    email_address = params[:email]
+    email_address = params[:email_address]
     locations = params[:locations]
     ResultsMailer.send_results(email_address, locations).deliver
     render nothing: true

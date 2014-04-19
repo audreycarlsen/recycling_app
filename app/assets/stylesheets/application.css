@@ -63,3 +63,15 @@ li {
 .small-text {
   font-size: 12px;
 }
+
+.email-notification {
+  padding-left: 5px;
+  color: green;
+  font-size: 12px;
+}
+
+.email-error {
+  padding-left: 5px;
+  color: red;
+  font-size: 12px;
+}
