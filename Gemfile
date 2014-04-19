@@ -14,6 +14,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'whenever',     :require => false
 gem "resque"
 gem "debugger"
+gem "redcarpet"
 
 group :doc do
   gem 'sdoc', require: false

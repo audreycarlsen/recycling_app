@@ -1,9 +1,9 @@
-# require 'resque/server'
+require 'resque/server'
 
 RecyclingApp::Application.routes.draw do
   root "welcome#index"
 
-  # mount Resque::Server, :at => "/resque"
+  mount Resque::Server, :at => "/resque"
 
   resources :materials
 

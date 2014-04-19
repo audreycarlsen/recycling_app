@@ -75,3 +75,7 @@ li {
   color: red;
   font-size: 12px;
 }
+
+h2, h3 {
+  font-weight: bold;
+}
