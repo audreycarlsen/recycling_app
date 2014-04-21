@@ -4,6 +4,14 @@ lock '3.1.0'
 set :application, 'recycling_app'
 set :repo_url, 'git@github.com:audreycarlsen/recycling_app.git'
 set :use_sudo, false
+set :keep_releases, 1
+after "deploy:restart", "deploy:cleanup"
+
+role :resque_worker, "ubuntu@ec2-54-187-54-26.us-west-2.compute.amazonaws.com"
+role :resque_scheduler, "ubuntu@ec2-54-187-54-26.us-west-2.compute.amazonaws.com"
+set :workers, { "*" => 1 }
+set :resque_environment_task, true
+after "deploy:restart", "resque:restart"
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
