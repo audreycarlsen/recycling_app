@@ -45,7 +45,7 @@ $(document).ready(function() {
           var data_link = '<strong>' + data.name + '</strong><br>';
         }
 
-        var windowContent = data_link + data.street + '<br>' + data.city + ', ' + data.state + ' ' + data.zipcode + '<br>' + data.phone + '<br><em>' + data.distance + '</em>'
+        var windowContent = data_link + data.phone + '<br>' + data.street + '<br>' + data.city + ', ' + data.state + ' ' + data.zipcode + '<br><em>' + data.distance + '</em>'
 
         google.maps.event.addListener(marker, 'click', function() {
           infoWindow.setContent(windowContent);

@@ -157,6 +157,10 @@ class DataScraper
 
   def self.titleize(name)
     lowercase_words = %w{a an the and but or for nor of}
-    name.split.each_with_index.map{|x, index| lowercase_words.include?(x) && index > 0 ? x : x.capitalize }.join(" ")
+    unless name == "TVs"
+      name.split.each_with_index.map{|x, index| lowercase_words.include?(x) && index > 0 ? x : x.capitalize }.join(" ")
+    else
+      "TVs"
+    end
   end
 end

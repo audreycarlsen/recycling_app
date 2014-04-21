@@ -2,8 +2,6 @@
   <h4><em>What do I do with... </em></h4>
   <strong><h3 id="displayed-title"><%= @displayed_title %></h3></strong>
 
-  <p>Don't see what you're looking for...?</p>
-
   <% if @locations_by_type.last %>
 
     <!-- Locations Tables w. Tabs -->
@@ -90,9 +88,11 @@
                       <% end %>
                     </td>
                     <td><%= location.hours %></td>
-                    <% if location.cost %>
-                      <td><%= location.cost.html_safe %></td>
-                    <% end %>
+                    <td>
+                      <% if location.cost %>
+                        <%= location.cost.html_safe %>
+                      <% end %>
+                    </td>
                   </tr>
                 <% end %>
               </tbody>
@@ -111,6 +111,7 @@
                 <th>Name</th>
                 <th>Location</th>
                 <th>Hours</th>
+                <th>Cost</th>
               </thead>
               <tbody>
                 <% @mail_in_locations.each do |location| %>
@@ -131,6 +132,11 @@
                       <% end %>
                     </td>
                     <td><%= location.hours %></td>
+                    <td>
+                      <% if location.cost %>
+                        <%= location.cost.html_safe %>
+                      <% end %>
+                    </td>
                   </tr>
                 <% end %>
               </tbody>
@@ -140,27 +146,28 @@
           <% end %>
         </div>
       </div>
-    <% else %>
+    </div>
+    <div class="col-md-6">
+
+      <!-- Email -->
+
+      <span class="small-text">Send me these results:</span>
+      
+      <%= form_tag("/email", method: "post", class: "form-inline") do %>
+        <div class="form-group">
+          <input type="email" class="form-control input-sm email-me-form" placeholder="Enter email">
+        </div>
+        <button type="submit" class="btn btn-info btn-sm email-me-button">Go</button><%= image_tag "loading.gif", id: "loading-gif", height: "20px", style: "display: none; padding-left: 10px" %> <span class="email-notification"></span><span class="email-error"></span>
+      <% end %>
+
+      <!-- Map -->
+
+      <br><p>Near <span id="displayed_address"><%= @displayed_address %></span></p>
+      <p><div id="map-canvas" style="width:100%; height:400px;"  data-current-location="<%= @current_location %>"></div></p>
+    </div>
+  <% else %>
+    <div class="col-md-6">
       No results.
-    <% end %>
-  </div>
-
-  <div class="col-md-6">
-
-    <!-- Email -->
-
-    <span class="small-text">Send me these results:</span>
-    
-    <%= form_tag("/email", method: "post", class: "form-inline") do %>
-      <div class="form-group">
-        <input type="email" class="form-control input-sm email-me-form" placeholder="Enter email">
-      </div>
-      <button type="submit" class="btn btn-info btn-sm email-me-button">Go</button><%= image_tag "loading.gif", id: "loading-gif", height: "20px", style: "display: none; padding-left: 10px" %> <span class="email-notification"></span><span class="email-error"></span>
-    <% end %>
-
-    <!-- Map -->
-
-    <br><p>Near <span id="displayed_address"><%= @displayed_address %></span></p>
-    <p><div id="map-canvas" style="width:100%; height:400px;"  data-current-location="<%= @current_location %>"></div></p>
-  </div>
+    </div>
+  <% end %>
 </div>
