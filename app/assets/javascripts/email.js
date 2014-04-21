@@ -127,6 +127,7 @@ $(document).ready(function() {
         error: function () {
           $(".email-error").html("There was an error with your request.");
           $(".email-me-form").val("");
+          $("#loading-gif").hide();
         }
       });
       return false;
