@@ -99,7 +99,7 @@ $(document).ready(function() {
           watchCurrentLocation();
           watchCheckboxes();
           watchOnwardButton();
-          $('.learn-more').popover({trigger: 'click, hover'});
+          $('.learn-more').popover({trigger: 'hover'});
         }
       });
       return false;

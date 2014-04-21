@@ -6,6 +6,5 @@ class WelcomeController < ApplicationController
   end
 
   def api
-    @markdown = Redcarpet::Markdown.new(renderer, extensions = {})
   end
 end

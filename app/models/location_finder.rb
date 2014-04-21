@@ -12,24 +12,6 @@ class LocationFinder
     else
       @locations_by_type = locations_by_material
     end
-
-    # @pick_up_locations  = []
-    # @drop_off_locations = []
-    # @mail_in_locations  = []
-
-    # @locations_by_type.each do |location|
-    #   if location.pick_up == true
-    #     @pick_up_locations << location
-    #   end
-    #   if location.drop_off == true
-    #     @drop_off_locations << location
-    #   end
-    #   if location.mail_in == true
-    #     @mail_in_locations << location
-    #   end
-    # end
-
-    
   end
 
   def drop_off_locations

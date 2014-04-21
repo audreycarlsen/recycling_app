@@ -1,47 +1,54 @@
-markdown.render(
+<div class="container">
+  <h2><strong>What Do I Do With . . . this API?</strong></h2>
 
-## What Do I Do With . . . this API?
+  <hr>
 
-###Requests
+  <h3><strong>Requests</strong></h3>
 
-A WDIDW Location API request takes the following form:
+  <p>A WDIDW Location API request takes the following form:</p>
 
-    http://www.wdidw.com/api/locations?parameters
+  <blockquote>http://www.wdidw.com/api/locations?parameters</blockquote>
 
-Output is in JavaScript Object Notation (JSON).
+  <p>Output is in JavaScript Object Notation (JSON).</p>
 
-###Parameters
+  <h3><strong>Parameters</strong></h3>
 
-All parameters are optional and should be separated using the ampersand (&) character. If no parameters are provided, the response will include all locations.
+  <p>All parameters are optional and should be separated using the ampersand (&) character. If no parameters are provided, the response will include all locations.</p>
 
-One or more material categories can be included in the query string, separated by commas. Response will only include locations that match all specified materials.
+  <p>One or more material categories can be included in the query string, separated by commas. Response will only include locations that match all specified materials.</p>
 
-    materials="Gaming+Devices,Air+Conditioners"
+  <blockquote>materials="Gaming+Devices,Air+Conditioners"</blockquote>
 
-Locations can also be filtered by address:
+  <p>Locations can also be filtered by address:</p>
 
-    city=Seattle
-    state=WA
+  <blockquote>
+    city=Seattle<br>
+    state=WA<br>
     zipcode=98105
-    
-Or by service type:
-    
-    business=true
-    residents=true
-    drop_off=true
-    mail_in=true
-    pick_up=true
+  </blockquote>
+      
+  <p>Or by service type:</p>
 
-###Responses
+    <blockquote>
+      <code>business=true</code><br>
+      <code>residents=true</code><br>
+      <code>drop_off=true</code><br>
+      <code>mail_in=true</code><br>
+      <code>pick_up=true</code>
+    </blockquote>
 
-A sample HTTP request is shown below:
+  <h3><strong>Responses</strong></h3>
 
-    http://www.wdidw.com/api/locations?materials=TVs,Monitors&zipcode=98006&residents=true
-    
-The JSON result is shown below:
+  <p>A sample HTTP request is shown below:</p>
 
-    [ { "_id":
-            { "$oid": "534c73c76c61739a298e0000" },
+  <blockquote><code>http://www.wdidw.com/api/locations?materials=TVs,Monitors&zipcode=98006&residents=true</code></blockquote>
+      
+  <p>The JSON result is shown below:</p>
+  <blockquote>
+  <pre>
+    [ 
+      { "_id": 
+          { "$oid": "534c73c76c61739a298e0000" },
         "business": false,
         "city": "Bellevue",
         "cost": "FREE for E-Cycle Washington eligible groups including residents, small businesses (\u003C 50 employees corporate-wide), school districts (no colleges or universities), charities and non-profit groups.",
@@ -53,7 +60,7 @@ The JSON result is shown below:
         "longitude": "-122.1525500001822",
         "mail_in": false,
         "materials": 
-            [ "Monitors", "Computers, Laptops, Tablets", "TVs" ],
+          [ "Monitors", "Computers, Laptops, Tablets", "TVs" ],
         "max_volume": "3 products per donor, per day.",
         "min_volume": null,
         "name": "Goodwill Newport Hills Donation Center",
@@ -63,11 +70,14 @@ The JSON result is shown below:
         "state": "WA",
         "street": "5115 112th PL SE",
         "website": "http://www.seattlegoodwill.org/",
-        "zipcode": "98006" } ]
+        "zipcode": "98006"
+      } 
+    ]
+  </pre></blockquote>
 
-###Materials API
+  <h3><strong>Materials API</strong></h3>
 
-The static materials data used to build WDIDW, including subcategories and descriptions, can be accessed through the following API request:
+  The static materials data used to build WDIDW, including subcategories and descriptions, can be accessed through the following API request:
 
-    http://www.wdidw.com/api/materials
-    )
+      http://www.wdidw.com/api/materials
+</div>
