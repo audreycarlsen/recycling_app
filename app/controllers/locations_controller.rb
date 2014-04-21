@@ -13,9 +13,12 @@ class LocationsController < ApplicationController
   end
 
   def email
-    email_address = params[:email_address]
-    locations     = params[:locations]
-    Resque.enqueue(EmailJob, email_address, locations)
+    email_address    = params[:email_address]
+    locations        = params[:locations]
+    materials        = params[:materials]
+    current_location = params[:current_location]
+
+    Resque.enqueue(EmailJob, email_address, locations, materials, current_location)
     render nothing: true
   end
 

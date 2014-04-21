@@ -1,8 +1,6 @@
 <div class="container">
   <h4><em>What do I do with... </em></h4>
-  <h3><strong>
-    <%= @displayed_title %>
-  </strong></h3>
+  <strong><h3 id="displayed-title"><%= @displayed_title %></h3></strong>
 
   <p>Don't see what you're looking for...?</p>
 
@@ -35,7 +33,7 @@
               </thead>
               <tbody>
                 <% @drop_off_locations.each do |location| %>
-                  <tr data-name="<%= location.name %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>" data-distance="<%= location.distance %>" data-latitude="<%= location.latitude %>" data-longitude="<%= location.longitude %>">
+                  <tr data-name="<%= location.name %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>" data-distance="<%= location.distance %>" data-latitude="<%= location.latitude %>" data-longitude="<%= location.longitude %>">
                     <td>
                       <strong>
                         <% if location.website %>
@@ -66,7 +64,7 @@
 
         <div class="tab-pane" id="pick_up">
           <% unless @pick_up_locations.empty? %>
-            <table class="table table-condensed location-table">
+            <table class="table table-condensed location-table" id="pick_up_table">
               <thead>
                 <th>Name</th>
                 <th>Location</th>
@@ -75,7 +73,7 @@
               </thead>
               <tbody>
                 <% @pick_up_locations.each do |location| %>
-                  <tr>
+                  <tr data-name="<%= location.name %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>">
                     <td>
                       <strong>
                         <% if location.website %>
@@ -108,7 +106,7 @@
 
         <div class="tab-pane" id="mail_in">
           <% unless @mail_in_locations.empty? %>
-            <table class="table table-condensed location-table">
+            <table class="table table-condensed location-table" id="mail_in_table">
               <thead>
                 <th>Name</th>
                 <th>Location</th>
@@ -116,7 +114,7 @@
               </thead>
               <tbody>
                 <% @mail_in_locations.each do |location| %>
-                  <tr>
+                  <tr data-name="<%= location.name %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>">
                     <td>
                       <strong>
                         <% if location.website %>
@@ -147,8 +145,6 @@
     <% end %>
   </div>
 
-  <!-- Map -->
-
   <div class="col-md-6">
 
     <!-- Email -->
@@ -162,7 +158,9 @@
       <button type="submit" class="btn btn-info btn-sm email-me-button">Go</button><%= image_tag "loading.gif", id: "loading-gif", height: "20px", style: "display: none; padding-left: 10px" %> <span class="email-notification"></span><span class="email-error"></span>
     <% end %>
 
-    <br><p>Near <%= @displayed_address %></p>
+    <!-- Map -->
+
+    <br><p>Near <span id="displayed_address"><%= @displayed_address %></span></p>
     <p><div id="map-canvas" style="width:100%; height:400px;"  data-current-location="<%= @current_location %>"></div></p>
   </div>
 </div>

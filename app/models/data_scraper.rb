@@ -37,6 +37,14 @@ class DataScraper
     new_location.materials << material_handled
   end
 
+  def self.set_phone(phone, new_location)
+    if phone == "()"
+      new_location.phone = nil
+    else
+      new_location.phone = phone
+    end
+  end
+
   def self.set_services(location_json, new_location)
     new_location.pick_up   = location_json['pickup_allowed'] == 'TRUE'
     new_location.drop_off  = location_json['dropoff_allowed'] == 'TRUE'
@@ -69,7 +77,6 @@ class DataScraper
       street:        location_json['provider_address'],
       city:          location_json['city'],
       zipcode:       location_json['zip'],
-      phone:         location_json['phone']['phone_number'], 
       website:       location_json['provider_url'].try(:[],'url'),
       hours:         location_json['hours'],       
       cost:          location_json['fee'],        
@@ -81,6 +88,7 @@ class DataScraper
     set_state_and_zip(location_json, new_location)
     set_services(location_json, new_location)
     set_materials(location_json['material_handled'], new_location)
+    set_phone(location_json['phone']['phone_number'], new_location)
 
     unless new_location.save
       Rails.logger.warning("#{new_location.name} failed")

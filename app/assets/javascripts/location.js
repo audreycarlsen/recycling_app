@@ -19,6 +19,9 @@ $(document).ready(function() {
         var data = $(location).data();
 
         var name      = data.name;
+        var phone     = data.phone;
+        var url       = data.url;
+        var hours     = data.hours;
         var street    = data.street;
         var city      = data.city;
         var state     = data.state;
@@ -35,7 +38,14 @@ $(document).ready(function() {
           icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
         });
 
-        var windowContent = '<strong>' + data.name + '</strong><br>' + data.street + '<br>' + data.city + ', ' + data.state + ' ' + data.zipcode + '<br>' + data.distance
+        if (data.url) {
+          var data_link = '<strong><a href="' + data.url + '" target="_blank">' + data.name + '</a></strong><br>';
+        }
+        else {
+          var data_link = '<strong>' + data.name + '</strong><br>';
+        }
+
+        var windowContent = data_link + data.street + '<br>' + data.city + ', ' + data.state + ' ' + data.zipcode + '<br>' + data.phone + '<br><em>' + data.distance + '</em>'
 
         google.maps.event.addListener(marker, 'click', function() {
           infoWindow.setContent(windowContent);

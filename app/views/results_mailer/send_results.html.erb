@@ -1,3 +1,62 @@
-<% @drop_off_locations.each do |index, location| %>
-  <%= location["name"] %>
+<p><strong>What Do I Do With... <%= @materials %></strong></p>
+
+<% if @drop_off_locations %>
+  <p>DROP-OFF LOCATIONS
+  <br>Near <%= @current_location %></p>
+
+  <% @drop_off_locations.each do |index, location| %>
+    <p>
+      <% if location["url"] == "" %>
+        <%= location["name"] %> (<%= location["distance"] %>)<br>
+      <% else %>
+        <%= link_to location["name"], location["url"], target: "_blank" %> (<%= location["distance"] %>)<br>
+      <% end %>
+      <%= location["street"] %><br>
+      <% unless location["city"] == "" %>
+        <%= location["city"] %>, <%= location["state"] %> <%= location["zipcode"] %><br>
+      <% end %>
+      <%= location["phone"] %>
+    </p>
+  <% end %>
+  ---------------
+<% end %>
+
+<% if @pick_up_locations %>
+  <p>PICK-UP LOCATIONS</p>
+
+  <% @pick_up_locations.each do |index, location| %>
+    <p>
+      <% if location["url"] == "" %>
+        <%= location["name"] %><br>
+      <% else %>
+        <%= link_to location["name"], location["url"], target: "_blank" %><br>
+      <% end %>
+      <%= location["street"] %><br>
+      <% unless location["city"] == "" %>
+        <%= location["city"] %>, <%= location["state"] %> <%= location["zipcode"] %><br>
+      <% end %>
+      <%= location["phone"] %>
+    </p>
+  <% end %>
+  ---------------
+<% end %>
+
+<% if @mail_in_locations %>
+  <p>MAIL-IN LOCATIONS</p>
+
+  <% @mail_in_locations.each do |index, location| %>
+    <p>
+      <% if location["url"] == "" %>
+        <%= location["name"] %><br>
+      <% else %>
+        <%= link_to location["name"], location["url"], target: "_blank" %><br>
+      <% end %>
+      <%= location["street"] %><br>
+      <% unless location["city"] == "" %>
+        <%= location["city"] %>, <%= location["state"] %> <%= location["zipcode"] %><br>
+      <% end %>
+      <%= location["phone"] %>
+    </p>
+  <% end %>
+  ---------------
 <% end %>
