@@ -40,7 +40,6 @@
       </div>
 
       <%= form_tag("/results", method: "post") do %>
-        
       
         <div class="clear"></div>
 
@@ -61,22 +60,24 @@
           
           <div class="container">
             <div class="form-group">
-              <div class="col-xs-4">
-                <input name="displayed_address" type="text" id="displayed_address_field" class="form-control"/><span style="font-size: 12px;"><em>ex: 1301 5th Ave, Seattle, WA 98101</em></span>
-                <input name="address" type="hidden" id="address_field" class="form-control" style="width:40%"/>
-              </div>
-              <div class="col-xs-4">
-                <span style="margin-right: 5px;">or</span> <button type="button" class="btn btn-sm btn-primary current_location">Use Current Location</button><%= image_tag "loading.gif", class: "loading-gif1", height: "20px", style: "display: none; padding-left: 10px" %>
+              <div class="example-address"><em>ex: 1301 5th Ave, Seattle, WA 98101</em></div>
+              <input name="displayed_address" type="text" class="form-control" id="displayed_address_field" />
+              <input name="address" type="hidden" id="address_field" class="form-control"/>
+
+              <div class="current-location-block">
+                <span class="or"><em>or...</em></span> <button type="button" class="btn btn-sm btn-info current_location">Use Current Location</button><%= image_tag "loading.gif", class: "loading-gif1", height: "20px", style: " display: none; padding-left: 10px" %>
               </div>
             </div>
 
-            <p><div class='error'></div></p>
-            <p><div class="invalid_address"></div></p>
+            <div class="invalid_address"></div>
           </div>
+        </div>
+      <% end %>
 
-          <p><button type="submit" class="onward-button", style="display: none;">Onward, to glory!</button> </p>
-        <% end %>
-        <button type="submit" class="btn btn-lg btn-warning dummy-onward-button">Onward, to glory!</button> <%= image_tag "loading.gif", class: "loading-gif2", height: "30px", style: "display: none; padding-left: 10px" %>
-      </div>
+      <hr>
+
+      <button type="submit" class="onward-button" style="display: none;">Onward, to glory!</button>
+      <button type="submit" class="btn btn-lg btn-warning dummy-onward-button">Onward, to glory!</button> <%= image_tag "loading.gif", class: "loading-gif2", height: "30px", style: "display: none; padding-left: 10px" %>
+    </div>
   </script>
 </div>

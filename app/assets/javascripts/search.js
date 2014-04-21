@@ -13,7 +13,7 @@ function showPosition(position) {
 
 function watchCurrentLocation() {
   $('.current_location').click(function() {
-    var error = document.querySelector('.error');
+    var invalid = document.querySelector('.invalid_address');
     $('.loading-gif1').show();
 
     if (navigator.geolocation) {
@@ -21,7 +21,7 @@ function watchCurrentLocation() {
         alert("Check your browser and system settings to enable location services.");
       });
     } else {
-      error.innerHTML = "Geolocation is not supported by this browser. Please type in your location by hand.";
+      invalid_address.innerHTML = "Geolocation is not supported by this browser. Please type in your location by hand.";
     }
   });
 }
