@@ -57,7 +57,7 @@ function watchOnwardButton() {
         url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false",
         success: function(data) {
           if (data["status"] == "ZERO_RESULTS") {
-            $(".invalid_address").html("Invalid address :(");
+            $(".invalid_address").html("Invalid address");
             $('.loading-gif2').hide();
             return false;
           }
@@ -102,15 +102,19 @@ $(document).ready(function() {
           $('.learn-more').popover({trigger: 'hover'});
         }
       });
-      return false;
     };
 
-    $('.search_button').click(
-      update
-    );
+    function watchForChange() {
+      console.log("made it");
+      $('.select_box').change(
+        update
+      );
+    }
 
-    $('.select_box').change(
-      update
-    );
+    $('.search_button').click(function(e) {
+      e.preventDefault();
+      update();
+      watchForChange();
+    });
   }
 });

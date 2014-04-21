@@ -7,12 +7,11 @@
 
   <hr>
 
-  <%= form_tag do %>
-    <div class="col-xs-3">
-      <%= select_tag "material", options_from_collection_for_select(@materials, "id", "name"), prompt: "Select a category", class: "form-control input-sm select_box" %>
-    </div>
-  <% end %>
-  <button type="submit" class="btn btn-sm btn-success search_button">GO</button>
+  <div class="clearfix">
+    <%= form_tag do %>
+      <%= select_tag "material", options_from_collection_for_select(@materials, "id", "name"), prompt: "Select a category", class: "form-control input-sm select_box" %><button type="submit" class="btn btn-sm btn-success search_button">GO</button>
+    <% end %>
+  </div>
 
   <div id="material_result">
   </div>
@@ -20,49 +19,60 @@
   <script id="material-result-template" type="text/x-handlebars-template">
     <div id="material_result">
 
+      <hr>
+
       <h4><em>What do I do with... </em></h4>
-      <strong><h3>{{name}}</h3>
-      <p>Step 1: Select specific materials</p></strong>
+      <strong><h3>{{name}}</h3></strong>
+
+      <strong><p>Step 1: Select specific materials</p></strong>
+
+      <div class="container">
+          <div class="checkbox">
+            {{#each subcategories}}
+              <div class="material-block">
+                <div class="watched-checkbox">
+                  <input class='{roles: true}' name="subcategories[]" type="checkbox" value="{{name}}" />
+                </div>
+                {{name}} <span class="learn-more glyphicon glyphicon-info-sign gray" href="#" data-toggle="popover" data-placement="bottom" data-content="{{description}}"></span>
+              </div>
+            {{/each}}
+          </div>
+      </div>
 
       <%= form_tag("/results", method: "post") do %>
-        <div class="checkbox">
-          {{#each subcategories}}
-            <div class="material-block">
-              <div class="watched-checkbox">
-                <input class='{roles: true}' name="subcategories[]" type="checkbox" value="{{name}}" />
-              </div>
-              {{name}} <span class="learn-more glyphicon glyphicon-info-sign gray" href="#" data-toggle="popover" data-placement="bottom" data-content="{{description}}"></span>
-            </div>
-          {{/each}}
-        </div>
+        
       
         <div class="clear"></div>
 
           <p><strong>Step 2: Is this material generated from your business or residence?</strong></p>
-
-          <label class="radio-inline">
-            <input name="type" type="radio" value="Business" /> Business
-          </label>
-          <label class="radio-inline">
-            <input name="type" type="radio" value="Residence" /> Residence
-          </label>
-
-          <br><br>
-
-          <p><strong>Step 3: Enter your address to find drop-off locations nearest to you</strong></p>
-          <em>ex: 1301 5th Ave, Seattle, WA 98101</em><br>
-
-          <div class="form-group">
-            <input name="displayed_address" type="text" id="displayed_address_field" class="form-control" style="width:40%"/>
+          
+          <div class="container" style="font-size: 13px;">
+            <label class="radio-inline">
+              <input name="type" type="radio" value="Business" /> Business
+            </label>
+            <label class="radio-inline">
+              <input name="type" type="radio" value="Residence" /> Residence
+            </label>
           </div>
 
-          <div class="invalid_address"></div>
+          <br>
+
+          <p><strong>Step 3: Enter your address to find drop-off locations nearest to you</strong></p>
           
-          <input name="address" type="hidden" id="address_field" class="form-control" style="width:40%"/>
+          <div class="container">
+            <div class="form-group">
+              <div class="col-xs-4">
+                <input name="displayed_address" type="text" id="displayed_address_field" class="form-control"/><span style="font-size: 12px;"><em>ex: 1301 5th Ave, Seattle, WA 98101</em></span>
+                <input name="address" type="hidden" id="address_field" class="form-control" style="width:40%"/>
+              </div>
+              <div class="col-xs-4">
+                <span style="margin-right: 5px;">or</span> <button type="button" class="btn btn-sm btn-primary current_location">Use Current Location</button><%= image_tag "loading.gif", class: "loading-gif1", height: "20px", style: "display: none; padding-left: 10px" %>
+              </div>
+            </div>
 
-          or <button type="button" class="btn btn-sm btn-info current_location">Use Current Location</button><%= image_tag "loading.gif", class: "loading-gif1", height: "20px", style: "display: none; padding-left: 10px" %>
-
-          <p><div class='error'></div></p>
+            <p><div class='error'></div></p>
+            <p><div class="invalid_address"></div></p>
+          </div>
 
           <p><button type="submit" class="onward-button", style="display: none;">Onward, to glory!</button> </p>
         <% end %>

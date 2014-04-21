@@ -18,7 +18,7 @@ body {
 }
 
 .location-table {
-  font-size: 12px;
+  font-size: .857em;
 }
 
 .css-class-here {
@@ -37,12 +37,6 @@ li {
   color: red;
 }
 
-.material-block {
-  margin:20px;
-  width:172px;
-  float:left;
-}
-
 .clear {
   clear: both;
 }
@@ -57,21 +51,65 @@ li {
 
 .popover-content {
   padding: 9px 14px;
-  font-size: 12px;
+  font-size: .857em;
 }
 
 .small-text {
-  font-size: 12px;
+  font-size: .857em;
 }
 
 .email-notification {
   padding-left: 5px;
   color: green;
-  font-size: 12px;
+  font-size: .857em;
 }
 
 .email-error {
   padding-left: 5px;
   color: red;
-  font-size: 12px;
+  font-size: .857em;
+}
+
+.material-block {
+  margin-bottom: 5px;
+  margin-right: 10px;
+  vertical-align: top;
+  font-size: 13px;
+}
+
+.search_button {
+  margin-left: 10px;
+}
+
+.select_box {
+  float: left;
+  width: 82%;
+}
+
+@media (min-width: 550px) {
+  .material-block {
+    display: inline-block;
+    width: 47%;
+  }
+
+  .select_box {
+    width: 60%;
+  }
+}
+
+@media (min-width: 700px) {
+  .select_box {
+    width: 45%;
+  }
+}
+
+@media (min-width: 975px) {
+  .material-block {
+    display: inline-block;
+    width: 31%;
+  }
+
+  .select_box {
+    width: 35%;
+  }
 }
