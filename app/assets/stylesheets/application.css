@@ -150,3 +150,8 @@ li {
     width: 33%;
   }
 }
+
+.locations_desc_row {
+  display: none;
+}
+}

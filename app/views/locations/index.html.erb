@@ -1,12 +1,14 @@
 <div class="container">
+
   <h4><em>What do I do with... </em></h4>
-  <strong><h3 id="displayed-title"><%= @displayed_title %></h3></strong>
+  
+  <div class="col-md-6">
+    
+    <strong><h3 id="displayed-title"><%= @displayed_title %></h3></strong>
 
-  <% if @locations_by_type.last %>
+    <% if @locations_by_type.last %>
 
-    <!-- Locations Table w. Tabs -->
-
-    <div class="col-md-6">
+      <!-- Locations Table w. Tabs -->
 
       <!-- Nav Tabs -->
 
@@ -22,16 +24,18 @@
 
         <div class="tab-pane active" id="drop_off">
           <% unless @drop_off_locations.empty? %>
-            <table class="table table-condensed location-table" id="drop_off_table">
+            <table class="table table-condensed location-table borderless" id="drop_off_table">
               <thead>
+                <th></th>
                 <th>Name</th>
-                <th>Location</th>
-                <th>Hours</th>
                 <th>Distance</th>
               </thead>
-              <tbody>
+              <tbody class="locations_table">
                 <% @drop_off_locations.each do |location| %>
-                  <tr data-name="<%= location.name %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>" data-distance="<%= location.distance %>" data-latitude="<%= location.latitude %>" data-longitude="<%= location.longitude %>">
+                  <tr class="locations_row" id="<%= location.id %>" data-name="<%= location.name %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>" data-distance="<%= location.distance %>" data-latitude="<%= location.latitude %>" data-longitude="<%= location.longitude %>">
+                    <td>
+                      <span class="glyphicon glyphicon-chevron-down gray" style="display: none;"></span><span class="glyphicon glyphicon-chevron-up gray"></span>
+                    </td>
                     <td>
                       <strong>
                         <% if location.website %>
@@ -40,15 +44,12 @@
                           <%= location.name %>
                         <% end %>
                       </strong>
-                    <br><%= location.phone %></td>
-                    <td>
-                      <%= location.street %><br>
-                      <% if location.city || location.zipcode %>
-                        <%= location.city %>, <%= location.state %> <%= location.zipcode%>
-                      <% end %>
                     </td>
-                    <td><%= location.hours %></td>
                     <td><%= location.distance %></td>
+                  </tr>
+                  <tr class="locations_desc_row" id="desc_<%= location.id %>">
+                    <td></td>
+                    <td colspan="2">Hello</td>
                   </tr>
                 <% end %>
               </tbody>

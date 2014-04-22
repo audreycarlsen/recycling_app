@@ -146,7 +146,7 @@ class DataScraper
   end
 
   def self.get_all
-    if DataScraper.last.nil?
+    if DataScraper.last
       DataScraper.create
     end
 
