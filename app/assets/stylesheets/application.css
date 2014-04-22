@@ -158,3 +158,23 @@ li {
 .locations_desc_row td {
   vertical-align: top;
 }
+
+.fixed-col-1 {
+  width: 8%;
+}
+
+.fixed-col-2 {
+  width: 92%;
+}
+
+.fixed-col-a {
+  width: 8%;
+}
+
+.fixed-col-b {
+  width: 73%;
+}
+
+.fixed-col-c {
+  width: 19%;
+}

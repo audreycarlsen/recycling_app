@@ -4,7 +4,7 @@
   <div class="col-md-6">
     <strong><h3 id="displayed-title" style="margin-bottom:20px; margin-left:-15px"><%= @displayed_title %></h3></strong>
 
-    <% if @locations_by_type.last %>
+    <% if @drop_off_locations.last || @pick_up_locations.last || @mail_in_locations.last %>
 
       <!-- Locations Table w. Tabs -->
 
@@ -31,15 +31,15 @@
               <tbody class="locations_table">
                 <% @drop_off_locations.each do |location| %>
                   <tr class="locations_row" id="<%= location.id %>" data-name="<%= location.name %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>" data-distance="<%= location.distance %>" data-latitude="<%= location.latitude %>" data-longitude="<%= location.longitude %>">
-                    <td>
+                    <td class="fixed-col-a">
                       <span class="glyphicon glyphicon-chevron-down gray" style="display: none;"></span><span class="glyphicon glyphicon-chevron-up gray"></span>
                     </td>
-                    <td>
+                    <td class="fixed-col-b">
                       <strong>
                         <%= location.name %>
                       </strong>
                     </td>
-                    <td><%= location.distance %></td>
+                    <td class="fixed-col-c"><%= location.distance %></td>
                   </tr>
                   <tr class="locations_desc_row" id="desc_<%= location.id %>">
                     <td style="border-top: none;"></td>
@@ -47,23 +47,27 @@
                       <table style="margin-bottom: 8px;">
                         <tr>
                           <td style="padding-right: 5px;"><strong>Address:</strong></td>
-                          <td><%= location.street %><% if location.city || location.zipcode %>, <%= location.city %>, <%= location.state %> <%= location.zipcode%><% end %></td>
+                          <td><%= location.street %><% if location.city || location.zipcode %><br><%= location.city %>, <%= location.state %> <%= location.zipcode%><% end %></td>
                         </tr>
-                        <tr>
-                          <td><strong>Phone:</strong></td>
-                          <td><%= location.phone %></td>
-                        </tr>
+                        <% if location.phone %>
+                          <tr>
+                            <td><strong>Phone:</strong></td>
+                            <td><%= location.phone %></td>
+                          </tr>
+                        <% end %>
                         <tr>
                           <td><strong>Hours:</strong></td>
                           <td><%= location.hours %></td>
                         </tr>
-                        <tr>
-                          <td></td>
-                          <td>
-                            <% if location.website %>
-                              <%= link_to "Visit Website", location.website, :target => "_blank" %>
-                            <% end %>
-                          </td>
+
+                          <% if location.website %>
+                            <tr>
+                              <td></td>
+                              <td>
+                                <%= link_to "Visit Website", location.website, :target => "_blank" %>
+                              </td>
+                            </tr>
+                          <% end %>
                         </tr>
                       </table>
                     </td>
@@ -82,34 +86,54 @@
           <% unless @pick_up_locations.empty? %>
             <table class="table table-condensed location-table" id="pick_up_table">
               <thead>
+                <th></th>
                 <th>Name</th>
-                <th>Location</th>
-                <th>Hours</th>
-                <th>Cost</th>
               </thead>
-              <tbody>
+              <tbody class="locations_table">
                 <% @pick_up_locations.each do |location| %>
-                  <tr data-name="<%= location.name %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>">
-                    <td>
-                      <strong>
-                        <% if location.website %>
-                          <%= link_to location.name, location.website, :target => "_blank" %>
-                        <% else %>
-                          <%= location.name %>
-                        <% end %>
-                      </strong>
-                    <br><%= location.phone %></td>
-                    <td>
-                      <%= location.street %><br>
-                      <% if location.city || location.zipcode %>
-                        <%= location.city %>, <%= location.state %> <%= location.zipcode%>
-                      <% end %>
+                  <tr class="locations_row" id="<%= location.id %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>">
+                    <td class="fixed-col-1">
+                      <span class="glyphicon glyphicon-chevron-down gray" style="display: none;"></span><span class="glyphicon glyphicon-chevron-up gray"></span>
                     </td>
-                    <td><%= location.hours %></td>
-                    <td>
-                      <% if location.cost %>
-                        <%= location.cost.html_safe %>
-                      <% end %>
+                    <td class="fixed-col-2">
+                      <strong>
+                        <%= location.name %>
+                      </strong>
+                    </td>
+                  </tr>
+                  <tr class="locations_desc_row" id="desc_<%= location.id %>">
+                    <td style="border-top: none;"></td>
+                    <td colspan="1" style="border-top: none;">
+                      <table style="margin-bottom: 8px;">
+                        <tr>
+                          <td style="padding-right: 5px;"><strong>Address:</strong></td>
+                          <td><%= location.street %><% if location.city || location.zipcode %><br><%= location.city %>, <%= location.state %> <%= location.zipcode%><% end %></td>
+                        </tr>
+                        <% if location.phone %>
+                          <tr>
+                            <td><strong>Phone:</strong></td>
+                            <td><%= location.phone %></td>
+                          </tr>
+                        <% end %>
+                        <tr>
+                          <td><strong>Hours:</strong></td>
+                          <td><%= location.hours %></td>
+                        </tr>
+                        <% if location.cost %>
+                          <tr>
+                            <td><strong>Cost:</strong></td>
+                            <td><%= location.cost %></td>
+                          </tr>
+                        <% end %>
+                        <% if location.website %>
+                          <tr>
+                            <td></td>
+                            <td>
+                              <%= link_to "Visit Website", location.website, :target => "_blank" %>
+                            </td>
+                          </tr>
+                        <% end %>
+                      </table>
                     </td>
                   </tr>
                 <% end %>
@@ -126,34 +150,54 @@
           <% unless @mail_in_locations.empty? %>
             <table class="table table-condensed location-table" id="mail_in_table">
               <thead>
+                <th></th>
                 <th>Name</th>
-                <th>Location</th>
-                <th>Hours</th>
-                <th>Cost</th>
               </thead>
-              <tbody>
+              <tbody class="locations_table">
                 <% @mail_in_locations.each do |location| %>
-                  <tr data-name="<%= location.name %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>">
-                    <td>
-                      <strong>
-                        <% if location.website %>
-                          <%= link_to location.name, location.website, :target => "_blank" %>
-                        <% else %>
-                          <%= location.name %>
-                        <% end %>
-                      </strong>
-                    <br><%= location.phone %></td>
-                    <td>
-                      <%= location.street %><br>
-                      <% if location.city || location.zipcode %>
-                        <%= location.city %>, <%= location.state %> <%= location.zipcode%>
-                      <% end %>
+                  <tr class="locations_row" id="<%= location.id %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>">
+                    <td class="fixed-col-1">
+                      <span class="glyphicon glyphicon-chevron-down gray" style="display: none;"></span><span class="glyphicon glyphicon-chevron-up gray"></span>
                     </td>
-                    <td><%= location.hours %></td>
-                    <td>
-                      <% if location.cost %>
-                        <%= location.cost.html_safe %>
-                      <% end %>
+                    <td class="fixed-col-2">
+                      <strong>
+                        <%= location.name %>
+                      </strong>
+                    </td>
+                  </tr>
+                  <tr class="locations_desc_row" id="desc_<%= location.id %>">
+                    <td style="border-top: none;"></td>
+                    <td colspan="1" style="border-top: none;">
+                      <table style="margin-bottom: 8px;">
+                        <tr>
+                          <td style="padding-right: 5px;"><strong>Address:</strong></td>
+                          <td><%= location.street %><% if location.city || location.zipcode %><br><%= location.city %>, <%= location.state %> <%= location.zipcode%><% end %></td>
+                        </tr>
+                        <% if location.phone %>
+                          <tr>
+                            <td><strong>Phone:</strong></td>
+                            <td><%= location.phone %></td>
+                          </tr>
+                        <% end %>
+                        <tr>
+                          <td><strong>Hours:</strong></td>
+                          <td><%= location.hours %></td>
+                        </tr>
+                        <% if location.cost %>
+                          <tr>
+                            <td><strong>Cost:</strong></td>
+                            <td><%= location.cost %></td>
+                          </tr>
+                        <% end %>
+                        <% if location.website %>
+                          <tr>
+                            <td></td>
+                            <td>
+                              <%= link_to "Visit Website", location.website, :target => "_blank" %>
+                            </td>
+                          </tr>
+                        <% end %>
+                      </table>
                     </td>
                   </tr>
                 <% end %>
@@ -164,28 +208,27 @@
           <% end %>
         </div>
       </div>
-    </div>
-    <div class="col-md-6">
+    <% else %>
+      No results. Please try a different search.
+    <% end %>
+  </div>
 
-      <!-- Email -->
+  <div class="col-md-6">
 
-      <span class="small-text">Send me these results:</span>
-      
-      <%= form_tag("/email", method: "post", class: "form-inline") do %>
-        <div class="form-group">
-          <input type="email" class="form-control input-sm email-me-form" placeholder="Enter email">
-        </div>
-        <button type="submit" class="btn btn-info btn-sm email-me-button">Go</button><%= image_tag "loading.gif", id: "loading-gif", height: "20px", style: "display: none; padding-left: 10px" %> <span class="email-notification"></span><span class="email-error"></span>
-      <% end %>
+    <!-- Email -->
 
-      <!-- Map -->
+    <span class="small-text">Send me these results:</span>
+    
+    <%= form_tag("/email", method: "post", class: "form-inline") do %>
+      <div class="form-group">
+        <input type="email" class="form-control input-sm email-me-form" placeholder="Enter email">
+      </div>
+      <button type="submit" class="btn btn-info btn-sm email-me-button">Go</button><%= image_tag "loading.gif", id: "loading-gif", height: "20px", style: "display: none; padding-left: 10px" %> <span class="email-notification"></span><span class="email-error"></span>
+    <% end %>
 
-      <br><p>Near <span id="displayed_address"><%= @displayed_address %></span></p>
-      <p><div id="map-canvas" style="width:100%; height:400px;"  data-current-location="<%= @current_location %>"></div></p>
-    </div>
-  <% else %>
-    <div class="col-md-6">
-      No results.
-    </div>
-  <% end %>
+    <!-- Map -->
+
+    <br><p>Near <span id="displayed_address"><%= @displayed_address %></span></p>
+    <p><div id="map-canvas" style="width:100%; height:400px;"  data-current-location="<%= @current_location %>"></div></p>
+  </div>
 </div>
