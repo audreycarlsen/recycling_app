@@ -24,7 +24,7 @@
 
         <div class="tab-pane active" id="drop_off">
           <% unless @drop_off_locations.empty? %>
-            <table class="table table-condensed location-table borderless" id="drop_off_table">
+            <table class="table table-condensed location-table" id="drop_off_table">
               <thead>
                 <th></th>
                 <th>Name</th>
@@ -48,8 +48,8 @@
                     <td><%= location.distance %></td>
                   </tr>
                   <tr class="locations_desc_row" id="desc_<%= location.id %>">
-                    <td></td>
-                    <td colspan="2">Hello</td>
+                    <td style="border-top: none;"></td>
+                    <td colspan="2" style="border-top: none;">Hello</td>
                   </tr>
                 <% end %>
               </tbody>
