@@ -55,20 +55,20 @@
                             <td><%= location.phone %></td>
                           </tr>
                         <% end %>
-                        <tr>
-                          <td><strong>Hours:</strong></td>
-                          <td><%= location.hours.html_safe %></td>
-                        </tr>
-
-                          <% if location.website %>
-                            <tr>
-                              <td></td>
-                              <td>
-                                <%= link_to "Visit Website", location.website, :target => "_blank" %>
-                              </td>
-                            </tr>
-                          <% end %>
-                        </tr>
+                        <% if location.hours%>
+                          <tr>
+                            <td><strong>Hours:</strong></td>
+                            <td><%= location.hours.html_safe %></td>
+                          </tr>
+                        <% end %>
+                        <% if location.website %>
+                          <tr>
+                            <td></td>
+                            <td>
+                              <%= link_to "Visit Website", location.website, :target => "_blank" %>
+                            </td>
+                          </tr>
+                        <% end %>
                       </table>
                     </td>
                   </tr>
@@ -115,10 +115,12 @@
                             <td><%= location.phone %></td>
                           </tr>
                         <% end %>
-                        <tr>
-                          <td><strong>Hours:</strong></td>
-                          <td><%= location.hours.html_safe %></td>
-                        </tr>
+                        <% if location.hours%>
+                          <tr>
+                            <td><strong>Hours:</strong></td>
+                            <td><%= location.hours.html_safe %></td>
+                          </tr>
+                        <% end %>
                         <% if location.cost %>
                           <tr>
                             <td><strong>Cost:</strong></td>
@@ -179,10 +181,12 @@
                             <td><%= location.phone %></td>
                           </tr>
                         <% end %>
-                        <tr>
-                          <td><strong>Hours:</strong></td>
-                          <td><%= location.hours.html_safe %></td>
-                        </tr>
+                        <% if location.hours%>
+                          <tr>
+                            <td><strong>Hours:</strong></td>
+                            <td><%= location.hours.html_safe %></td>
+                          </tr>
+                        <% end %>
                         <% if location.cost %>
                           <tr>
                             <td><strong>Cost:</strong></td>
