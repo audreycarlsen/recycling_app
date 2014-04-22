@@ -50,7 +50,7 @@
                 <th>Name</th>
                 <th>Distance</th>
               </thead>
-              <tbody class="locations_table">
+              <tbody class="drop_off_locations_table">
                 <% @drop_off_locations.each do |location| %>
                   <tr class="locations_row" id="<%= location.id %>" data-name="<%= location.name %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>" data-distance="<%= location.distance %>" data-latitude="<%= location.latitude %>" data-longitude="<%= location.longitude %>">
                     <td class="fixed-col-a">
@@ -111,7 +111,7 @@
                 <th></th>
                 <th>Name</th>
               </thead>
-              <tbody class="locations_table">
+              <tbody class="pick_up_locations_table">
                 <% @pick_up_locations.each do |location| %>
                   <tr class="locations_row" id="<%= location.id %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>">
                     <td class="fixed-col-1">
@@ -177,7 +177,7 @@
                 <th></th>
                 <th>Name</th>
               </thead>
-              <tbody class="locations_table">
+              <tbody class="mail_in_locations_table">
                 <% @mail_in_locations.each do |location| %>
                   <tr class="locations_row" id="<%= location.id %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>">
                     <td class="fixed-col-1">

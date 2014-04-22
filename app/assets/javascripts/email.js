@@ -11,7 +11,7 @@ $(document).ready(function() {
     else {
       var locations_hash = {};
 
-      var drop_off_rows = $('#drop_off_table tbody').find("tr");
+      var drop_off_rows = $('.drop_off_locations_table').find(".locations_row");
       if (drop_off_rows.length > 0 ) {
         var drop_off_array = [];
 
@@ -45,7 +45,7 @@ $(document).ready(function() {
         locations_hash["drop_off"] = drop_off_array;
       }
 
-      var pick_up_rows = $('#pick_up_table tbody').find("tr");
+      var pick_up_rows = $('.pick_up_locations_table').find(".locations_row");
       if (pick_up_rows.length > 0 ) {
         var pick_up_array = [];
         $.each(pick_up_rows, function (i, location) {
@@ -76,7 +76,7 @@ $(document).ready(function() {
         locations_hash["pick_up"] = pick_up_array;
       }
 
-      var mail_in_rows = $('#mail_in_table tbody').find("tr");
+      var mail_in_rows = $('.mail_in_locations_table').find(".locations_row");
       if (mail_in_rows.length > 0 ) {
         var mail_in_array = [];
         $.each(mail_in_rows, function (i, location) {
@@ -106,7 +106,7 @@ $(document).ready(function() {
         });
         locations_hash["mail_in"] = mail_in_array;
       }
-
+        
       $("#loading-gif").show();
 
       $.ajax({
