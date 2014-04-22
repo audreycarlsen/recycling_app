@@ -59,7 +59,7 @@ $(document).ready(function() {
         map: map,
         icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
       });
-      var windowContent = "YOU ARE HERE!";
+      var windowContent = "You are here!";
       google.maps.event.addListener(marker, 'click', function() {
         infoWindow.setContent(windowContent);
         infoWindow.open(map, this);
