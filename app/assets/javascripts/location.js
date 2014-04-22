@@ -57,7 +57,7 @@ $(document).ready(function() {
       var marker = new google.maps.Marker({
         position: position,
         map: map,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+        icon: 'https://storage.googleapis.com/support-kms-prod/SNP_2752068_en_v0'
       });
       var windowContent = "You are here!";
       google.maps.event.addListener(marker, 'click', function() {
@@ -65,5 +65,7 @@ $(document).ready(function() {
         infoWindow.open(map, this);
       });
 
+      infoWindow.setContent(windowContent);
+      infoWindow.open(map, marker);
   }
 });
