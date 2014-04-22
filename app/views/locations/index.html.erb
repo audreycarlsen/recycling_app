@@ -57,7 +57,7 @@
                         <% end %>
                         <tr>
                           <td><strong>Hours:</strong></td>
-                          <td><%= location.hours %></td>
+                          <td><%= location.hours.html_safe %></td>
                         </tr>
 
                           <% if location.website %>
@@ -117,12 +117,12 @@
                         <% end %>
                         <tr>
                           <td><strong>Hours:</strong></td>
-                          <td><%= location.hours %></td>
+                          <td><%= location.hours.html_safe %></td>
                         </tr>
                         <% if location.cost %>
                           <tr>
                             <td><strong>Cost:</strong></td>
-                            <td><%= location.cost %></td>
+                            <td><%= location.cost.html_safe %></td>
                           </tr>
                         <% end %>
                         <% if location.website %>
@@ -181,12 +181,12 @@
                         <% end %>
                         <tr>
                           <td><strong>Hours:</strong></td>
-                          <td><%= location.hours %></td>
+                          <td><%= location.hours.html_safe %></td>
                         </tr>
                         <% if location.cost %>
                           <tr>
                             <td><strong>Cost:</strong></td>
-                            <td><%= location.cost %></td>
+                            <td><%= location.cost.html_safe %></td>
                           </tr>
                         <% end %>
                         <% if location.website %>
