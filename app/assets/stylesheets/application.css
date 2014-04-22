@@ -159,6 +159,11 @@ li {
   vertical-align: top;
 }
 
+blockquote {
+  font-family: "Courier", sans-serif;
+  font-size: .928em;
+}
+
 .fixed-col-1 {
   width: 8%;
 }
