@@ -16,7 +16,7 @@ class LocationFinder
 
   def drop_off_locations
     drop_off_locations = @locations_by_type.where(drop_off: true)
-    drop_off_locations = drop_off_locations.reject{ |l| l.latitude.nil?}
+    drop_off_locations = drop_off_locations.reject{ |l| l.latitude == 0.0}
 
     unless drop_off_locations.count == 0
 
@@ -32,7 +32,7 @@ class LocationFinder
     
       distances = LocationFinder.calculate_distances(@coordinates, destination_coords)
 
-      if distances.include?("URI Too Large") || distances.parsed_response["rows"].first["elements"][0]["distance"] == nil
+      if distances.include?("URI Too Large")
         drop_off_locations = nil
       else
         drop_off_locations.each_with_index do |location, index|
