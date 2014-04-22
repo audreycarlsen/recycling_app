@@ -96,6 +96,7 @@ $(document).ready(function() {
         success: function(data) {
           var html = template(data);
           $("#material_result").replaceWith(html);
+          $("#error").html("");
           watchCurrentLocation();
           watchCheckboxes();
           watchOnwardButton();
@@ -105,7 +106,6 @@ $(document).ready(function() {
     };
 
     function watchForChange() {
-      console.log("made it");
       $('.select_box').change(
         update
       );
@@ -115,6 +115,7 @@ $(document).ready(function() {
       e.preventDefault();
       update();
       watchForChange();
+      $("#error").html("");
     });
   }
 });

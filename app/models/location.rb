@@ -4,8 +4,8 @@ class Location
   include Mongoid::Document
 
   field :name,          type: String
-  field :latitude,      type: String
-  field :longitude,     type: String
+  field :latitude,      type: Float
+  field :longitude,     type: Float
   field :materials,     type: Array
   field :residents,     type: Boolean
   field :business,      type: Boolean

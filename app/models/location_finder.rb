@@ -24,21 +24,20 @@ class LocationFinder
 
       drop_off_locations.each do |location|
         unless location == drop_off_locations.last
-          destination_coords << (location.latitude + "," + location.longitude + "|")
+          destination_coords << (location.latitude.to_s + "," + location.longitude.to_s + "|")
         else
-          destination_coords << (location.latitude + "," + location.longitude)
+          destination_coords << (location.latitude.to_s + "," + location.longitude.to_s)
         end
       end
     
       distances = LocationFinder.calculate_distances(@coordinates, destination_coords)
 
-      if distances.parsed_response["rows"].first["elements"][0]["distance"] == nil
-        redirect_to root_path
+      if distances.include?("URI Too Large") || distances.parsed_response["rows"].first["elements"][0]["distance"] == nil
+        drop_off_locations = nil
       else
         drop_off_locations.each_with_index do |location, index|
           location.distance = distances.parsed_response["rows"].first["elements"][index]["distance"]["text"]
         end
-
         drop_off_locations.sort_by! { |location| location.distance.split(" mi")[0].delete(",").to_f }
       end
     end
@@ -59,6 +58,8 @@ class LocationFinder
   def locations_by_type
     @locations_by_type
   end
+
+  private
 
   def self.calculate_distances(current_location, destination_coords)
     url = ("https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + current_location + "&destinations=" + destination_coords + "&sensor=false&units=imperial&key=" + ENV['GOOGLE_SERVER_API_KEY']).strip

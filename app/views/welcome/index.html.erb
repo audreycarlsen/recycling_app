@@ -3,7 +3,7 @@
 
   <p>Not sure what to do with items that aren’t collected curbside? You've come to the right place!</p>
 
-  <p>To begin, search by key word below or use the drop-down menu to select a general category. You will then be asked for more information to narrow your selection. tktk</p>
+  <p>To begin, use the drop-down menu to select a general category. You will then be asked for more information to narrow your search.</p>
 
   <hr>
 
@@ -12,6 +12,8 @@
       <%= select_tag "material", options_from_collection_for_select(@materials, "id", "name"), prompt: "Select a category", class: "form-control input-sm select_box" %><button type="submit" class="btn btn-sm btn-success search_button">GO</button>
     <% end %>
   </div>
+
+  <p id="error"><br><%= flash[:error] %></p>
 
   <div id="material_result">
   </div>
@@ -26,20 +28,20 @@
 
       <strong><p>Step 1: Select specific materials</p></strong>
 
-      <div class="container">
-          <div class="checkbox">
-            {{#each subcategories}}
-              <div class="material-block">
-                <div class="watched-checkbox">
-                  <input class='{roles: true}' name="subcategories[]" type="checkbox" value="{{name}}" />
-                </div>
-                {{name}} <span class="learn-more glyphicon glyphicon-info-sign gray" href="#" data-toggle="popover" data-placement="bottom" data-content="{{description}}"></span>
-              </div>
-            {{/each}}
-          </div>
-      </div>
-
       <%= form_tag("/results", method: "post") do %>
+
+        <div class="container">
+            <div class="checkbox">
+              {{#each subcategories}}
+                <div class="material-block">
+                  <div class="watched-checkbox">
+                    <input class='{roles: true}' name="subcategories[]" type="checkbox" value="{{name}}" />
+                  </div>
+                  {{name}} <span class="learn-more glyphicon glyphicon-info-sign gray" href="#" data-toggle="popover" data-placement="bottom" data-content="{{description}}"></span>
+                </div>
+              {{/each}}
+            </div>
+        </div>
       
         <div class="clear"></div>
 
@@ -68,15 +70,13 @@
                 <span class="or"><em>or...</em></span> <button type="button" class="btn btn-sm btn-info current_location">Use Current Location</button><%= image_tag "loading.gif", class: "loading-gif1", height: "20px", style: " display: none; padding-left: 10px" %>
               </div>
             </div>
-
             <div class="invalid_address"></div>
+            <button type="submit" class="onward-button" style="display:none;">Onward, to glory!</button>
           </div>
         </div>
       <% end %>
 
       <hr>
-
-      <button type="submit" class="onward-button" style="display: none;">Onward, to glory!</button>
       <button type="submit" class="btn btn-lg btn-warning dummy-onward-button">Onward, to glory!</button> <%= image_tag "loading.gif", class: "loading-gif2", height: "30px", style: "display: none; padding-left: 10px" %>
     </div>
   </script>

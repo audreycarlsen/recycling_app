@@ -10,6 +10,10 @@ class LocationsController < ApplicationController
     @displayed_address = params["displayed_address"].split("near: ").last
     @current_location  = params["address"].split(",").map {|coord| coord.to_f}
     @displayed_title   = display_title(params["subcategories"])
+
+    if @drop_off_locations == nil
+      redirect_to root_path, :flash => { :error => "There was a problem with your request. Please try again." }
+    end
   end
 
   def email
