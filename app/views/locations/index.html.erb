@@ -1,9 +1,31 @@
 <div class="container">
 
   <h4 style="margin-bottom:-5px;"><em>What do I do with... </em></h4>
-  <div class="col-md-6">
-    <strong><h3 id="displayed-title" style="margin-bottom:20px; margin-left:-15px"><%= @displayed_title %></h3></strong>
+  <strong><h3 id="displayed-title" style="margin-bottom:20px;"><%= @displayed_title %></h3></strong>
 
+  <div class="col-md-6 col-md-push-6 map-container">
+
+    <!-- Email -->
+
+    <span class="small-text">Send me these results:</span>
+    
+    <%= form_tag("/email", method: "post") do %>
+      <div class="form-group">
+        <input type="email" class="form-control input-sm email-me-form" placeholder="Enter email">
+      </div>
+      <button type="submit" class="btn btn-info btn-sm email-me-button">Go</button><%= image_tag "loading.gif", id: "loading-gif", height: "20px", style: "display: none; padding-left: 10px" %> <span class="email-notification"></span><span class="email-error"></span>
+    <% end %>
+
+    <!-- Map -->
+
+    <br><p>Near <span id="displayed_address"><%= @displayed_address %></span></p>
+    <div style="width:100%; height:400px;">
+      <strong><div class="hover-text"></div></strong>
+      <div id="map-canvas" style="width:100%; height:400px;"  data-current-location="<%= @current_location %>"></div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-md-pull-6">
     <% if @drop_off_locations.last || @pick_up_locations.last || @mail_in_locations.last %>
 
       <!-- Locations Table w. Tabs -->
@@ -215,27 +237,5 @@
     <% else %>
       No results. Please try a different search.
     <% end %>
-  </div>
-
-  <div class="col-md-6">
-
-    <!-- Email -->
-
-    <span class="small-text">Send me these results:</span>
-    
-    <%= form_tag("/email", method: "post", class: "form-inline") do %>
-      <div class="form-group">
-        <input type="email" class="form-control input-sm email-me-form" placeholder="Enter email">
-      </div>
-      <button type="submit" class="btn btn-info btn-sm email-me-button">Go</button><%= image_tag "loading.gif", id: "loading-gif", height: "20px", style: "display: none; padding-left: 10px" %> <span class="email-notification"></span><span class="email-error"></span>
-    <% end %>
-
-    <!-- Map -->
-
-    <br><p>Near <span id="displayed_address"><%= @displayed_address %></span></p>
-    <div style="width:100%; height:400px;">
-      <strong><div class="hover-text"></div></strong>
-      <div id="map-canvas" style="width:100%; height:400px;"  data-current-location="<%= @current_location %>"></div>
-    </div>
   </div>
 </div>

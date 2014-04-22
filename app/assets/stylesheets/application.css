@@ -151,6 +151,18 @@ li {
   }
 }
 
+@media (min-width: 992px) {
+  .map-container {
+    margin-top: -65px;
+  }
+}
+
+@media (max-width: 992px) {
+  .map-container {
+    margin-bottom: 20px;
+  }
+}
+
 .locations_desc_row {
   display: none;
 }
@@ -196,4 +208,14 @@ blockquote {
   width: 100%;
   display: none;
   text-shadow: 2px 2px #dedede;
+}
+
+.email-me-form {
+  float:left;
+  margin-right: 7px;
+  margin-top: -10px;
+}
+
+.email-me-button {
+  margin-top: -10px;
 }
