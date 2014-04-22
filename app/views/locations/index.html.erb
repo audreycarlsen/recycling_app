@@ -11,9 +11,9 @@
       <!-- Nav Tabs -->
 
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#drop_off" data-toggle="tab">Drop-Off</a></li>
-        <li><a href="#pick_up" data-toggle="tab">Pick-Up</a></li>
-        <li><a href="#mail_in" data-toggle="tab">Mail-In</a></li>
+        <li class="active"><a href="#drop_off" data-toggle="tab" class="drop_off_tab">Drop-Off</a></li>
+        <li><a href="#pick_up" data-toggle="tab" class="pick_up_tab">Pick-Up</a></li>
+        <li><a href="#mail_in" data-toggle="tab" class="mail_in_tab">Mail-In</a></li>
       </ul>
 
       <div class="tab-content">
@@ -233,6 +233,9 @@
     <!-- Map -->
 
     <br><p>Near <span id="displayed_address"><%= @displayed_address %></span></p>
-    <p><div id="map-canvas" style="width:100%; height:400px;"  data-current-location="<%= @current_location %>"></div></p>
+    <div style="width:100%; height:400px;">
+      <strong><div class="hover-text"></div></strong>
+      <div id="map-canvas" style="width:100%; height:400px;"  data-current-location="<%= @current_location %>"></div>
+    </div>
   </div>
 </div>

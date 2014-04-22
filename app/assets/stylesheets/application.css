@@ -183,3 +183,17 @@ blockquote {
 .fixed-col-c {
   width: 19%;
 }
+
+.opaque {
+  opacity: 0.25;
+}
+
+.hover-text {
+  position: absolute;
+  top: 57%;
+  text-align: center;
+  z-index: 2;
+  width: 100%;
+  display: none;
+  text-shadow: 2px 2px #dedede;
+}
