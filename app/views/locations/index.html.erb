@@ -1,10 +1,8 @@
 <div class="container">
 
-  <h4><em>What do I do with... </em></h4>
-  
+  <h4 style="margin-bottom:-5px;"><em>What do I do with... </em></h4>
   <div class="col-md-6">
-    
-    <strong><h3 id="displayed-title"><%= @displayed_title %></h3></strong>
+    <strong><h3 id="displayed-title" style="margin-bottom:20px; margin-left:-15px"><%= @displayed_title %></h3></strong>
 
     <% if @locations_by_type.last %>
 
@@ -38,18 +36,37 @@
                     </td>
                     <td>
                       <strong>
-                        <% if location.website %>
-                          <%= link_to location.name, location.website, :target => "_blank" %>
-                        <% else %>
-                          <%= location.name %>
-                        <% end %>
+                        <%= location.name %>
                       </strong>
                     </td>
                     <td><%= location.distance %></td>
                   </tr>
                   <tr class="locations_desc_row" id="desc_<%= location.id %>">
                     <td style="border-top: none;"></td>
-                    <td colspan="2" style="border-top: none;">Hello</td>
+                    <td colspan="1" style="border-top: none;">
+                      <table style="margin-bottom: 8px;">
+                        <tr>
+                          <td style="padding-right: 5px;"><strong>Address:</strong></td>
+                          <td><%= location.street %><% if location.city || location.zipcode %>, <%= location.city %>, <%= location.state %> <%= location.zipcode%><% end %></td>
+                        </tr>
+                        <tr>
+                          <td><strong>Phone:</strong></td>
+                          <td><%= location.phone %></td>
+                        </tr>
+                        <tr>
+                          <td><strong>Hours:</strong></td>
+                          <td><%= location.hours %></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td>
+                            <% if location.website %>
+                              <%= link_to "Visit Website", location.website, :target => "_blank" %>
+                            <% end %>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
                   </tr>
                 <% end %>
               </tbody>
