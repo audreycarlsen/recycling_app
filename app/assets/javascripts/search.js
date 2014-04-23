@@ -105,7 +105,11 @@ $(document).ready(function() {
           watchCurrentLocation();
           watchCheckboxes();
           watchOnwardButton();
-          $('.learn-more').popover({trigger: 'hover'});
+          if ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            $('.learn-more').popover({trigger: 'click'})
+          } else {
+            $('.learn-more').popover({trigger: 'hover'});
+          }
         }
       });
     };

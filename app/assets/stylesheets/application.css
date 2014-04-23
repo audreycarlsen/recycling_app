@@ -29,10 +29,6 @@ body {
   text-transform: lowercase;
 }
 
-li {
-  margin-left: -23px;
-}
-
 .invalid_address {
   color: red;
 }
@@ -104,6 +100,13 @@ li {
   margin-right: 5px; 
 }
 
+@media (max-width: 399px) {
+  .nav-tabs > li > a {
+    font-size: 13px;
+    padding: 5px 8px !important;
+  }
+}
+
 @media (min-width: 550px) {
   .material-block {
     display: inline-block;
@@ -155,7 +158,7 @@ li {
 
 @media (min-width: 992px) {
   .map-container {
-    margin-top: -65px;
+    margin-top: -70px;
   }
 }
 
@@ -166,15 +169,10 @@ li {
 }
 
 @media (max-width: 1199px) {
-  .email-notification {
+  .email-error {
     padding-top: 5px;
     display: block;
   }
-
-  .email-error {
-      padding-top: 5px;
-      display: block;
-    }
 }
 
 .locations_desc_row {
@@ -224,12 +222,4 @@ blockquote {
   float:left;
   margin-right: 7px;
 }
-
-.email-error, #error {
-  display: block;
-  padding-top: 5px;
-}
-
-.nav-tabs {
-  margin-left: 23px;
-}
+ 

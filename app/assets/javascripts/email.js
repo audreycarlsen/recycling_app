@@ -106,7 +106,8 @@ $(document).ready(function() {
         });
         locations_hash["mail_in"] = mail_in_array;
       }
-        
+      
+      $(".email-error").html("");
       $("#loading-gif").show();
 
       $.ajax({
