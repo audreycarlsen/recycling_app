@@ -10,9 +10,8 @@
     <span class="small-text">Send me these results:</span>
     
     <%= form_tag("/email", method: "post") do %>
-      <div class="form-group">
-        <input type="email" class="form-control input-sm email-me-form" placeholder="Enter email">
-      </div>
+            <input type="email" class="form-control input-sm email-me-form" placeholder="Enter email">
+
       <button type="submit" class="btn btn-info btn-sm email-me-button">Go</button><%= image_tag "loading.gif", id: "loading-gif", height: "20px", style: "display: none; padding-left: 10px; margin-top: -10px;" %> <div class="email-notification"></div><div class="email-error"></div>
     <% end %>
 
@@ -33,16 +32,16 @@
       <!-- Nav Tabs -->
 
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#drop_off" data-toggle="tab" class="drop_off_tab">Drop-Off</a></li>
-        <li><a href="#pick_up" data-toggle="tab" class="pick_up_tab">Pick-Up</a></li>
-        <li><a href="#mail_in" data-toggle="tab" class="mail_in_tab">Mail-In</a></li>
+        <li class="active"><a href="#drop_off" data-toggle="tab" class="drop_off_tab">Drop-Off (<%= @drop_off_locations.count %>)</a></li>
+        <li><a href="#pick_up" data-toggle="tab" class="pick_up_tab">Pick-Up (<%= @pick_up_locations.count %>)</a></li>
+        <li><a href="#mail_in" data-toggle="tab" class="mail_in_tab">Mail-In (<%= @mail_in_locations.count %>)</a></li>
       </ul>
 
       <div class="tab-content">
 
         <!-- Drop-Off Table -->
 
-        <div class="tab-pane active" id="drop_off">
+        <div class="tab-pane fade in active" id="drop_off">
           <% unless @drop_off_locations.empty? %>
             <table class="table table-condensed location-table" id="drop_off_table">
               <thead>
@@ -104,7 +103,7 @@
 
         <!-- Pick-Up Table -->
 
-        <div class="tab-pane" id="pick_up">
+        <div class="tab-pane fade" id="pick_up">
           <% unless @pick_up_locations.empty? %>
             <table class="table table-condensed location-table" id="pick_up_table">
               <thead>
@@ -170,7 +169,7 @@
 
         <!-- Mail-In Table -->
 
-        <div class="tab-pane" id="mail_in">
+        <div class="tab-pane fade" id="mail_in">
           <% unless @mail_in_locations.empty? %>
             <table class="table table-condensed location-table" id="mail_in_table">
               <thead>

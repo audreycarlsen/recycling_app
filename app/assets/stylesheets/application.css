@@ -62,12 +62,14 @@ li {
   padding-left: 5px;
   color: green;
   font-size: .857em;
+  display: inline;
 }
 
 .email-error, #error {
   padding-left: 5px;
   color: red;
   font-size: .857em;
+  display: inline;
 }
 
 .material-block {
@@ -163,6 +165,18 @@ li {
   }
 }
 
+@media (max-width: 1199px) {
+  .email-notification {
+    padding-top: 5px;
+    display: block;
+  }
+
+  .email-error {
+      padding-top: 5px;
+      display: block;
+    }
+}
+
 .locations_desc_row {
   display: none;
 }
@@ -196,10 +210,6 @@ blockquote {
   width: 19%;
 }
 
-.opaque {
-  opacity: 0.25;
-}
-
 .hover-text {
   position: absolute;
   top: 57%;
@@ -213,9 +223,13 @@ blockquote {
 .email-me-form {
   float:left;
   margin-right: 7px;
-  margin-top: -10px;
 }
 
-.email-me-button {
-  margin-top: -13px;
+.email-error, #error {
+  display: block;
+  padding-top: 5px;
+}
+
+.nav-tabs {
+  margin-left: 23px;
 }
