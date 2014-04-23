@@ -7,9 +7,6 @@ RecyclingApp::Application.routes.draw do
 
   resources :materials
 
-  get "about",    to: "welcome#about"
-  get "api",      to: "welcome#api"
-
   post "results", to: "locations#index"
   post "email",   to: "locations#email"
 
