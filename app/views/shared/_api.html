@@ -2,7 +2,7 @@
 
 <p>A WDIDW Location API request takes the following form:</p>
 
-<blockquote>http://www.wdidw.com/api/locations?parameters</blockquote>
+<blockquote><pre>http://www.wdidw.com/api/locations?parameters</pre></blockquote>
 
 <p>Output is in JavaScript Object Notation (JSON).</p>
 
@@ -12,7 +12,7 @@
 
 <p>All parameters are optional and should be separated using the ampersand (&) character. If no parameters are provided, the response will include all locations.</p>
 
-<p>One or more material categories can be included in the query string, separated by commas. Response will only include locations that match all specified materials.</p>
+<p>One or more material categories can be included in the query string, separated by commas. The response will only include locations that match all specified materials.</p>
 
 <blockquote><pre>materials="Gaming+Devices,Air+Conditioners"</pre></blockquote>
 
@@ -55,7 +55,8 @@
       "location_type": location_type,
       "longitude": longitude,
       "mail_in": true/false,
-      "materials": [ materials ],
+      "materials": 
+        [ materials ],
       "max_volume": max_volume,
       "min_volume": min_volume,
       "name": name,
@@ -76,4 +77,4 @@
 
 <p>The static materials data used to build WDIDW, including subcategories and descriptions, can be accessed through the following API request:</p>
 
-<blockquote>http://www.wdidw.com/api/materials</blockquote>
+<blockquote><pre>http://www.wdidw.com/api/materials</pre></blockquote>

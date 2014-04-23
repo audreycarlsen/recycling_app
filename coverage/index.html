@@ -14,27 +14,27 @@
       <img src="./assets/0.8.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2014-04-17T17:03:46-07:00">2014-04-17T17:03:46-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2014-04-22T16:58:08-07:00">2014-04-22T16:58:08-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">88.32%</span></span>
+    (<span class="covered_percent"><span class="yellow">87.86%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         8.81
+         8.93
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>6</b> files in total.
-    <b>197</b> relevant lines. 
-    <span class="green"><b>174</b> lines covered</span> and
-    <span class="red"><b>23</b> lines missed </span>
+    <b>206</b> relevant lines. 
+    <span class="green"><b>181</b> lines covered</span> and
+    <span class="red"><b>25</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -52,12 +52,12 @@
       
       <tr>
         <td class="strong"><a href="#0613402cbee2f1b4d14d8fad21c7470edfb3c8ec" class="src_link" title="app/models/data_scraper.rb">app/models/data_scraper.rb</a></td>
-        <td class="red strong">72.29 %</td>
-        <td>154</td>
-        <td>83</td>
-        <td>60</td>
-        <td>23</td>
-        <td>4.3</td>
+        <td class="red strong">72.83 %</td>
+        <td>169</td>
+        <td>92</td>
+        <td>67</td>
+        <td>25</td>
+        <td>5.0</td>
       </tr>
       
       <tr>
@@ -129,11 +129,11 @@
         <div class="source_table" id="0613402cbee2f1b4d14d8fad21c7470edfb3c8ec">
   <div class="header">
     <h3>app/models/data_scraper.rb</h3>
-    <h4><span class="red">72.29 %</span> covered</h4>
+    <h4><span class="red">72.83 %</span> covered</h4>
     <div>
-      <b>83</b> relevant lines. 
-      <span class="green"><b>60</b> lines covered</span> and
-      <span class="red"><b>23</b> lines missed.</span>
+      <b>92</b> relevant lines. 
+      <span class="green"><b>67</b> lines covered</span> and
+      <span class="red"><b>25</b> lines missed.</span>
     </div>
   </div>
   
@@ -377,37 +377,37 @@
         <li class="covered" data-hits="1" data-linenumber="40">
           <span class="hits">1</span>
           
-          <code class="ruby">  def self.set_services(location_json, new_location)</code>
+          <code class="ruby">  def self.set_phone(phone, new_location)</code>
         </li>
       
         <li class="covered" data-hits="10" data-linenumber="41">
           <span class="hits">10</span>
           
-          <code class="ruby">    new_location.pick_up   = location_json[&#39;pickup_allowed&#39;] == &#39;TRUE&#39;</code>
+          <code class="ruby">    if phone == &quot;()&quot;</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="42">
-          <span class="hits">10</span>
+        <li class="missed" data-hits="0" data-linenumber="42">
           
-          <code class="ruby">    new_location.drop_off  = location_json[&#39;dropoff_allowed&#39;] == &#39;TRUE&#39;</code>
+          
+          <code class="ruby">      new_location.phone = nil</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="43">
-          <span class="hits">10</span>
+        <li class="never" data-hits="" data-linenumber="43">
           
-          <code class="ruby">    new_location.mail_in   = location_json[&#39;mail_in_allowed&#39;] == &#39;TRUE&#39;</code>
+          
+          <code class="ruby">    else</code>
         </li>
       
         <li class="covered" data-hits="10" data-linenumber="44">
           <span class="hits">10</span>
           
-          <code class="ruby">    new_location.business  = location_json[&#39;property_type&#39;].include?(&#39;Business&#39;)</code>
+          <code class="ruby">      new_location.phone = phone</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="45">
-          <span class="hits">10</span>
+        <li class="never" data-hits="" data-linenumber="45">
           
-          <code class="ruby">    new_location.residents = location_json[&#39;property_type&#39;].include?(&#39;Residents&#39;)</code>
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="46">
@@ -425,37 +425,37 @@
         <li class="covered" data-hits="1" data-linenumber="48">
           <span class="hits">1</span>
           
-          <code class="ruby">  def self.set_state_and_zip(location_json, new_location)</code>
+          <code class="ruby">  def self.set_services(location_json, new_location)</code>
         </li>
       
         <li class="covered" data-hits="10" data-linenumber="49">
           <span class="hits">10</span>
           
-          <code class="ruby">    if location_json[&#39;zip&#39;]</code>
+          <code class="ruby">    new_location.pick_up   = location_json[&#39;pickup_allowed&#39;] == &#39;TRUE&#39;</code>
         </li>
       
         <li class="covered" data-hits="10" data-linenumber="50">
           <span class="hits">10</span>
           
-          <code class="ruby">      set_state(location_json[&#39;zip&#39;], new_location)</code>
+          <code class="ruby">    new_location.drop_off  = location_json[&#39;dropoff_allowed&#39;] == &#39;TRUE&#39;</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="51">
+        <li class="covered" data-hits="10" data-linenumber="51">
+          <span class="hits">10</span>
           
-          
-          <code class="ruby">    elsif location_json[&quot;city&quot;] &amp;&amp; location_json[&quot;provider_address&quot;]</code>
+          <code class="ruby">    new_location.mail_in   = location_json[&#39;mail_in_allowed&#39;] == &#39;TRUE&#39;</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="52">
+        <li class="covered" data-hits="10" data-linenumber="52">
+          <span class="hits">10</span>
           
-          
-          <code class="ruby">      set_zip(location_json, new_location)</code>
+          <code class="ruby">    new_location.business  = location_json[&#39;property_type&#39;].include?(&#39;Business&#39;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="53">
+        <li class="covered" data-hits="10" data-linenumber="53">
+          <span class="hits">10</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">    new_location.residents = location_json[&#39;property_type&#39;].include?(&#39;Residents&#39;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="54">
@@ -473,253 +473,253 @@
         <li class="covered" data-hits="1" data-linenumber="56">
           <span class="hits">1</span>
           
-          <code class="ruby">  def self.add_new_material_and_description(existing_location, location_json)</code>
+          <code class="ruby">  def self.set_state_and_zip(location_json, new_location)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="57">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="10" data-linenumber="57">
+          <span class="hits">10</span>
           
-          <code class="ruby">    existing_location.materials &lt;&lt; DataScraper.titleize(location_json[&#39;material_handled&#39;])</code>
+          <code class="ruby">    if location_json[&#39;zip&#39;]</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="58">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="10" data-linenumber="58">
+          <span class="hits">10</span>
           
-          <code class="ruby">    existing_location.description &lt;&lt; (&#39; &#39; + location_json[&#39;service_description&#39;].to_s.strip + &#39; &#39; + location_json[&#39;restrictions&#39;].to_s).strip</code>
+          <code class="ruby">      set_state(location_json[&#39;zip&#39;], new_location)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="59">
-          <span class="hits">2</span>
+        <li class="missed" data-hits="0" data-linenumber="59">
           
-          <code class="ruby">    existing_location.save</code>
+          
+          <code class="ruby">    elsif location_json[&quot;city&quot;] &amp;&amp; location_json[&quot;provider_address&quot;]</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="60">
-          <span class="hits">2</span>
+        <li class="missed" data-hits="0" data-linenumber="60">
           
-          <code class="ruby">    existing_location</code>
+          
+          <code class="ruby">      set_zip(location_json, new_location)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="61">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="62">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="63">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="63">
+        <li class="covered" data-hits="1" data-linenumber="64">
           <span class="hits">1</span>
           
-          <code class="ruby">  def self.create_location(location_json)</code>
+          <code class="ruby">  def self.add_new_material_and_description(existing_location, location_json)</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="64">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="2" data-linenumber="65">
+          <span class="hits">2</span>
           
-          <code class="ruby">    new_location = Location.new(</code>
+          <code class="ruby">    existing_location.materials &lt;&lt; DataScraper.titleize(location_json[&#39;material_handled&#39;])</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="65">
+        <li class="covered" data-hits="2" data-linenumber="66">
+          <span class="hits">2</span>
           
-          
-          <code class="ruby">      name:          DataScraper.titleize(location_json[&#39;provider_name&#39;]),</code>
+          <code class="ruby">    existing_location.description &lt;&lt; (&#39; &#39; + location_json[&#39;service_description&#39;].to_s.strip + &#39; &#39; + location_json[&#39;restrictions&#39;].to_s).strip</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="66">
+        <li class="covered" data-hits="2" data-linenumber="67">
+          <span class="hits">2</span>
           
-          
-          <code class="ruby">      latitude:      location_json[&#39;geolocation&#39;][&#39;latitude&#39;],</code>
+          <code class="ruby">    existing_location.save</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="67">
+        <li class="covered" data-hits="2" data-linenumber="68">
+          <span class="hits">2</span>
           
-          
-          <code class="ruby">      longitude:     location_json[&#39;geolocation&#39;][&#39;longitude&#39;],</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="68">
-          
-          
-          <code class="ruby">      location_type: &quot;Business&quot;,</code>
+          <code class="ruby">    existing_location</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="69">
           
           
-          <code class="ruby">      street:        location_json[&#39;provider_address&#39;],</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="70">
           
           
-          <code class="ruby">      city:          location_json[&#39;city&#39;],</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="71">
+        <li class="covered" data-hits="1" data-linenumber="71">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">      zipcode:       location_json[&#39;zip&#39;],</code>
+          <code class="ruby">  def self.create_location(location_json)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="72">
+        <li class="covered" data-hits="10" data-linenumber="72">
+          <span class="hits">10</span>
           
-          
-          <code class="ruby">      phone:         location_json[&#39;phone&#39;][&#39;phone_number&#39;], </code>
+          <code class="ruby">    new_location = Location.new(</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="73">
           
           
-          <code class="ruby">      website:       location_json[&#39;provider_url&#39;].try(:[],&#39;url&#39;),</code>
+          <code class="ruby">      name:          DataScraper.titleize(location_json[&#39;provider_name&#39;]),</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="74">
           
           
-          <code class="ruby">      hours:         location_json[&#39;hours&#39;],       </code>
+          <code class="ruby">      latitude:      location_json[&#39;geolocation&#39;][&#39;latitude&#39;].to_f.round(4),</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="75">
           
           
-          <code class="ruby">      cost:          location_json[&#39;fee&#39;],        </code>
+          <code class="ruby">      longitude:     location_json[&#39;geolocation&#39;][&#39;longitude&#39;].to_f.round(4),</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="76">
           
           
-          <code class="ruby">      min_volume:    location_json[&#39;minimum_volume&#39;],</code>
+          <code class="ruby">      location_type: &quot;Business&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="77">
           
           
-          <code class="ruby">      max_volume:    location_json[&#39;maximum_volume&#39;],  </code>
+          <code class="ruby">      street:        location_json[&#39;provider_address&#39;],</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="78">
-          <span class="hits">10</span>
+        <li class="never" data-hits="" data-linenumber="78">
           
-          <code class="ruby">      description:   (location_json[&#39;service_description&#39;].to_s.strip + &#39; &#39; + location_json[&#39;restrictions&#39;].to_s).strip</code>
+          
+          <code class="ruby">      city:          location_json[&#39;city&#39;],</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="79">
           
           
-          <code class="ruby">    )</code>
+          <code class="ruby">      zipcode:       location_json[&#39;zip&#39;],</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="80">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      website:       location_json[&#39;provider_url&#39;].try(:[],&#39;url&#39;),</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="81">
-          <span class="hits">10</span>
+        <li class="never" data-hits="" data-linenumber="81">
           
-          <code class="ruby">    set_state_and_zip(location_json, new_location)</code>
+          
+          <code class="ruby">      hours:         location_json[&#39;hours&#39;],       </code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="82">
-          <span class="hits">10</span>
+        <li class="never" data-hits="" data-linenumber="82">
           
-          <code class="ruby">    set_services(location_json, new_location)</code>
+          
+          <code class="ruby">      cost:          location_json[&#39;fee&#39;],        </code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="83">
-          <span class="hits">10</span>
+        <li class="never" data-hits="" data-linenumber="83">
           
-          <code class="ruby">    set_materials(location_json[&#39;material_handled&#39;], new_location)</code>
+          
+          <code class="ruby">      min_volume:    location_json[&#39;minimum_volume&#39;],</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="84">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      max_volume:    location_json[&#39;maximum_volume&#39;],  </code>
         </li>
       
         <li class="covered" data-hits="10" data-linenumber="85">
           <span class="hits">10</span>
           
-          <code class="ruby">    unless new_location.save</code>
+          <code class="ruby">      description:   (location_json[&#39;service_description&#39;].to_s.strip + &#39; &#39; + location_json[&#39;restrictions&#39;].to_s).strip</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="86">
+        <li class="never" data-hits="" data-linenumber="86">
           
           
-          <code class="ruby">      Rails.logger.warning(&quot;#{new_location.name} failed&quot;)</code>
+          <code class="ruby">    )</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="87">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="88">
+        <li class="covered" data-hits="10" data-linenumber="88">
+          <span class="hits">10</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">    set_state_and_zip(location_json, new_location)</code>
         </li>
       
         <li class="covered" data-hits="10" data-linenumber="89">
           <span class="hits">10</span>
           
-          <code class="ruby">    new_location</code>
+          <code class="ruby">    set_services(location_json, new_location)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="90">
+        <li class="covered" data-hits="10" data-linenumber="90">
+          <span class="hits">10</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    set_materials(location_json[&#39;material_handled&#39;], new_location)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="91">
+        <li class="covered" data-hits="10" data-linenumber="91">
+          <span class="hits">10</span>
+          
+          <code class="ruby">    set_phone(location_json[&#39;phone&#39;][&#39;phone_number&#39;], new_location)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="92">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="92">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="10" data-linenumber="93">
+          <span class="hits">10</span>
           
-          <code class="ruby">  def self.needs_updating?(api_date_modified)</code>
+          <code class="ruby">    unless new_location.save</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="93">
-          <span class="hits">5</span>
-          
-          <code class="ruby">    api_date_modified != DataScraper.last.date_modified</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="94">
+        <li class="missed" data-hits="0" data-linenumber="94">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">      Rails.logger.warning(&quot;#{new_location.name} failed&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="95">
           
           
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="96">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="96">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="10" data-linenumber="97">
+          <span class="hits">10</span>
           
-          <code class="ruby">  def self.socrata_api_call(offset = 0)</code>
-        </li>
-      
-        <li class="covered" data-hits="4" data-linenumber="97">
-          <span class="hits">4</span>
-          
-          <code class="ruby">    HTTParty.get(&quot;http://data.kingcounty.gov/resource/zqwi-c5q3.json?$limit=1000&amp;$offset=#{offset}&quot;)</code>
+          <code class="ruby">    new_location</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="98">
@@ -737,211 +737,211 @@
         <li class="covered" data-hits="1" data-linenumber="100">
           <span class="hits">1</span>
           
-          <code class="ruby">  def self.update_or_create_location(location_json)</code>
+          <code class="ruby">  def self.needs_updating?(api_date_modified)</code>
         </li>
       
         <li class="covered" data-hits="5" data-linenumber="101">
           <span class="hits">5</span>
           
-          <code class="ruby">    existing_location = Location.where(name: DataScraper.titleize(location_json[&#39;provider_name&#39;])).first</code>
+          <code class="ruby">    api_date_modified != DataScraper.last.date_modified</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="102">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="103">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="103">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="1" data-linenumber="104">
+          <span class="hits">1</span>
           
-          <code class="ruby">    if existing_location</code>
+          <code class="ruby">  def self.socrata_api_call(offset = 0)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="104">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="4" data-linenumber="105">
+          <span class="hits">4</span>
           
-          <code class="ruby">      add_new_material_and_description(existing_location, location_json)</code>
+          <code class="ruby">    HTTParty.get(&quot;http://data.kingcounty.gov/resource/zqwi-c5q3.json?$limit=1000&amp;$offset=#{offset}&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="105">
+        <li class="never" data-hits="" data-linenumber="106">
           
           
-          <code class="ruby">    else</code>
-        </li>
-      
-        <li class="covered" data-hits="3" data-linenumber="106">
-          <span class="hits">3</span>
-          
-          <code class="ruby">      create_location(location_json)</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="107">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="108">
+        <li class="covered" data-hits="1" data-linenumber="108">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">  def self.update_or_create_location(location_json)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="109">
+        <li class="covered" data-hits="5" data-linenumber="109">
+          <span class="hits">5</span>
+          
+          <code class="ruby">    existing_location = Location.where(name: DataScraper.titleize(location_json[&#39;provider_name&#39;])).first</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="110">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="110">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="5" data-linenumber="111">
+          <span class="hits">5</span>
           
-          <code class="ruby">  def self.update_date_modified(api_date_modified)</code>
+          <code class="ruby">    if existing_location</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="111">
+        <li class="covered" data-hits="2" data-linenumber="112">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      add_new_material_and_description(existing_location, location_json)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="113">
+          
+          
+          <code class="ruby">    else</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="114">
           <span class="hits">3</span>
           
-          <code class="ruby">    ds = DataScraper.last</code>
-        </li>
-      
-        <li class="covered" data-hits="3" data-linenumber="112">
-          <span class="hits">3</span>
-          
-          <code class="ruby">    ds.date_modified = api_date_modified</code>
-        </li>
-      
-        <li class="covered" data-hits="3" data-linenumber="113">
-          <span class="hits">3</span>
-          
-          <code class="ruby">    ds.save</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="114">
-          
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">      create_location(location_json)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="115">
           
           
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="116">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="117">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="116">
+        <li class="covered" data-hits="1" data-linenumber="118">
           <span class="hits">1</span>
           
-          <code class="ruby">  def self.update_or_leave_locations_alone(api_date_modified)</code>
+          <code class="ruby">  def self.update_date_modified(api_date_modified)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="117">
+        <li class="covered" data-hits="3" data-linenumber="119">
           <span class="hits">3</span>
           
-          <code class="ruby">    if needs_updating?(api_date_modified)</code>
+          <code class="ruby">    ds = DataScraper.last</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="118">
+        <li class="covered" data-hits="3" data-linenumber="120">
+          <span class="hits">3</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">    ds.date_modified = api_date_modified</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="119">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="121">
+          <span class="hits">3</span>
           
-          <code class="ruby">      Location.delete_all</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="120">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="121">
-          <span class="hits">2</span>
-          
-          <code class="ruby">      offset = 0</code>
+          <code class="ruby">    ds.save</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="122">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="123">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="123">
+        <li class="covered" data-hits="1" data-linenumber="124">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def self.update_or_leave_locations_alone(api_date_modified)</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="125">
+          <span class="hits">3</span>
+          
+          <code class="ruby">    if needs_updating?(api_date_modified)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="126">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="127">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      Location.delete_all</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="128">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="129">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      offset = 0</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="130">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="131">
           <span class="hits">2</span>
           
           <code class="ruby">      while true</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="124">
+        <li class="covered" data-hits="4" data-linenumber="132">
           <span class="hits">4</span>
           
           <code class="ruby">        response = socrata_api_call(offset)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="125">
+        <li class="covered" data-hits="4" data-linenumber="133">
           <span class="hits">4</span>
           
           <code class="ruby">        count = response.count</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="126">
+        <li class="covered" data-hits="4" data-linenumber="134">
           <span class="hits">4</span>
           
           <code class="ruby">        offset += count</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="127">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="4" data-linenumber="128">
-          <span class="hits">4</span>
-          
-          <code class="ruby">        response.each do |location_json|</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="129">
-          
-          
-          <code class="ruby">          result = self.update_or_create_location(location_json)</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="130">
-          
-          
-          <code class="ruby">          puts result.name</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="131">
-          
-          
-          <code class="ruby">        end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="132">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="4" data-linenumber="133">
-          <span class="hits">4</span>
-          
-          <code class="ruby">        break if count &lt; 1000</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="134">
-          
-          
-          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="135">
@@ -950,115 +950,205 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="136">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="4" data-linenumber="136">
+          <span class="hits">4</span>
           
-          <code class="ruby">      update_date_modified(api_date_modified)</code>
+          <code class="ruby">        response.each do |location_json|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="137">
+        <li class="missed" data-hits="0" data-linenumber="137">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">          result = self.update_or_create_location(location_json)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="138">
+        <li class="missed" data-hits="0" data-linenumber="138">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">          puts result.name</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="139">
           
           
+          <code class="ruby">        end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="140">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="140">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="4" data-linenumber="141">
+          <span class="hits">4</span>
           
-          <code class="ruby">  def self.get_all</code>
+          <code class="ruby">        break if count &lt; 1000</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="141">
+        <li class="never" data-hits="" data-linenumber="142">
           
           
-          <code class="ruby">    if DataScraper.last.nil?</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="142">
-          
-          
-          <code class="ruby">      DataScraper.create</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="143">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="144">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      update_date_modified(api_date_modified)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="145">
+          
+          
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="144">
+        <li class="never" data-hits="" data-linenumber="146">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="147">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="145">
+        <li class="covered" data-hits="1" data-linenumber="148">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def self.get_all</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="149">
+          
+          
+          <code class="ruby">    if DataScraper.last</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="150">
+          
+          
+          <code class="ruby">      DataScraper.create</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="151">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="152">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="153">
           
           
           <code class="ruby">    test_response = HTTParty.get(&quot;http://data.kingcounty.gov/resource/zqwi-c5q3.json?$limit=1&quot;)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="146">
+        <li class="missed" data-hits="0" data-linenumber="154">
           
           
           <code class="ruby">    last_date_modified = test_response.headers[&quot;last-modified&quot;]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="147">
+        <li class="missed" data-hits="0" data-linenumber="155">
           
           
           <code class="ruby">    self.update_or_leave_locations_alone(last_date_modified)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="148">
+        <li class="never" data-hits="" data-linenumber="156">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="149">
+        <li class="never" data-hits="" data-linenumber="157">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="150">
+        <li class="covered" data-hits="1" data-linenumber="158">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.titleize(name)</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="151">
+        <li class="covered" data-hits="18" data-linenumber="159">
           <span class="hits">18</span>
           
           <code class="ruby">    lowercase_words = %w{a an the and but or for nor of}</code>
         </li>
       
-        <li class="covered" data-hits="69" data-linenumber="152">
-          <span class="hits">69</span>
+        <li class="covered" data-hits="18" data-linenumber="160">
+          <span class="hits">18</span>
           
-          <code class="ruby">    name.split.each_with_index.map{|x, index| lowercase_words.include?(x) &amp;&amp; index &gt; 0 ? x : x.capitalize }.join(&quot; &quot;)</code>
+          <code class="ruby">    title = name.split.each_with_index.map do |x, index| </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="153">
+        <li class="covered" data-hits="51" data-linenumber="161">
+          <span class="hits">51</span>
+          
+          <code class="ruby">      unless /[[:upper:]]/.match(x[1])</code>
+        </li>
+      
+        <li class="covered" data-hits="51" data-linenumber="162">
+          <span class="hits">51</span>
+          
+          <code class="ruby">        lowercase_words.include?(x) &amp;&amp; index &gt; 0 ? x : x.capitalize</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="163">
+          
+          
+          <code class="ruby">      else</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="164">
+          
+          
+          <code class="ruby">        x</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="165">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="166">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="18" data-linenumber="167">
+          <span class="hits">18</span>
+          
+          <code class="ruby">    title.join(&quot; &quot;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="168">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="154">
+        <li class="never" data-hits="" data-linenumber="169">
           
           
           <code class="ruby">end</code>
@@ -1121,13 +1211,13 @@
         <li class="covered" data-hits="1" data-linenumber="7">
           <span class="hits">1</span>
           
-          <code class="ruby">  field :latitude,      type: String</code>
+          <code class="ruby">  field :latitude,      type: Float</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="8">
           <span class="hits">1</span>
           
-          <code class="ruby">  field :longitude,     type: String</code>
+          <code class="ruby">  field :longitude,     type: Float</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="9">
