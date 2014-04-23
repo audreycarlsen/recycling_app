@@ -95,6 +95,11 @@ $(document).ready(function() {
         url: "/materials/" + id,
         success: function(data) {
           var html = template(data);
+
+          setTimeout(function (){
+            $(document.body).scrollTop($('#hr-anchor').offset().top);
+          }, 500);
+
           $("#material_result").replaceWith(html);
           $("#error").html("");
           watchCurrentLocation();
