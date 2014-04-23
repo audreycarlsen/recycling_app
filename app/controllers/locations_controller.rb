@@ -40,10 +40,10 @@ class LocationsController < ApplicationController
           title = title + " and " + subcategory
         end
       else
-        unless subcategory == subcategories.last
-           title = subcategory + ","
-        else
+        if subcategory == subcategories.last
           title = title + " and " + subcategory
+        else
+          title = title + subcategory + ", "
         end
       end
     end

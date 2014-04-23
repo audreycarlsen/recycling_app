@@ -31,6 +31,9 @@ body {
 
 .invalid_address {
   color: red;
+  display: inline;
+  padding-left: 10px;
+  font-size: .928em;
 }
 
 .clear {
@@ -100,6 +103,18 @@ body {
   margin-right: 5px; 
 }
 
+.search-again {
+  float:right;
+  padding-right:15px;
+  width:50%;
+  text-align:right;
+}
+
+.main-title {
+  float:left;
+  width:50%;
+}
+
 @media (max-width: 399px) {
   .nav-tabs > li > a {
     font-size: 13px;
@@ -158,13 +173,21 @@ body {
 
 @media (min-width: 992px) {
   .map-container {
-    margin-top: -70px;
+    margin-top: -65px;
   }
 }
 
 @media (max-width: 992px) {
   .map-container {
     margin-bottom: 20px;
+  }
+
+  .search-again {
+    width:25%
+  }
+
+  .main-title {
+    width:75%
   }
 }
 
@@ -223,3 +246,7 @@ blockquote {
   margin-right: 7px;
 }
  
+.navbar-nav li {
+  margin-left: -23px;
+}
+

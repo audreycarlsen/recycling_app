@@ -4,7 +4,7 @@ function showPosition(position) {
     url: "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&sensor=false",
     success: function(data) {
       $('#address_field').val(position.coords.latitude + "," + position.coords.longitude);
-      $('#displayed_address_field').val("near: " + data.results[0].address_components[0].short_name + " " + data.results[0].address_components[1].short_name + ", " + data.results[0].address_components[3].short_name + ", " + data.results[0].address_components[5].short_name + " " + data.results[0].address_components[7].short_name);
+      $('#displayed_address_field').val(data.results[0].address_components[0].short_name + " " + data.results[0].address_components[1].short_name + ", " + data.results[0].address_components[3].short_name + ", " + data.results[0].address_components[5].short_name + " " + data.results[0].address_components[7].short_name);
       $(".invalid_address").html('');
       $('.loading-gif1').hide();
     }
@@ -21,7 +21,7 @@ function watchCurrentLocation() {
         alert("Check your browser and system settings to enable location services.");
       });
     } else {
-      invalid_address.innerHTML = "Geolocation is not supported by this browser. Please type in your location by hand.";
+      alert("Geolocation is not supported by this browser. Please type in your location by hand.");
     }
   });
 }
