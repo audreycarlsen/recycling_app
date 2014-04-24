@@ -10,22 +10,8 @@ $(document).ready(function() {
     };
 
     var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
     var infoWindow = new google.maps.InfoWindow();
-
-    var position = new google.maps.LatLng(current_location[0], current_location[1]);
-    var marker = new google.maps.Marker({
-      position: position,
-      map: map,
-      icon: 'https://storage.googleapis.com/support-kms-prod/SNP_2752068_en_v0'
-    });
-    var windowContent = "You are here!";
-    google.maps.event.addListener(marker, 'click', function() {
-      infoWindow.setContent(windowContent);
-      infoWindow.open(map, this);
-    });
-
-    infoWindow.setContent(windowContent);
-    infoWindow.open(map, marker);
 
     var rows = $('#drop_off_table tbody').find("tr");
 
@@ -72,6 +58,21 @@ $(document).ready(function() {
         first_marker = marker;
       }
     });
+
+    var position = new google.maps.LatLng(current_location[0], current_location[1]);
+    var marker = new google.maps.Marker({
+      position: position,
+      map: map,
+      icon: 'https://storage.googleapis.com/support-kms-prod/SNP_2752068_en_v0'
+    });
+    var windowContent = "You are here!&nbsp;&nbsp;&nbsp;";
+    google.maps.event.addListener(marker, 'click', function() {
+      infoWindow.setContent(windowContent);
+      infoWindow.open(map, this);
+    });
+
+    infoWindow.setContent(windowContent);
+    infoWindow.open(map, marker);
 
     var zoom = 11;
 

@@ -90,6 +90,12 @@
                             <td><%= location.hours.html_safe %></td>
                           </tr>
                         <% end %>
+                        <% if !location.description.empty? %>
+                          <tr>
+                            <td><strong>Notes:</strong></td>
+                            <td><%= location.description.html_safe %></td>
+                          </tr>
+                        <% end %>
                         <% if location.website %>
                           <tr>
                             <td></td>
@@ -156,6 +162,12 @@
                             <td><%= location.cost.html_safe %></td>
                           </tr>
                         <% end %>
+                        <% if !location.description.empty? %>
+                          <tr>
+                            <td><strong>Notes:</strong></td>
+                            <td><%= location.description.html_safe %></td>
+                          </tr>
+                        <% end %>
                         <% if location.website %>
                           <tr>
                             <td></td>
@@ -210,16 +222,16 @@
                             <td><%= location.phone %></td>
                           </tr>
                         <% end %>
-                        <% if location.hours%>
-                          <tr>
-                            <td><strong>Hours:</strong></td>
-                            <td><%= location.hours.html_safe %></td>
-                          </tr>
-                        <% end %>
                         <% if location.cost %>
                           <tr>
                             <td><strong>Cost:</strong></td>
                             <td><%= location.cost.html_safe %></td>
+                          </tr>
+                        <% end %>
+                        <% if !location.description.empty? %>
+                          <tr>
+                            <td><strong>Notes:</strong></td>
+                            <td><%= location.description.html_safe %></td>
                           </tr>
                         <% end %>
                         <% if location.website %>
