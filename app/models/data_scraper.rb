@@ -20,13 +20,15 @@ class DataScraper
   end
 
   def self.set_state(zipcode, new_location)
-    if zipcode.to_i.between?(98001, 99403)
+    if zipcode.length == 5
+      if zipcode.to_i.between?(98001, 99403)
         new_location.state = "WA"
-    else
-      city_response = HTTParty.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + zipcode.to_s + '&sensor=false')
-      city_response["results"][0]["address_components"].each do |hash|
-        if hash["types"].include?("administrative_area_level_1")
-          new_location.state = hash["short_name"]
+      else
+        city_response = HTTParty.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + zipcode.to_s + '&sensor=false')
+        city_response["results"][0]["address_components"].each do |hash|
+          if hash["types"].include?("administrative_area_level_1")
+            new_location.state = hash["short_name"]
+          end
         end
       end
     end
@@ -146,7 +148,7 @@ class DataScraper
   end
 
   def self.get_all
-    if DataScraper.last
+    unless DataScraper.last
       DataScraper.create
     end
 
