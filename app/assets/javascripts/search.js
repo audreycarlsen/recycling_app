@@ -114,17 +114,21 @@ $(document).ready(function() {
       });
     };
 
-    function watchForChange() {
-      $('.select_box').change(
-        update
-      );
-    }
+    $('.select_box').change(
+      update
+    );
 
-    $('.search_button').click(function(e) {
-      e.preventDefault();
-      update();
-      watchForChange();
-      $("#error").html("");
-    });
+    // function watchForChange() {
+    //   $('.select_box').change(
+    //     update
+    //   );
+    // }
+
+    // $('.search_button').click(function(e) {
+    //   e.preventDefault();
+    //   update();
+    //   watchForChange();
+    //   $("#error").html("");
+    // });
   }
 });

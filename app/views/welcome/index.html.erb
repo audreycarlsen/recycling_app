@@ -9,7 +9,8 @@
 
   <div class="clearfix">
     <%= form_tag do %>
-      <%= select_tag "material", options_from_collection_for_select(@materials, "id", "name"), prompt: "Select a category", class: "form-control input-sm select_box" %><button type="submit" class="btn btn-sm btn-success search_button">GO</button>
+      <%= select_tag "material", options_from_collection_for_select(@materials, "id", "name"), prompt: "Select a category", class: "form-control input-sm select_box" %>
+      <!-- <button type="submit" class="btn btn-sm btn-success search_button">GO</button> -->
     <% end %>
   </div>
 
