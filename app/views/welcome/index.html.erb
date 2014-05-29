@@ -32,16 +32,28 @@
       <%= form_tag("/results", method: "post") do %>
 
         <div class="container">
-            <div class="checkbox">
-              {{#each subcategories}}
-                <div class="material-block">
-                  <div class="watched-checkbox">
-                    <input class='{roles: true}' name="subcategories[]" type="checkbox" value="{{name}}" />
-                  </div>
-                  {{name}} <span class="learn-more glyphicon glyphicon-info-sign gray" href="#" data-toggle="popover" data-placement="bottom" data-content="{{description}}"></span>
+          <div class="checkbox">
+          {{#ifEqualsOne subcategories.length}}
+            {{#each subcategories}}
+              <div class="material-block">
+                <div class="watched-checkbox">
+                  <input class='{roles: true}' name="subcategories[]" type="checkbox" value="{{name}}" checked=true/>
                 </div>
-              {{/each}}
-            </div>
+                {{name}} <span class="learn-more glyphicon glyphicon-info-sign gray" href="#" data-toggle="popover" data-placement="bottom" data-content="{{description}}"></span>
+              </div>
+            {{/each}}
+          {{/ifEqualsOne}}
+          {{#ifMoreThanOne subcategories.length}}
+            {{#each subcategories}}
+              <div class="material-block">
+                <div class="watched-checkbox">
+                  <input class='{roles: true}' name="subcategories[]" type="checkbox" value="{{name}}"/>
+                </div>
+                {{name}} <span class="learn-more glyphicon glyphicon-info-sign gray" href="#" data-toggle="popover" data-placement="bottom" data-content="{{description}}"></span>
+              </div>
+            {{/each}}
+          {{/ifMoreThanOne}}
+          </div>
         </div>
       
         <div class="clear"></div>
