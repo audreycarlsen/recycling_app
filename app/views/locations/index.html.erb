@@ -18,7 +18,7 @@
     <span class="small-text">Send me these results:</span>
     
     <%= form_tag("/email", method: "post") do %>
-            <input type="email" class="form-control input-sm email-me-form" placeholder="Enter email">
+      <input type="email" class="form-control input-sm email-me-form" placeholder="Enter email">
 
       <button type="submit" class="btn btn-info btn-sm email-me-button">Go</button><%= image_tag "loading.gif", id: "loading-gif", height: "20px", style: "display: none; padding-left: 10px; margin-top: -10px;" %> <div class="email-notification"></div><div class="email-error"></div>
     <% end %>
@@ -61,7 +61,7 @@
                 <% @drop_off_locations.each do |location| %>
                   <tr class="locations_row" id="<%= location.id %>" data-name="<%= location.name %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>" data-distance="<%= location.distance %>" data-latitude="<%= location.latitude %>" data-longitude="<%= location.longitude %>">
                     <td class="fixed-col-a">
-                      <span class="glyphicon glyphicon-chevron-down gray" style="display: none;"></span><span class="glyphicon glyphicon-chevron-up gray"></span>
+                      <span class="glyphicon glyphicon-chevron-down gray" style="display: none;"></span><span class="glyphicon glyphicon-chevron-right gray"></span>
                     </td>
                     <td class="fixed-col-b">
                       <strong>
@@ -128,7 +128,7 @@
                 <% @pick_up_locations.each do |location| %>
                   <tr class="locations_row" id="<%= location.id %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>">
                     <td class="fixed-col-1">
-                      <span class="glyphicon glyphicon-chevron-down gray" style="display: none;"></span><span class="glyphicon glyphicon-chevron-up gray"></span>
+                      <span class="glyphicon glyphicon-chevron-down gray" style="display: none;"></span><span class="glyphicon glyphicon-chevron-right gray"></span>
                     </td>
                     <td class="fixed-col-2">
                       <strong>
@@ -200,7 +200,7 @@
                 <% @mail_in_locations.each do |location| %>
                   <tr class="locations_row" id="<%= location.id %>" data-phone="<%= location.phone%>" data-hours="<%= location.hours %>" data-url="<%= location.website %>" data-street="<%= location.street %>" data-city="<%= location.city %>" data-state="<%= location.state %>" data-zipcode="<%= location.zipcode %>">
                     <td class="fixed-col-1">
-                      <span class="glyphicon glyphicon-chevron-down gray" style="display: none;"></span><span class="glyphicon glyphicon-chevron-up gray"></span>
+                      <span class="glyphicon glyphicon-chevron-down gray" style="display: none;"></span><span class="glyphicon glyphicon-chevron-right gray"></span>
                     </td>
                     <td class="fixed-col-2">
                       <strong>

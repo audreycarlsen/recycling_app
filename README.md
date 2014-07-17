@@ -1,3 +1,19 @@
+## About this Project
+
+Everyone has materials sitting around their house that they don't know what to do with — old or broken appliances, burnt-out fluorescent light bulbs, bags of dead batteries waiting to find a final resting place.
+
+__*What Do I Do With...?*__ was inspired by King County's [original recycling website](http://your.kingcounty.gov/solidwaste/wdidw/), which provides information on local businesses willing to accept and responsibly dispose of a variety of unwanted materials.
+
+The application you see here builds on King County's website by incorporating geolocation, distance, and mapping features, as well as an improved user experience, particularly for mobile devices. It pulls data on a weekly basis from a [public dataset](https://data.kingcounty.gov/Environment/What-do-I-do-with-Recycling-options-in-King-County/zqwi-c5q3) to ensure up-to-date information and includes a public API for easy location-based querying.
+
+This project was created by [Audrey Carlsen](http://www.audreycarlsen.com/) through [Ada Developers Academy](http://adadevelopersacademy.org/).
+
+Special thanks goes to Al Boss and Jay Beach at King County for their enthusiasm and encouragement.
+
+**Publicity:**
++ [Washington Business Alliance](http://www.wacatalyst.org/seattle-women-in-software-design-student-improves-on-king-county-web-app/)
++ [Seattle.io](http://www.seattle.io/posts/civic-apps-built-by-students-at-ada-developers-academy)
+
 ## What Do I Do With . . . this API?
 
 ###Requests
