@@ -30,6 +30,14 @@
       <strong><div class="hover-text"></div></strong>
       <div id="map-canvas" style="width:100%; height:400px;"  data-current-location="<%= @current_location %>"></div>
     </div>
+
+    <!-- Icon Legend -->
+
+    <br>
+    <div class="icon_legend">
+      <%= image_tag "icon-tibn.gif" %> = Members of the <a href="http://your.kingcounty.gov/solidwaste/takeitback/index.asp" target="_blank">Take It Back Network</a><br>
+      <%= image_tag "icon-E-cycle-WA.gif" %> = Members of the <a href="http://www.ecy.wa.gov/programs/swfa/eproductrecycle/index.html" target="_blank">E-Cycle Washington program</a>
+    </div>
   </div>
 
   <div class="col-md-6 col-md-pull-6">
@@ -66,6 +74,14 @@
                     <td class="fixed-col-b">
                       <strong>
                         <%= location.name %>
+                        <span class="program_icon">
+                          <% if location.tibn %>
+                            <%= image_tag "icon-tibn.gif" %>
+                          <% end %>
+                          <% if location.ecycle %>
+                            <%= image_tag "icon-E-cycle-WA.gif" %>
+                          <% end %>
+                        </span>
                       </strong>
                     </td>
                     <td class="fixed-col-c"><%= location.distance %></td>

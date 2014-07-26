@@ -48,11 +48,16 @@ class DataScraper
   end
 
   def self.set_services(location_json, new_location)
-    new_location.pick_up   = location_json['pickup_allowed'] == 'TRUE'
+    new_location.pick_up   = location_json['pickup_allowed']  == 'TRUE'
     new_location.drop_off  = location_json['dropoff_allowed'] == 'TRUE'
     new_location.mail_in   = location_json['mail_in_allowed'] == 'TRUE'
     new_location.business  = location_json['property_type'].include?('Business')
     new_location.residents = location_json['property_type'].include?('Residents')
+  end
+
+  def self.set_programs(location_json, new_location)
+    new_location.ecycle = location_json['ecycle'] == 'TRUE'
+    new_location.tibn   = location_json['tibn']   == 'TRUE'
   end
 
   def self.set_state_and_zip(location_json, new_location)
@@ -84,11 +89,12 @@ class DataScraper
       cost:          location_json['fee'],        
       min_volume:    location_json['minimum_volume'],
       max_volume:    location_json['maximum_volume'],  
-      description:   (location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip
+      description:   (location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip,
     )
 
     set_state_and_zip(location_json, new_location)
     set_services(location_json, new_location)
+    set_programs(location_json, new_location)
     set_materials(location_json['material_handled'], new_location)
     set_phone(location_json['phone']['phone_number'], new_location)
 

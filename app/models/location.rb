@@ -12,6 +12,8 @@ class Location
   field :pick_up,       type: Boolean
   field :drop_off,      type: Boolean
   field :mail_in,       type: Boolean
+  field :ecycle,        type: Boolean
+  field :tibn,          type: Boolean
   field :location_type, type: String
   field :street,        type: String
   field :city,          type: String
