@@ -73,15 +73,13 @@
                     </td>
                     <td class="fixed-col-b">
                       <strong>
-                        <%= location.name %>
-                        <span class="program_icon">
+                        <span class="location_name"><%= location.name %></span>
                           <% if location.tibn %>
-                            <%= image_tag "icon-tibn.gif" %>
+                            <%= image_tag "icon-tibn.gif", class: "program_icon" %>
                           <% end %>
                           <% if location.ecycle %>
-                            <%= image_tag "icon-E-cycle-WA.gif" %>
+                            <%= image_tag "icon-E-cycle-WA.gif", class: "program_icon" %>
                           <% end %>
-                        </span>
                       </strong>
                     </td>
                     <td class="fixed-col-c"><%= location.distance %></td>
@@ -148,7 +146,13 @@
                     </td>
                     <td class="fixed-col-2">
                       <strong>
-                        <%= location.name %>
+                        <span class="location_name"><%= location.name %></span>
+                          <% if location.tibn %>
+                            <%= image_tag "icon-tibn.gif", class: "program_icon" %>
+                          <% end %>
+                          <% if location.ecycle %>
+                            <%= image_tag "icon-E-cycle-WA.gif", class: "program_icon" %>
+                          <% end %>
                       </strong>
                     </td>
                   </tr>
@@ -220,7 +224,13 @@
                     </td>
                     <td class="fixed-col-2">
                       <strong>
-                        <%= location.name %>
+                        <span class="location_name"><%= location.name %></span>
+                          <% if location.tibn %>
+                            <%= image_tag "icon-tibn.gif", class: "program_icon" %>
+                          <% end %>
+                          <% if location.ecycle %>
+                            <%= image_tag "icon-E-cycle-WA.gif", class: "program_icon" %>
+                          <% end %>
                       </strong>
                     </td>
                   </tr>

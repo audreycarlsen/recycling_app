@@ -250,11 +250,11 @@ blockquote {
   margin-left: -23px;
 }
 
-.program_icon {
-  padding-left: 2px;
+.location_name {
+  padding-right: 2px;
 }
 
-.program_icon img {
+.program_icon {
   width: 14px;
   padding-bottom: 3px;
 }

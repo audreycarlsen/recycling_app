@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $('.location-table').on('click', '.locations_row', function(event) {
     $(this).siblings("#desc_" + this.id).toggle();
-    $(this).find("span").toggle();
+    $(this).find(".glyphicon").toggle();
   });
 
   $('.pick_up_tab').click(function() {
