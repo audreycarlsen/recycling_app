@@ -63,6 +63,9 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
+      within release_path do
+        execute :rake, 'data_scraper'
+      end
     end
   end
 
