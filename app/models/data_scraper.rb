@@ -115,6 +115,7 @@ class DataScraper
   end
 
   def self.update_or_create_location(location_json)
+    puts "updating_or_creating_location"
     existing_location = Location.where(name: DataScraper.titleize(location_json['provider_name'])).first
 
     if existing_location
@@ -157,6 +158,7 @@ class DataScraper
 
   def self.get_all
     unless DataScraper.last
+      puts "creating DataScraper"
       DataScraper.create
     end
 
