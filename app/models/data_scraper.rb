@@ -70,7 +70,7 @@ class DataScraper
 
   def self.add_new_material_and_description(existing_location, location_json)
     existing_location.materials << DataScraper.titleize(location_json['material_handled'])
-    existing_location.description << (' ' + location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip
+    existing_location.description[location_json['material_handled']] = ((location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip)
     existing_location.save
     existing_location
   end
@@ -89,7 +89,7 @@ class DataScraper
       cost:          location_json['fee'],        
       min_volume:    location_json['minimum_volume'],
       max_volume:    location_json['maximum_volume'],  
-      description:   (location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip,
+      description:   {location_json['material_handled'] => ((location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip)}
     )
 
     set_state_and_zip(location_json, new_location)

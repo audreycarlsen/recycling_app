@@ -104,12 +104,26 @@
                             <td><%= location.hours.html_safe %></td>
                           </tr>
                         <% end %>
-                        <% if !location.description.empty? %>
+                        <% if location.cost %>
                           <tr>
-                            <td><strong>Notes:</strong></td>
-                            <td><%= location.description.html_safe %></td>
+                            <td><strong>Fees:</strong></td>
+                            <td><%= location.cost.html_safe %></td>
                           </tr>
                         <% end %>
+                        <tr>
+                          <td><strong>Notes:</strong></td>
+                          <td>
+                            <% if @materials.length == 1 %>
+                              <%= location.description[@materials.first].html_safe %>
+                            <% else %>
+                              <% @materials.each do |material| %>
+                                <% unless location.description[material].empty? %>
+                                  <p><em><%= material + ": " %></em><%= location.description[material].html_safe %></p>
+                                <% end %>
+                              <% end %>
+                            <% end %>
+                          </td>
+                        </tr>
                         <% if location.website %>
                           <tr>
                             <td></td>
@@ -178,14 +192,14 @@
                         <% end %>
                         <% if location.cost %>
                           <tr>
-                            <td><strong>Cost:</strong></td>
+                            <td><strong>Fees:</strong></td>
                             <td><%= location.cost.html_safe %></td>
                           </tr>
                         <% end %>
                         <% if !location.description.empty? %>
                           <tr>
                             <td><strong>Notes:</strong></td>
-                            <td><%= location.description.html_safe %></td>
+                            <td><%= location.description %></td>
                           </tr>
                         <% end %>
                         <% if location.website %>
@@ -250,14 +264,14 @@
                         <% end %>
                         <% if location.cost %>
                           <tr>
-                            <td><strong>Cost:</strong></td>
+                            <td><strong>Fees:</strong></td>
                             <td><%= location.cost.html_safe %></td>
                           </tr>
                         <% end %>
                         <% if !location.description.empty? %>
                           <tr>
                             <td><strong>Notes:</strong></td>
-                            <td><%= location.description.html_safe %></td>
+                            <td><%= location.description %></td>
                           </tr>
                         <% end %>
                         <% if location.website %>

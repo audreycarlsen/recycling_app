@@ -198,6 +198,10 @@ body {
   }
 }
 
+.locations_row {
+  cursor: pointer;
+}
+
 .locations_desc_row {
   display: none;
 }

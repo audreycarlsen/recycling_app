@@ -64,7 +64,7 @@ namespace :deploy do
       #   execute :rake, 'cache:clear'
       # end
       within release_path do
-        execute :rake, 'data_scraper'
+        execute :rake, 'data_scraper', "RAILS_ENV=production"
       end
     end
   end

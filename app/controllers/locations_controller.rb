@@ -9,6 +9,7 @@ class LocationsController < ApplicationController
 
     @displayed_address = params["displayed_address"].split("near: ").last
     @current_location  = params["address"].split(",").map {|coord| coord.to_f}
+    @materials         = params["subcategories"]
     @displayed_title   = display_title(params["subcategories"])
 
     if @drop_off_locations == nil
