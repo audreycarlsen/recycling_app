@@ -76,6 +76,7 @@ class DataScraper
   end
 
   def self.create_location(location_json)
+    puts "creating location"
     new_location = Location.new(
       name:          DataScraper.titleize(location_json['provider_name']),
       latitude:      location_json['geolocation']['latitude'].to_f.round(4),
@@ -130,6 +131,7 @@ class DataScraper
   end
 
   def self.update_or_leave_locations_alone(api_date_modified)
+    puts "updating or leaving locations alone"
     if needs_updating?(api_date_modified)
 
       Location.delete_all
