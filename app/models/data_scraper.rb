@@ -134,8 +134,10 @@ class DataScraper
   def self.update_or_leave_locations_alone(api_date_modified)
     puts "updating or leaving locations alone"
     if needs_updating?(api_date_modified)
+      puts "needs updating"
 
       Location.delete_all
+      puts "deleting all locations"
 
       offset = 0
 
@@ -144,7 +146,10 @@ class DataScraper
         count = response.count
         offset += count
 
+        puts offset
+
         response.each do |location_json|
+          puts "doing things to responses"
           result = self.update_or_create_location(location_json)
           puts result.name
         end
