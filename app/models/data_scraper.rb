@@ -133,7 +133,7 @@ class DataScraper
 
   def self.update_or_leave_locations_alone(api_date_modified)
     puts "updating or leaving locations alone"
-    if needs_updating?(api_date_modified)
+    # if needs_updating?(api_date_modified)
       puts "needs updating"
 
       Location.delete_all
@@ -158,7 +158,7 @@ class DataScraper
       end
 
       update_date_modified(api_date_modified)
-    end
+    # end
   end
 
   def self.get_all
