@@ -117,9 +117,13 @@
                               <%= location.description[@materials.first].html_safe %>
                             <% else %>
                               <% @materials.each do |material| %>
-                                <% unless location.description[material].empty? %>
-                                  <p><em><%= material + ": " %></em><%= location.description[material].html_safe %></p>
-                                <% end %>
+                                <p><em><%= material + ": " %></em>
+                                  <% if location.description[material].empty? %>
+                                    None.
+                                  <% else %>
+                                    <%= location.description[material].html_safe %>
+                                  <% end %>
+                                </p>
                               <% end %>
                             <% end %>
                           </td>

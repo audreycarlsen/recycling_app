@@ -84,10 +84,43 @@ function watchOnwardButton() {
 
 $(document).ready(function() {
   if ($("#material-result-template").length) {
-    var source = $("#material-result-template").html();
-    var template = Handlebars.compile(source);
+    var hash     = $.param.fragment().split("&"),
+        source   = $("#material-result-template").html(),
+        template = Handlebars.compile(source);
 
-    var update = function() {
+    // Setup page for submaterial specified in URL hash
+    if ( hash.length > 1 ) {
+      var materialId  = hash[0],
+          subcategory = hash[1].replace( /\+/g, ' ' );
+
+      $.ajax( {
+        type: "GET",
+        url: "/materials/" + materialId,
+        success: function( data ) {
+          var html = template( data );
+
+          setTimeout( function ( ){
+            $( document.body ).scrollTop( $( '#hr-anchor' ).offset().top );
+          }, 500 );
+
+          $( "#material_result" ).replaceWith( html );
+          $( "#error" ).html( "" );
+          watchCurrentLocation();
+          watchCheckboxes();
+          watchOnwardButton();
+          if ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test( navigator.userAgent ) ) {
+            $( '.learn-more' ).popover( { trigger: 'click' } );
+          } else {
+            $( '.learn-more' ).popover( { trigger: 'hover' } );
+          }
+          $( ".select_box" ).val( materialId ); // Fill in drop-down with material specified in URL hash
+          $( ".watched-checkbox input[value*='"+subcategory+"']" ).prop( 'checked', true ); // Check submaterial specified in URL hash
+        }
+      } );
+    }
+
+    // Do stuff when user selects material from drop-down
+    $('.select_box').change( function () {
       var id = $("#material option:selected").val();
 
       $.ajax({
@@ -112,23 +145,8 @@ $(document).ready(function() {
           }
         }
       });
-    };
 
-    $('.select_box').change(
-      update
-    );
-
-    // function watchForChange() {
-    //   $('.select_box').change(
-    //     update
-    //   );
-    // }
-
-    // $('.search_button').click(function(e) {
-    //   e.preventDefault();
-    //   update();
-    //   watchForChange();
-    //   $("#error").html("");
-    // });
+      window.location.hash = "";
+    });
   }
 });

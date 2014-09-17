@@ -36,7 +36,7 @@ class DataScraper
 
   def self.set_materials(material_handled, new_location)
     new_location.materials = []
-    new_location.materials << material_handled
+    new_location.materials << DataScraper.titleize(material_handled)
   end
 
   def self.set_phone(phone, new_location)
@@ -69,14 +69,16 @@ class DataScraper
   end
 
   def self.add_new_material_and_description(existing_location, location_json)
-    existing_location.materials << DataScraper.titleize(location_json['material_handled'])
-    existing_location.description[location_json['material_handled']] = ((location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip)
+    material_handled = DataScraper.titleize(location_json['material_handled'])
+    existing_location.materials << material_handled
+    existing_location.description[material_handled] = ((location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip)
     existing_location.save
     existing_location
   end
 
   def self.create_location(location_json)
-    puts "creating location"
+    material_handled = DataScraper.titleize(location_json['material_handled'])
+
     new_location = Location.new(
       name:          DataScraper.titleize(location_json['provider_name']),
       latitude:      location_json['geolocation']['latitude'].to_f.round(4),
@@ -90,13 +92,13 @@ class DataScraper
       cost:          location_json['fee'],        
       min_volume:    location_json['minimum_volume'],
       max_volume:    location_json['maximum_volume'],  
-      description:   {location_json['material_handled'] => ((location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip)}
+      description:   { material_handled => ((location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip)}
     )
 
     set_state_and_zip(location_json, new_location)
     set_services(location_json, new_location)
     set_programs(location_json, new_location)
-    set_materials(location_json['material_handled'], new_location)
+    set_materials(material_handled, new_location)
     set_phone(location_json['phone']['phone_number'], new_location)
 
     unless new_location.save
@@ -115,7 +117,6 @@ class DataScraper
   end
 
   def self.update_or_create_location(location_json)
-    puts "updating_or_creating_location"
     existing_location = Location.where(name: DataScraper.titleize(location_json['provider_name'])).first
 
     if existing_location
@@ -132,12 +133,10 @@ class DataScraper
   end
 
   def self.update_or_leave_locations_alone(api_date_modified)
-    puts "updating or leaving locations alone"
+
     # if needs_updating?(api_date_modified)
-      puts "needs updating"
 
       Location.delete_all
-      puts "deleting all locations"
 
       offset = 0
 
@@ -146,10 +145,7 @@ class DataScraper
         count = response.count
         offset += count
 
-        puts offset
-
         response.each do |location_json|
-          puts "doing things to responses"
           result = self.update_or_create_location(location_json)
           puts result.name
         end
@@ -163,7 +159,6 @@ class DataScraper
 
   def self.get_all
     unless DataScraper.last
-      puts "creating DataScraper"
       DataScraper.create
     end
 
