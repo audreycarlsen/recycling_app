@@ -22,7 +22,7 @@ class Location
   field :phone,         type: String
   field :website,       type: String
   field :hours,         type: String
-  field :cost,          type: String
+  field :fee,           type: Hash
   field :min_volume,    type: String
   field :max_volume,    type: String
   field :description,   type: Hash

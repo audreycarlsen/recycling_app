@@ -72,6 +72,7 @@ class DataScraper
     material_handled = DataScraper.titleize(location_json['material_handled'])
     existing_location.materials << material_handled
     existing_location.description[material_handled] = ((location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip)
+    existing_location.fee[material_handled]         = location_json['fee']
     existing_location.save
     existing_location
   end
@@ -89,7 +90,7 @@ class DataScraper
       zipcode:       location_json['zip'],
       website:       location_json['provider_url'].try(:[],'url'),
       hours:         location_json['hours'],       
-      cost:          location_json['fee'],        
+      fee:           { material_handled => location_json['fee'] },        
       min_volume:    location_json['minimum_volume'],
       max_volume:    location_json['maximum_volume'],  
       description:   { material_handled => ((location_json['service_description'].to_s.strip + ' ' + location_json['restrictions'].to_s).strip)}
