@@ -271,3 +271,7 @@ blockquote {
   width: 12px;
   padding-bottom: 3px;
 }
+
+.material_name {
+  padding-right: 10px;
+}
