@@ -111,7 +111,7 @@
                               <td><%= location.fee[@materials.first].html_safe %></td>
                             </tr>
                           <% end %>
-                          <% if location.description[@materials.first] %>
+                          <% if !location.description[@materials.first].empty? %>
                             <tr>
                               <td><strong>Notes:<br></strong></td>
                               <td><%= location.description[@materials.first].html_safe %></td>
@@ -205,7 +205,7 @@
                               <td><%= location.fee[@materials.first].html_safe %></td>
                             </tr>
                           <% end %>
-                          <% if location.description[@materials.first] %>
+                          <% if !location.description[@materials.first].empty? %>
                             <tr>
                               <td><strong>Notes:<br></strong></td>
                               <td><%= location.description[@materials.first].html_safe %></td>
@@ -293,7 +293,7 @@
                               <td><%= location.fee[@materials.first].html_safe %></td>
                             </tr>
                           <% end %>
-                          <% if location.description[@materials.first] %>
+                          <% if !location.description[@materials.first].empty? %>
                             <tr>
                               <td><strong>Notes:<br></strong></td>
                               <td><%= location.description[@materials.first].html_safe %></td>
