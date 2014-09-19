@@ -84,7 +84,7 @@ function watchOnwardButton() {
 
 $(document).ready(function() {
   if ($("#material-result-template").length) {
-    var hash     = $.param.fragment().split("&"),
+    var hash     = window.location.hash.substr(1).split("&"),
         source   = $("#material-result-template").html(),
         template = Handlebars.compile(source);
 
