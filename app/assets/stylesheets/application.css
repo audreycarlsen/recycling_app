@@ -275,3 +275,15 @@ blockquote {
 .material_name {
   padding-right: 10px;
 }
+
+.divider {
+  border-top: 1px solid #eeeeee;
+}
+
+.divider td {
+  padding-top: 10px;
+}
+
+.spacing {
+  height: 10px;
+}

@@ -117,20 +117,6 @@
                               <td><%= location.description[@materials.first].html_safe %></td>
                             </tr>
                           <% end %>
-                        <% else %>
-                          <% @materials.each do |material| %>
-                            <tr>
-                              <td class="material_name"><strong><%= material %></strong></td>
-                              <td>
-                                <% if location.fee[material] %>
-                                  <p><em>Fees:<br></em><%= location.fee[material].html_safe %></p>
-                                <% end %>
-                                <% if !location.description[material].empty? %>
-                                  <p><em>Notes:<br></em><%= location.description[material].html_safe %></p>
-                                <% end %>
-                              </td>
-                            </tr>
-                          <% end %>
                         <% end %>
                         <% if location.website %>
                           <tr>
@@ -139,6 +125,22 @@
                               <%= link_to "Visit Website", location.website, :target => "_blank" %>
                             </td>
                           </tr>
+                        <% end %>
+                        <% if @materials.length > 1  %>
+                          <tr class="spacing"></tr>
+                          <% @materials.each do |material| %>
+                            <tr class="divider">
+                              <td class="material_name"><em><%= material %></em></td>
+                              <td>
+                                <% if location.fee[material] %>
+                                  <p><strong>Fees:<br></strong><%= location.fee[material].html_safe %></p>
+                                <% end %>
+                                <% if !location.description[material].empty? %>
+                                  <p><strong>Notes:<br></strong><%= location.description[material].html_safe %></p>
+                                <% end %>
+                              </td>
+                            </tr>
+                          <% end %>
                         <% end %>
                       </table>
                     </td>
@@ -192,7 +194,7 @@
                             <td><%= location.phone %></td>
                           </tr>
                         <% end %>
-                        <% if location.hours%>
+                        <% if location.hours %>
                           <tr>
                             <td><strong>Hours:</strong></td>
                             <td><%= location.hours.html_safe %></td>
@@ -211,20 +213,6 @@
                               <td><%= location.description[@materials.first].html_safe %></td>
                             </tr>
                           <% end %>
-                        <% else %>
-                          <% @materials.each do |material| %>
-                            <tr>
-                              <td class="material_name"><strong><%= material %></strong></td>
-                              <td>
-                                <% if location.fee[material] %>
-                                  <p><em>Fees:<br></em><%= location.fee[material].html_safe %></p>
-                                <% end %>
-                                <% if !location.description[material].empty? %>
-                                  <p><em>Notes:<br></em><%= location.description[material].html_safe %></p>
-                                <% end %>
-                              </td>
-                            </tr>
-                          <% end %>
                         <% end %>
                         <% if location.website %>
                           <tr>
@@ -233,6 +221,22 @@
                               <%= link_to "Visit Website", location.website, :target => "_blank" %>
                             </td>
                           </tr>
+                        <% end %>
+                        <% if @materials.length > 1  %>
+                          <tr class="spacing"></tr>
+                          <% @materials.each do |material| %>
+                            <tr class="divider">
+                              <td class="material_name"><em><%= material %></em></td>
+                              <td>
+                                <% if location.fee[material] %>
+                                  <p><strong>Fees:<br></strong><%= location.fee[material].html_safe %></p>
+                                <% end %>
+                                <% if !location.description[material].empty? %>
+                                  <p><strong>Notes:<br></strong><%= location.description[material].html_safe %></p>
+                                <% end %>
+                              </td>
+                            </tr>
+                          <% end %>
                         <% end %>
                       </table>
                     </td>
@@ -299,20 +303,6 @@
                               <td><%= location.description[@materials.first].html_safe %></td>
                             </tr>
                           <% end %>
-                        <% else %>
-                          <% @materials.each do |material| %>
-                            <tr>
-                              <td class="material_name"><strong><%= material %></strong></td>
-                              <td>
-                                <% if location.fee[material] %>
-                                  <p><em>Fees:<br></em><%= location.fee[material].html_safe %></p>
-                                <% end %>
-                                <% if !location.description[material].empty? %>
-                                  <p><em>Notes:<br></em><%= location.description[material].html_safe %></p>
-                                <% end %>
-                              </td>
-                            </tr>
-                          <% end %>
                         <% end %>
                         <% if location.website %>
                           <tr>
@@ -321,6 +311,22 @@
                               <%= link_to "Visit Website", location.website, :target => "_blank" %>
                             </td>
                           </tr>
+                        <% end %>
+                        <% if @materials.length > 1  %>
+                          <tr class="spacing"></tr>
+                          <% @materials.each do |material| %>
+                            <tr class="divider">
+                              <td class="material_name"><em><%= material %></em></td>
+                              <td>
+                                <% if location.fee[material] %>
+                                  <p><strong>Fees:<br></strong><%= location.fee[material].html_safe %></p>
+                                <% end %>
+                                <% if !location.description[material].empty? %>
+                                  <p><strong>Notes:<br></strong><%= location.description[material].html_safe %></p>
+                                <% end %>
+                              </td>
+                            </tr>
+                          <% end %>
                         <% end %>
                       </table>
                     </td>
