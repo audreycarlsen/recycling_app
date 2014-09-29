@@ -82,16 +82,33 @@ function watchOnwardButton() {
   });
 }
 
+function parseQueryString( queryString ) {
+  var params = {}, queries, temp, i, l;
+
+  // Split into key/value pairs
+  queries = queryString.split("&");
+
+  // Convert the array of strings into an object
+  for ( i = 0, l = queries.length; i < l; i++ ) {
+      temp = queries[i].split('=');
+      params[temp[0]] = temp[1];
+  }
+
+  return params;
+};
+
 $(document).ready(function() {
   if ($("#material-result-template").length) {
-    var hash     = window.location.hash.substr(1).split("&"),
+    var hash     = window.location.hash.substr(1),
         source   = $("#material-result-template").html(),
         template = Handlebars.compile(source);
 
     // Setup page for submaterial specified in URL hash
     if ( hash.length > 1 ) {
-      var materialId  = hash[0],
-          subcategory = hash[1].replace( /\+/g, ' ' );
+      var parsedHash = parseQueryString( hash );
+      var material    = parsedHash.material,
+          materialId  = $(".clearfix option:contains('" + material + "')").val(),
+          subcategory = parsedHash.subcategory.replace( /\+/g, ' ' );
 
       $.ajax( {
         type: "GET",
