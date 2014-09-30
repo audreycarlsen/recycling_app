@@ -105,8 +105,8 @@ $(document).ready(function() {
 
     // Setup page for submaterial specified in URL hash
     if ( hash.length > 1 ) {
-      var parsedHash = parseQueryString( hash );
-      var material    = parsedHash.material,
+      var parsedHash  = parseQueryString( hash ),
+          material    = parsedHash.material.replace( /\+/g, ' ' ),
           materialId  = $(".clearfix option:contains('" + material + "')").val(),
           subcategory = parsedHash.subcategory.replace( /\+/g, ' ' );
 
